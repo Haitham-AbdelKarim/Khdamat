@@ -6,23 +6,61 @@
     <title>@ViewData["Title"] - Khdamat</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200&family=Lalezar&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Lalezar&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/all.min.css" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Khdamat</a>
+                <a class="navbar-brand newFont" asp-area="" asp-controller="Home" asp-action="Index">خدمات</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        @*<li class="nav-item ">
+            <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="Index">الرئيسية</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="Privacy">الخصوصية</a>
+        </li>*@
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">حسابي</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">الخدمات المطلوبة</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">العروض الواردة</a>
+                        </li>
+
+                        <li class="dropdown">
+
+                            <a class="nav-link text-dark  dropdown-toggle control" data-toggle="dropdown" asp-area="" asp-controller="Home" asp-action="#">التحكم</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في الطلبات</a>
+
+                                </li>
+                                <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في العملاء</a></li>
+                                <li>
+                                    <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في البلاغات</a>
+
+                                </li>
+                                <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في الشكاوي</a></li>
+
+                            </ul>
+
+
+
+
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -37,9 +75,25 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - Khdamat - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="blackFooter">
+            <div class="container flexFooter">
+                <div>
+                    <a class="nav-link comFooter " asp-area="" asp-controller="Home" asp-action="#">الشكاوي و الاقتراحات</a>
+                   
+                </div>
+                <div>
+
+                    <span><a href="#"><i class="fab fa-google-plus"></i></a></span>
+                    <span><a href="#"><i class="fab fa-instagram"></i></a></span>
+                    <span><a href="#"><i class="fab fa-facebook"></i></a></span>
+                    &copy; 2021 - Khdamat
+
+                </div>
+
+                    
+            </div>
         </div>
+       
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
