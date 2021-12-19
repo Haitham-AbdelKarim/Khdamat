@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Khdamat.Models;
 
 namespace Khdamat.Data
 {
@@ -12,5 +13,7 @@ namespace Khdamat.Data
             : base(options)
         {
         }
+        public DbSet<Khdamat.Models.Account> Account { get; set; }
+        public DbSet<Khdamat.Models.Client> Client { get; set; }
     }
 }
