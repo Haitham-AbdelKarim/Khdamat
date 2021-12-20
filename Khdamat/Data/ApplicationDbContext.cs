@@ -15,5 +15,6 @@ namespace Khdamat.Data
         }
         public DbSet<Khdamat.Models.Account> Account { get; set; }
         public DbSet<Khdamat.Models.Client> Client { get; set; }
+        public DbSet<Khdamat.Models.Worker> Worker { get; set; }
     }
 }

@@ -1,35 +1,16 @@
 ﻿@model Khdamat.Models.Account
 
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Choose";
 }
 
-@*<h1>Register</h1>
-
-<h4>Account</h4>*@
-@*<hr />*@
 <div class="row">
-    <div class="col-md-4 register">
-        <form asp-action="Register">
+    <div class="col-md-4 Choose">
+        <form asp-action="Choose">
             <h2 class="makeflex graycolor logofont">خدمات</h2>
             <h2 class="makeflex">انشاء حساب جديد</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                @*<label asp-for="Email" class="control-label">البريد الاكتروني</label>*@
-                <input asp-for="Email" class="form-control" placeholder="البريد الالكتروني" />
-                <span asp-validation-for="Email" class="text-danger makeflex"></span>
-            </div>
-            <div class="form-group">
-                @*<label asp-for="Password" class="control-label">كلمة المرور</label>*@
-                <input asp-for="Password" class="form-control" placeholder="كلمة المرور"/>
-                <span asp-validation-for="Password" class="text-danger makeflex"></span>
-            </div>
-            <div class="form-group">
-                @*<label asp-for="ConfirmPassword" class="control-label">تاكيد كلمة المرور</label>*@
-                <input asp-for="ConfirmPassword" class="form-control" placeholder="تاكيد كلمة المرور"/>
-                <span asp-validation-for="ConfirmPassword" class="text-danger makeflex"></span>
-            </div>
             <div class="typeofuser">
                 <div class="form-group form-check">
                     <label class="form-check-label makeflex ">
@@ -59,3 +40,5 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Khdamat.Models
 {
-    public class Client
+    public class Worker
     {
         [Key]
         [StringLength(maximumLength: 20)]
@@ -32,10 +32,8 @@ namespace Khdamat.Models
         public char Gender { get; set; }
         [Required]
         public DateTime Birth_Date { get; set; }
-
-
-
-
-
+        public float Rating { get; set; }
     }
 }
+
+

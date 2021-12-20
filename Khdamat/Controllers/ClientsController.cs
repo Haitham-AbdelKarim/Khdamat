@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Khdamat.Data;
 using Khdamat.Models;
 using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Http;
 
 namespace Khdamat.Controllers
 {
@@ -47,10 +48,13 @@ namespace Khdamat.Controllers
         }
 
         // GET: Clients/Register/
-        public IActionResult Register(string Email)
+        public IActionResult Register()
         {
+            if(HttpContext.Session.GetString("Email") == null)
+                return RedirectToAction("Register", "Accounts");
+            if (HttpContext.Session.GetInt32("isClient") != null)
+                return RedirectToAction("Register", "Accounts");
             Client client = new Client();
-            client.Client_Email = Email;
             return View(client);
         }
 
@@ -63,15 +67,127 @@ namespace Khdamat.Controllers
         {
             if (ModelState.IsValid)
             {
-                //con.Open();
-                //com.Connection = con;
-                //com.CommandText = "INSERT INTO Account (Email, Password, S_Blocked) values ('" + account.Email.ToString() + "','" + account.Password.ToString() + "', '0');";
-                //com.ExecuteNonQuery();
-                //con.Close();
-                //RedirectPermanentPreserveMethod("/Author/Index");
+                if (HttpContext.Session.GetString("Email") == null)
+                    return RedirectToAction("Register", "Accounts");
+                con.Open();
+                com.Connection = con;
+                com.CommandText = "INSERT INTO Client (Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date) values ('" 
+                    + client.Natoinal_ID + "','" 
+                    + HttpContext.Session.GetString("Email") + "','"
+                    + client.First_Name + "','"
+                    + client.Last_Name + "','"
+                    + client.Country + "','"
+                    + client.City + "','"
+                    + client.Street + "','"
+                    + client.Phone + "','"
+                    + client.Gender.ToString()+ "','"
+                    + client.Birth_Date.ToString("yyyy-MM-dd")
+                    + "');";
+                try
+                {
+                    com.ExecuteNonQuery();
+                    com.CommandText = "UPDATE ACCOUNT SET Client_b = '1' WHERE Email = '"
+                        + HttpContext.Session.GetString("Email") + "';";
+                    com.ExecuteNonQuery();
+                    HttpContext.Session.SetInt32("isClient",1);
+                    HttpContext.Session.SetString("FirstName", client.First_Name.ToString());
+                }
+                catch (Exception error)
+                {
+
+                    throw error;
+                }
+                con.Close();
+                return RedirectToAction("Index", "Home");
             }
             return View(client);
         }
+
+
+        // GET: Clients/RegisterBoth
+        public IActionResult RegisterBoth()
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+                return RedirectToAction("Register", "Accounts");
+            if (HttpContext.Session.GetInt32("isClient") != null)
+                return RedirectToAction("Register", "Accounts");
+            Client client = new Client();
+            return View(client);
+        }
+
+        // POST: Clients/RegisterBoth
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RegisterBoth([Bind("Natoinal_ID,Client_Email,First_Name,Last_Name,Country,City,Street,Phone,Gender,Birth_Date")] Client client)
+        {
+            if (ModelState.IsValid)
+            {
+                if (HttpContext.Session.GetString("Email") == null)
+                    return RedirectToAction("Register", "Accounts");
+                con.Open();
+                com.Connection = con;
+                com.CommandText = "INSERT INTO Client (Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date) values ('"
+                    + client.Natoinal_ID + "','"
+                    + HttpContext.Session.GetString("Email") + "','"
+                    + client.First_Name + "','"
+                    + client.Last_Name + "','"
+                    + client.Country + "','"
+                    + client.City + "','"
+                    + client.Street + "','"
+                    + client.Phone + "','"
+                    + client.Gender.ToString() + "','"
+                    + client.Birth_Date.ToString("yyyy-MM-dd")
+                    + "');";
+                try
+                {
+                    com.ExecuteNonQuery();
+                    com.CommandText = "UPDATE ACCOUNT SET Client_b = '1' WHERE Email = '"
+                        + HttpContext.Session.GetString("Email") + "';";
+                    com.ExecuteNonQuery();
+                    HttpContext.Session.SetInt32("isClient", 1);
+                    HttpContext.Session.SetString("FirstName", client.First_Name.ToString());
+                }
+                catch (Exception error)
+                {
+
+                    throw error;
+                }
+
+                com.Connection = con;
+                com.CommandText = "INSERT INTO Worker (Natoinal_ID, Worker_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date) values ('"
+                    + client.Natoinal_ID + "','"
+                    + HttpContext.Session.GetString("Email") + "','"
+                    + client.First_Name + "','"
+                    + client.Last_Name + "','"
+                    + client.Country + "','"
+                    + client.City + "','"
+                    + client.Street + "','"
+                    + client.Phone + "','"
+                    + client.Gender.ToString() + "','"
+                    + client.Birth_Date.ToString("yyyy-MM-dd")
+                    + "');";
+                try
+                {
+                    com.ExecuteNonQuery();
+                    com.CommandText = "UPDATE ACCOUNT SET Worker_b = '1' WHERE Email = '"
+                        + HttpContext.Session.GetString("Email") + "';";
+                    com.ExecuteNonQuery();
+                    HttpContext.Session.SetInt32("isWorker", 1);
+                }
+                catch (Exception error)
+                {
+
+                    throw error;
+                }
+
+                con.Close();
+                return RedirectToAction("Index", "Home");
+            }
+            return View(client);
+        }
+
 
         // GET: Clients/Edit/5
         public async Task<IActionResult> Edit(string id)
