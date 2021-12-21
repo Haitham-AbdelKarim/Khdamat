@@ -273,3 +273,15 @@ footer span .fa-google-plus:hover {
     background-color:gray;
     color:black;
 }
+
+.rigthTitle
+{
+    font-weight:bold;
+    font-size:18px;
+}
+
+.leftInfo
+{
+    font-size:14px;
+    color:var(--main-gray-text);
+}
