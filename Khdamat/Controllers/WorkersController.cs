@@ -72,7 +72,7 @@ namespace Khdamat.Controllers
                     return RedirectToAction("Register", "Accounts");
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "INSERT INTO Client (Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date) values ('"
+                com.CommandText = "INSERT INTO Worker (Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date) values ('"
                     + worker.Natoinal_ID + "','"
                     + HttpContext.Session.GetString("Email") + "','"
                     + worker.First_Name + "','"
@@ -99,9 +99,18 @@ namespace Khdamat.Controllers
                     throw error;
                 }
                 con.Close();
+                return RedirectToAction("Index", "Home");
             }
             return View(worker);
         }
+
+
+        // GET: Workers/profile
+        public IActionResult profile()
+        {
+            return View();
+        }
+
 
         // POST: Workers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
