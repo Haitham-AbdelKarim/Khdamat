@@ -64,7 +64,7 @@ namespace Khdamat.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Register([Bind("Natoinal_ID,Client_Email,First_Name,Last_Name,Country,City,Street,Phone,Gender,Birth_Date")] Worker worker)
+        public IActionResult Register([Bind("Natoinal_ID,Worker_Email,First_Name,Last_Name,Country,City,Street,Phone,Gender,Birth_Date")] Worker worker)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace Khdamat.Controllers
                     return RedirectToAction("Register", "Accounts");
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "INSERT INTO Worker (Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date) values ('"
+                com.CommandText = "INSERT INTO Worker (Natoinal_ID, Worker_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date) values ('"
                     + worker.Natoinal_ID + "','"
                     + HttpContext.Session.GetString("Email") + "','"
                     + worker.First_Name + "','"

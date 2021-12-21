@@ -45,34 +45,70 @@
                                 <a class="nav-link text-dark myNav" asp-area="" asp-controller="Workers" asp-action="profile">حسابي</a>
                             </li>
                         }
+
                         <li class="nav-item ">
                             <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">الخدمات المطلوبة</a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">العروض الواردة</a>
-                        </li>
 
-                        <li class="dropdown">
+                        @if (Context.Session.GetInt32("isClient") == 1)
+                        {
+                            <li class="nav-item ">
+                                <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">العروض الواردة</a>
+                            </li>
+                        }
 
-                            <a class="nav-link text-dark  dropdown-toggle control" data-toggle="dropdown" asp-area="" asp-controller="Home" asp-action="#">التحكم</a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في الطلبات</a>
+                        @if (Context.Session.GetInt32("isWorker") == 1)
+                        {
+                            <li class="nav-item ">
+                                <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">العروض المرسلة</a>
+                            </li>
+                        }
 
-                                </li>
-                                <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في العملاء</a></li>
-                                <li>
-                                    <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في البلاغات</a>
+                        @if (Context.Session.GetInt32("isAdmin") == 1 || Context.Session.GetInt32("isSupporter") == 1)
+                        {
+                            <li class="dropdown">
 
-                                </li>
-                                <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في الشكاوي</a></li>
+                                <a class="nav-link text-dark  dropdown-toggle control" data-toggle="dropdown" asp-area="" asp-controller="Home" asp-action="#">التحكم</a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في الطلبات</a>
 
-                            </ul>
+                                    </li>
+                                    @*  <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في العملاء</a></li>*@
+                                    <li class="dropdown">
+
+                                        <li class="nav-link text-dark  dropdown-toggle control" data-toggle="dropdown" asp-area="" asp-controller="Home" asp-action="#">التحكم في العملاء</li>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في الزباين</a>
+
+                                            </li>
+                                            <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في العمال</a></li>
+                                            <li>
+                                                <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في السابورتارز</a>
+
+                                            </li>
+                                           @* <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في الشكاوي</a></li>*@
+
+                                        </ul>
 
 
 
 
-                        </li>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في البلاغات</a>
+
+                                    </li>
+                                    <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في الشكاوي</a></li>
+
+                                </ul>
+
+
+
+
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

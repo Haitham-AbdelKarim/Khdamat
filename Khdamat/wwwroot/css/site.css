@@ -9,6 +9,7 @@ for details on configuring this project to bundle and minify static web assets. 
     --main-padding: 100px;
     --section-background: #ececec;
     --main--black: #1c1c1c;
+    --main--rightGray: #4a4a4a;
 }
 
 a.navbar-brand {
@@ -278,10 +279,11 @@ footer span .fa-google-plus:hover {
 {
     font-weight:bold;
     font-size:18px;
+    color:var(--main--rightGray);
 }
 
-.leftInfo
-{
-    font-size:14px;
-    color:var(--main-gray-text);
+.leftInfo {
+    font-size: 14px;
+    color: var(--main-gray-text);
+    margin: 3px 15px 0 0;
 }

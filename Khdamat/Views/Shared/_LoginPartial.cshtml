@@ -4,7 +4,7 @@
 @if (Context.Session.GetString("Email") != null)
 {
     <li class="nav-item">
-        <a  class="nav-link text-dark"  title="Manage">Hello 
+        <a  class="nav-link text-dark"  title="Manage">مرحبا 
             @((Context.Session.GetString("FirstName") == null)
                ? Context.Session.GetString("Email")
                : Context.Session.GetString("FirstName"))</a>
