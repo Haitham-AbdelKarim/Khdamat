@@ -17,6 +17,7 @@ namespace Khdamat.Controllers
         private readonly ApplicationDbContext _context;
         SqlCommand com = new SqlCommand();
         SqlConnection con = new SqlConnection();
+        SqlDataReader dr;
         public ClientsController(ApplicationDbContext context)
         {
             _context = context;
@@ -188,6 +189,86 @@ namespace Khdamat.Controllers
             return View(client);
         }
 
+        // GET: Clients/clientsControl
+        public IActionResult clientsControl(string id)
+        {
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "SELECT Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_b, S_Blocked FROM Client, Account WHERE Email = Client_Email;";
+            dr = com.ExecuteReader();
+            List<ClientDetails> clients = new List<ClientDetails>();
+            ClientDetails clientsDetails;
+            while(dr.Read())
+            {
+                clientsDetails = new ClientDetails();
+                clientsDetails.client.Natoinal_ID = dr["Natoinal_ID"].ToString();
+                clientsDetails.client.Client_Email = dr["Client_Email"].ToString();
+                clientsDetails.client.First_Name = dr["F_Name"].ToString();
+                clientsDetails.client.Last_Name = dr["L_Name"].ToString();
+                clientsDetails.client.Country = dr["Country"].ToString();
+                clientsDetails.client.City = dr["City"].ToString();
+                clientsDetails.client.Street = dr["Street"].ToString();
+                clientsDetails.client.Phone = dr["Phone"].ToString();
+                clientsDetails.client.Gender = dr["Gender"].ToString()[0];
+                if(dr["Admin_b"].ToString() == "True")
+                    clientsDetails.isAdmin = true;
+                else
+                    clientsDetails.isAdmin = false;
+
+                if (dr["Admin_b"].ToString() == "True")
+                    clientsDetails.isBlocked = true;
+                else
+                    clientsDetails.isBlocked = false;
+                clients.Add(clientsDetails);
+            }
+            dr.Close();
+            con.Close();
+            return View(clients);
+        }
+
+        // POST: Clients/clientsControl
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> clientsControl(string id, [Bind("Natoinal_ID,Client_Email,First_Name,Last_Name,Country,City,Street,Phone,Gender,Birth_Date")] Client client)
+        {
+            if (id != client.Natoinal_ID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(client);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ClientExists(client.Natoinal_ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(client);
+        }
+
+
+        // GET: Clients/profile
+        public IActionResult profile()
+        {
+            return View();  
+        }
+
+
 
         // GET: Clients/Edit/5
         public async Task<IActionResult> Edit(string id)
@@ -203,13 +284,6 @@ namespace Khdamat.Controllers
                 return NotFound();
             }
             return View(client);
-        }
-
-
-        // GET: Clients/profile
-        public IActionResult profile()
-        {
-            return View();  
         }
 
 
