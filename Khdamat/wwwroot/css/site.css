@@ -536,3 +536,7 @@ p,
     {
         text-decoration:none !important;
     }
+
+.navbar {
+    background-color: #eeeeee7d !important;
+}
