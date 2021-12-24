@@ -1,0 +1,82 @@
+﻿
+@*@{
+    ViewData["Title"] = "workerControl";
+}
+
+<h2 class="makeflex">التحكم في العمال</h2>
+<hr />
+@foreach (var item in Model)
+{
+
+<div>
+    <div class="makeflex">
+        <p class="rigthTitle">الاسم الاول:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.F_Name)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">الاسم الاخير:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.L_Name)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">البريد الالكتروني:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Worker_Email)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">الرقم القومي:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Natoinal_ID)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">البلد:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Country)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">المدينة:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.City)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">الشارع:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Street)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">رقم الهاتف:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Phone)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">رقم الهاتف:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Phone)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">النوع:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Gender)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">تاريخ الميلاد:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Birth_Date)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle"> التقييم:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Rating)</p>
+    </div>
+
+    @if (notadmin)
+    {
+        <div class="makeflex">
+            <a class="defultbutton" asp-area="" asp-controller="Clients" asp-action="profile">خليه السابورتر</a>
+            @if (not blocked)
+ {
+<a class="defultbutton" asp-area="" asp-controller="Clients" asp-action="profile">بلوك</a>
+}
+
+            @if (blocked)
+            {
+                <a class="defultbutton" asp-area="" asp-controller="Clients" asp-action="profile">ازل البلوك</a>
+            }
+
+        </div>
+    }
+</div>
+    <hr />
+
+
+}*@
+
