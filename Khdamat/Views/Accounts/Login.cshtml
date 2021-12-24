@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 @*<label asp-for="Password" class="control-label">كلمة المرور</label>*@
-                <input asp-for="Password" class="form-control" placeholder="كلمة المرور"/>
+                <input asp-for="Password" class="form-control" placeholder="كلمة المرور" />
                 <span asp-validation-for="Password" class="text-danger makeflex"></span>
             </div>
             <div class="typeofuser">
@@ -34,7 +34,11 @@
                 </div>
             </div>
             <div class="form-group center">
-                <input type="submit" value="استكمال" class="btn btn-primary defultbutton" />
+                <input type="submit" value="تسجيل دخول" class="btn btn-primary defultbutton" />
+            </div>
+
+            <div class="form-group center">
+                <a class="nav-link defultbutton grayBack" asp-area="" asp-controller="Accounts" asp-action="Register">انشاء حساب</a>
             </div>
         </form>
     </div>

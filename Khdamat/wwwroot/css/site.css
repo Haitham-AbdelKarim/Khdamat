@@ -267,6 +267,7 @@ footer span .fa-google-plus:hover {
 {
     background-color:orangered;
     border:none;
+    transition:var(--main--trasition);
 }
 
 .defultbutton:hover
@@ -287,3 +288,251 @@ footer span .fa-google-plus:hover {
     color: var(--main-gray-text);
     margin: 3px 15px 0 0;
 }
+
+.grayBack 
+{
+    background-color:gray;
+    color:white;
+    transition:var(--main--trasition);
+    text-decoration:none;
+    padding:5px 10px;
+    border-radius:5px;
+    font-size:12px;
+}
+
+    .grayBack :hover {
+        background-color: white;
+        color: var(--main-gray-text);
+        text-decoration: none;
+    }
+
+/*.vertical-nav {
+    position: fixed;
+    background: white;
+    box-shadow: 0 0 40px #00000021;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 70px;
+}*/
+
+    .vertical-nav li {
+        list-style: none;
+        display: block;
+        width: 100%;
+        border-bottom: solid 1px #f2f5ff;
+        text-align: center;
+        position: relative;
+        flex-grow: 1;
+        align-items: stretch;
+        display: flex;
+    }
+
+        .vertical-nav li:last-child {
+            border: none;
+        }
+
+        .vertical-nav li a {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            flex-flow: column;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .vertical-nav li:hover > a {
+            background: #fafafa;
+            transition: all 0.2s ease;
+        }
+
+            .vertical-nav li:hover > a .feather {
+                transform: scale(1.1);
+                transition: all 0.2s ease;
+            }
+
+        .vertical-nav li:hover > .hover-menu,
+        .vertical-nav li:focus-within > .hover-menu {
+            visibility: visible;
+            opacity: 1;
+            -webkit-animation: slide-down 0.2s ease-out;
+            -moz-animation: slide-down 0.2s ease-out;
+            transition: all 0.5s ease;
+            display: block;
+        }
+
+        .vertical-nav li .hover-menu {
+            background: white;
+            visibility: hidden;
+            transition: all 0.5s ease;
+            opacity: 0;
+            display: none;
+            position: absolute;
+            left: 100%;
+            min-width: 200px;
+            margin: 0;
+            padding: 0;
+            top: 0;
+            box-shadow: 0 0 40px #00000021;
+        }
+
+            .vertical-nav li .hover-menu:after {
+                right: 100%;
+                top: 20%;
+                border: solid transparent;
+                content: " ";
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+                border-color: rgba(255, 255, 255, 0);
+                border-right-color: #ffffff;
+                border-width: 10px;
+                margin-top: -10px;
+            }
+
+            .vertical-nav li .hover-menu ul {
+                margin: 0;
+                padding: 0;
+            }
+
+                .vertical-nav li .hover-menu ul li {
+                    list-style: none;
+                    display: block;
+                    width: 100%;
+                    text-align: center;
+                }
+
+                    .vertical-nav li .hover-menu ul li a {
+                        width: 100%;
+                        display: block !important;
+                        text-decoration: none;
+                        padding: 15px 20px;
+                        text-align: left;
+                        height: auto !important;
+                        font-weight: 400;
+                    }
+
+                        .vertical-nav li .hover-menu ul li a:hover {
+                            background: #fafafa;
+                            transition: 0.3s ease;
+                        }
+
+.menu-header {
+    font-family: "Roboto Condensed", sans-serif;
+    color: #929292;
+    font-size: 13px;
+    text-align: left !important;
+    padding: 12px 20px 5px 20px;
+    font-weight: 600;
+    border-bottom: none !important;
+}
+
+.log-out a {
+    background: #1e85c9;
+    color: white;
+}
+
+    .log-out a:hover {
+        color: #1e85c9;
+        background: white;
+    }
+
+@-webkit-keyframes slide-down {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-5%);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+
+    0 {
+        opacity: 0;
+        -webkit-transform: translateY(0);
+    }
+}
+
+@-moz-keyframes slide-down {
+    0% {
+        opacity: 0;
+        -moz-transform: translateY(-5%);
+    }
+
+    100% {
+        opacity: 1;
+        -moz-transform: translateY(0);
+    }
+}
+
+.content {
+    padding: 40px;
+    color: #464646;
+    width: 1170px;
+    margin: 0 auto;
+}
+
+/*h1,
+h2 {
+    color: #343535;
+    font-weight: 400;
+}*/
+
+p,
+.content li {
+    color: #949494;
+    line-height: 29px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.header-image {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+/* Zui table (modified) - https://jsfiddle.net/zinoui/dB93J/ */
+.zui-table {
+    border: solid 1px #ddeeee;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    box-shadow: 0 0 40px #00000021;
+    margin: 50px 0;
+}
+
+    .zui-table thead th {
+        background-color: #fff;
+        border: solid 1px #dee;
+        color: #343535;
+        border: solid 1px #f5f9f9;
+        padding: 20px;
+        text-align: left;
+    }
+
+    .zui-table tbody td {
+        border: solid 1px #edf1f1;
+        color: #949494;
+        font-size: 16px;
+        padding: 20px;
+    }
+
+    li a:hover 
+    {
+        text-decoration:none !important;
+    }

@@ -66,7 +66,7 @@
 
                         @if (Context.Session.GetInt32("isAdmin") == 1 || Context.Session.GetInt32("isSupporter") == 1)
                         {
-                            <li class="dropdown">
+                            <li class="dropdown vertical-nav">
 
                                 <a class="nav-link text-dark  dropdown-toggle control" data-toggle="dropdown" asp-area="" asp-controller="Home" asp-action="#">التحكم</a>
                                 <ul class="dropdown-menu">
@@ -75,10 +75,10 @@
 
                                     </li>
                                     @*  <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في العملاء</a></li>*@
-                                    <li class="dropdown">
-
-                                        <li class="nav-link text-dark  dropdown-toggle control" data-toggle="dropdown" asp-area="" asp-controller="Home" asp-action="#">التحكم في العملاء</li>
-                                        <ul class="dropdown-menu">
+                                <li >
+                                    <a href="#" style="padding: 5px 10px; color: var(--main-gray-text);">التحكم في العملاء</a>
+                                    <div class="hover-menu">
+                                        <ul>
                                             <li>
                                                 <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في الزباين</a>
 
@@ -86,16 +86,13 @@
                                             <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في العمال</a></li>
                                             <li>
                                                 <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في السابورتارز</a>
-
                                             </li>
-                                           @* <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في الشكاوي</a></li>*@
-
                                         </ul>
 
+                                    </div>
 
 
-
-                                    </li>
+                                </li>
                                     <li>
                                         <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في البلاغات</a>
 
