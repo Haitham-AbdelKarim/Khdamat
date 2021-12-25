@@ -1,0 +1,53 @@
+﻿
+@*@{
+    ViewData["Title"] = "complainControl";
+}
+
+<h2 class="makeflex">التحكم في الشكاوي</h2>
+<hr />
+@foreach (var item in Model)
+{
+
+<div>
+    <div class="makeflex">
+        <p class="rigthTitle">اي دي:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.ID)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">اي دي العامل:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Worker_ID)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">اي دي الزبون:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Client_ID)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">اي دي السابورتر:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Supporter_ID)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">الوصف:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Description)</p>
+    </div>
+
+
+    @if (item.C_or_S == true)
+    {
+        <div class="makeflex">
+            <p class="rigthTitle">شكوي:</p>
+           
+        </div>
+    }
+    else
+    {
+        <div class="makeflex">
+            <p class="rigthTitle">اقتراح:</p>
+           
+        </div>
+    }
+</div>
+    <hr />
+
+
+}*@
+

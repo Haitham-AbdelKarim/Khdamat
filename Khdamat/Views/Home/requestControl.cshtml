@@ -1,0 +1,70 @@
+﻿
+@*@{
+    ViewData["Title"] = "requestControl";
+}
+
+
+
+<h2 class="makeflex">التحكم في الطلبات</h2>
+<hr />
+@foreach (var item in Model)
+{
+
+<div>
+    <div class="makeflex">
+        <p class="rigthTitle">اي دي الزبون:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Client_ID)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">العنوان:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Title)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">الوصف:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Description_Req)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">رقم الخدمة:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Service_ID)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">اقل سن:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Min_Age)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">اكبر سن:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Max_Age)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">اقل سعر:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Min_Price)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">اي دي السابورتر:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Supporter_ID)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">النوع:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Gender)</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">تاريخ الطلب:</p>
+        <p class="leftInfo">@Html.DisplayFor(modelItem => item.Date_Req)</p>
+    </div>
+    <div class="makeflex">
+        @if (item.Done == true)
+        {
+            <p class="rigthTitle">تمت</p>
+        }
+        else
+        {
+            <p class="rigthTitle">لم تتم</p>
+        }
+    </div>
+
+    
+</div>
+    <hr />
+
+
+}*@
