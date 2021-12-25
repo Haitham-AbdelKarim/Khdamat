@@ -175,13 +175,13 @@ body {
     justify-content:space-between;
 }
 
-.comFooter{
-    color:white;
-    text-decoration:none;
-    margin:0;
-    padding:0;
-    transition:var(--main--trasition);
-    font-size:13px;
+.comFooter {
+    color: #343a40;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    transition: var(--main--trasition);
+    font-size: 13px;
 }
     .comFooter:hover{
         color:var(--main-color);

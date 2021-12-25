@@ -44,7 +44,10 @@ namespace Khdamat.Controllers
                 com.Connection = con;
                 string query = "SELECT max(ID) from Complain_Suggestion";
                 SqlCommand cmd = new SqlCommand(query, con);
-                int max = (int)cmd.ExecuteScalar();
+                int max;
+                if (string.IsNullOrEmpty(cmd.ExecuteScalar().ToString()))
+                    max = 0;
+                else max = (int)cmd.ExecuteScalar();
                 max++;
                 string email = HttpContext.Session.GetString("Email");
                

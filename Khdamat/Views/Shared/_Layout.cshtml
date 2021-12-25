@@ -59,6 +59,13 @@
                         @if (Context.Session.GetInt32("isClient") == 1)
                         {
                             <li class="nav-item ">
+                                <a class="nav-link text-dark myNav" asp-area="" asp-controller="Request" asp-action="Add_Req">إنشاء خدمة جديدة</a>
+                            </li>
+                        }
+
+                        @if (Context.Session.GetInt32("isClient") == 1)
+                        {
+                            <li class="nav-item ">
                                 <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">العروض الواردة</a>
                             </li>
                         }
