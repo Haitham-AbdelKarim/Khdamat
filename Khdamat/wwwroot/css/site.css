@@ -540,3 +540,21 @@ p,
 .navbar {
     background-color: #eeeeee7d !important;
 }
+
+a:hover
+{
+    text-decoration:none !important;
+}
+
+.rightButton {
+    padding: 5px 10px;
+    color: white;
+    border-radius: 5px;
+}
+
+.leftButton {
+    margin-right: 20px;
+    padding: 5px 10px;
+    color: white;
+    border-radius: 5px;
+}

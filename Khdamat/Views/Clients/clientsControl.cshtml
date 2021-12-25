@@ -55,15 +55,15 @@
     @if (item.isAdmin == false)
     {
         <div class="makeflex">
-            <a class="defultbutton" asp-area="" asp-controller="Clients" asp-action="profile">خليه السابورتر</a>
+            <a class="defultbutton rightButton" asp-area="" asp-controller="Clients" asp-action="profile">خليه السابورتر</a>
             @if (item.isBlocked == false)
 {
-<a class="defultbutton" asp-area="" asp-controller="Clients" asp-action="profile">بلوك</a>
+<a class="defultbutton leftButton" asp-area="" asp-controller="Clients" asp-action="profile">بلوك</a>
 }
 
             @if (item.isBlocked == true)
             {
-                <a class="defultbutton" asp-area="" asp-controller="Clients" asp-action="profile">ازل البلوك</a>
+                <a class="defultbutton leftButton" asp-area="" asp-controller="Clients" asp-action="profile">ازل البلوك</a>
             }
 
         </div>
