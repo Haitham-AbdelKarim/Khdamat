@@ -61,7 +61,7 @@ namespace Khdamat.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data Source=DESKTOP-DFH5760\SQLEXPRESS;Initial Catalog=Khdamat;Integrated Security=True.
+        ///   Looks up a localized string similar to Data Source=DESKTOP-8LEJ8MJ;Initial Catalog=Khdamat;Integrated Security=True.
         /// </summary>
         internal static string ConnectionString {
             get {

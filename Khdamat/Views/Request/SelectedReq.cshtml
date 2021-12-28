@@ -1,0 +1,70 @@
+﻿@model Khdamat.Models.ApplytoReq
+@using Microsoft.AspNetCore.Http;
+
+@{
+    ViewData["Title"] = "SelectedReq";
+}
+
+<h2 class="tit">@Model.Request.Title</h2>
+<div class="elem">
+ <label>المدينة : </label>
+<div class="cont">@Model.Request.City</div>
+</div>
+
+
+<div class="elem">
+    <label>الموعد : </label>
+<div class="cont">@Model.Request.Date_Req</div>
+</div>
+
+<div class="elem">
+    <label>النوع : </label>
+<div class="cont">@{
+                        string g;
+                        if (@Model.Request.Gender=='m')
+                            g="ذكر";
+                        else if (@Model.Request.Gender=='f')
+                            g="انثي";
+                        else g="غير محدد";
+                    } @g</div>
+</div>
+
+
+<div class="elem">
+    <label>اقل سن : </label>
+<div class="cont">@Model.Request.Max_Age</div>
+</div>
+
+<div class="elem">
+    <label>اكبر سن : </label>
+<div class="cont">@Model.Request.Min_Age</div>
+</div>
+
+<div class="elem">
+    <label>السعر المعروض : </label>
+<div class="cont">@Model.Request.Min_Price</div>
+</div>
+
+<div class="elem">
+<label>الوصف : </label> <div class="cont">@Model.Request.Description_Req</div>
+</div>
+
+@if(Context.Session.GetInt32("isWorker")!=null &&   Context.Session.GetInt32("isWorker") == 1 &&@Model.able==true)
+{
+    <button id="btn" onclick="document.getElementById('appdes').style.visibility='visible';document.getElementById('btn2').style.visibility='visible'">التقدم</button>
+
+}
+
+@using(Html.BeginForm("ApplytoRequest", "Request"))
+{
+    
+  <div id="appdes">   @Html.TextAreaFor(model=>model.description,new { @Model.id ,@class="app" })</div>
+ <div style="visibility:hidden"> @Html.TextBoxFor(m => m.id, new {@Value = @Model.id, @class = "red" })</div>
+ 
+                <input type="submit" value="ارسال" class="ersal2" id="btn2"/>
+@*                <a id="btn2" class="ersal2" href=@Url.Action("ApplytoRequest","Request",new{@Model.Request,@Model.id,@Model.description})> hnjkjniknj</a>
+*@
+}
+    
+	
+

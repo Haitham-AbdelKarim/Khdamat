@@ -2,21 +2,24 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+
 namespace Khdamat.Models
 {
-    public class Req_Svc
+   
+
+    public class ApplytoReq
     {
         public Request Request { get; set; }
-        public List<Service> Services { get; set; }
-        public List<Request> Requests { get; set; }
-
-        public Req_Svc()
+        public int id { get; set; }
+        public string  description { get; set; }
+        public bool able { get; set; }
+        public ApplytoReq()
         {
-            Services = new List<Service>();
-            
+
+
             Request = new Request();
-            //Requests=new List<Request>();
+            description="";
+            id=-1;
         }
     }
-    
 }
