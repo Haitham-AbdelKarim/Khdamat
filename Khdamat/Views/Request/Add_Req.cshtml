@@ -16,56 +16,87 @@
                     <span asp-validation-for="Request.Title" class="text-danger makeflex"></span>
                 </div>
                 <div class="form-group">
-                    <input asp-for="Request.Min_Age" type = "number" value="" class="form-control" placeholder="اقل سن"/>
+                    <input asp-for="Request.Min_Age" type="number" value="" class="form-control" placeholder="اقل سن" />
                     <span asp-validation-for="Request.Min_Age" class="text-danger makeflex"></span>
                 </div>
                 <div class="form-group">
-                    <input asp-for="Request.Max_Age" type = "number" value="" class="form-control" placeholder="اكبر سن"/>
+                    <input asp-for="Request.Max_Age" type="number" value="" class="form-control" placeholder="اكبر سن" />
                     <span asp-validation-for="Request.Max_Age" class="text-danger makeflex"></span>
                 </div>
                 <div class="form-group">
-                    <input asp-for="Request.Min_Price" type = "number" value="" class="form-control" placeholder="اقل سعر"/>
+                    <input asp-for="Request.Min_Price" type="number" value="" class="form-control" placeholder="اقل سعر" />
                     <span asp-validation-for="Request.Min_Price" class="text-danger makeflex"></span>
                 </div>
                 <div class="form-group">
                     <input asp-for="Request.City" class="form-control" placeholder="المدينة" />
                     <span asp-validation-for="Request.City" class="text-danger makeflex"></span>
                 </div>
-                <div class="form-group">
-                    @*<input asp-for="Gender" class="form-control" placeholder="النوع"/>
-                    <span asp-validation-for="Gender" class="text-danger makeflex"></span>*@ 
-                     <label style="margin-right: 10px;">النوع</label>
-                    <label>ذكر</label>
-                    <input asp-for="Request.Gender"  type="radio" value="m">
-                    <label>انثي</label>
-                    <input asp-for="Request.Gender"  type="radio" value="f">
+                @*<div class="center">
+                    نوع مقدم الخدمة
+                </div>*@
+
+                <div class="typeofuser">
+                    <div class="form-group form-check">
+                        <label class="form-check-label makeflex ">
+
+                            @*<div><input class="form-check-input" asp-for="IsWorker" /></div>*@
+                            <div> <input asp-for="Request.Gender" type="radio" value="m"></div>
+                            <div class="marginright">ذكر</div>
+                            @*@Html.DisplayNameFor(model => model.IsWorker)*@
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label makeflex ">
+
+                            @*<div> <input class="form-check-input" asp-for="IsClient" /></div>*@
+                            <div> <input asp-for="Request.Gender" type="radio" value="f"></div>
+                            <div class="marginright">انثي</div>
+
+                            @*@Html.DisplayNameFor(model => model.IsClient)*@
+                        </label>
+                    </div>
                     <span asp-validation-for="Request.Gender" class="text-danger makeflex"></span>
                 </div>
-                <label>نوع الخدمة</label>
-                <select asp-for="Request.Service_ID" >
-                  @if (Model.Services != null)
-                  {
-                    @foreach (Service item in Model.Services)
-                    {
-                        <option  value=@item.Service_ID>@item.Name</option>
-                        @*<li><a class="nav-link text-dark myNav" asp-for="Request.Service_ID" >@item.Name</a></li>*@
-                        
-                    }
-                  }
-                </select>
+
+                <!--<div class="form-group">-->
+                    @*<input asp-for="Gender" class="form-control" placeholder="النوع"/>
+            <span asp-validation-for="Gender" class="text-danger makeflex"></span>*@
+                    @* <label style="margin-right: 10px;">النوع</label>*@
+                    <!--<label>ذكر</label>
+                    <input asp-for="Request.Gender" type="radio" value="m">
+                    <label>انثي</label>
+                    <input asp-for="Request.Gender" type="radio" value="f">
+                    <span asp-validation-for="Request.Gender" class="text-danger makeflex"></span>
+                </div>-->
+            <div class="makeflex">
+                <p class="rightTitle" style="color:black">نوع الخدمة</p>
+                <div class="leftInfo" style="width:60%">
+                    <select asp-for="Request.Service_ID" style="width: 100%; border-color: #ced4da; ">
+                        @if (Model.Services != null)
+                        {
+                            @foreach (Service item in Model.Services)
+                            {
+                                <option value=@item.Service_ID>@item.Name</option>
+                                @*<li><a class="nav-link text-dark myNav" asp-for="Request.Service_ID" >@item.Name</a></li>*@
+
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
                 <div class="form-group">
-                    <label>تاريخ تحقق الخدمة</label>
-                    <input asp-for="Request.Date_Req" type = "date" class="form-control"/>
+                    <label style="display:flex">تاريخ تحقق الخدمة</label>
+                    <input asp-for="Request.Date_Req" type="date" class="form-control" />
                     <span asp-validation-for="Request.Date_Req" class="text-danger makeflex"></span>
                 </div>
 
                 <div class="form-group">
                     @*<input asp-for="Description_Req" class="form-control" placeholder="تفاصيل الخدمة"/>
-                    <span asp-validation-for="Description_Req" class="text-danger makeflex"></span>*@
-                    @Html.TextAreaFor(x=>x.Request.Description_Req, new {@class ="form-control",@id="textAnswer", @name="textAnswer" ,@rows = "10" , @placeholder = "تفاصيل الخدمة"})
+            <span asp-validation-for="Description_Req" class="text-danger makeflex"></span>*@
+                    @Html.TextAreaFor(x => x.Request.Description_Req, new { @class = "form-control", @id = "textAnswer", @name = "textAnswer", @rows = "10", @placeholder = "تفاصيل الخدمة" })
                 </div>
-                <div>
-                    <input type="submit" value="إضافة خدمة جديدة" />
+                <div class="center">
+                    <input class="defultbutton" style="color:white; padding:5px 10px; border-radius:5px;" type="submit" value="إضافة خدمة جديدة" />
                 </div>
                 @if (ViewBag.Message != null)
                 {

@@ -551,3 +551,11 @@ a:hover {
     color: white;
     border-radius: 5px;
 }
+
+.fullWidth{
+    width:100%!important;
+}
+
+.height200{
+    height:200px!important;
+}

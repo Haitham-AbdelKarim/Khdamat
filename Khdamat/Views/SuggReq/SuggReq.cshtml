@@ -4,35 +4,66 @@
 }
 
 
+<div class="row">
+    <div class="col-md-4 register">
+        @using (Html.BeginForm())
+        {
 
-           @using(Html.BeginForm())  
-           {
+            @Html.AntiForgeryToken()
+        <div class="registerdes">
 
-                 @Html.AntiForgeryToken() 
-                 <div class="registerdes">
+            <h4 class="makeflex">الاقتراحات و الشكاوى</h4>
+            <hr />
 
-                     <h3>الاقتراحات و الشكاوى</h3>
+            @*<div class="desc >
+            اقتراح
 
-                 <div class="desc">
-                 اقتراح
-               
-                @Html.RadioButtonFor(model => model.compORsug,'s')  
-                شكوي  
-                @Html.RadioButtonFor(model => model.compORsug,'c') 
+            @Html.RadioButtonFor(model => model.compORsug, 's')
+            شكوي
+            @Html.RadioButtonFor(model => model.compORsug, 'c')
+        </div>*@
+
+
+            <div class="typeofuser">
+                <div class="form-group form-check">
+                    <label class="form-check-label makeflex ">
+
+                        @*<div><input class="form-check-input" asp-for="IsWorker" /></div>*@
+                        <div>  @Html.RadioButtonFor(model => model.compORsug, 's')</div>
+                        <div class="marginright">اقتراح</div>
+                        @*@Html.DisplayNameFor(model => model.IsWorker)*@
+                    </label>
                 </div>
-               <div>
-                    @Html.TextBoxFor(model=>model.Title,new {placeholder = "عنوان الموضوع"})
-                    @Html.ValidationMessageFor(model=>model.Title,"")
-               
+                <div class="form-group form-check">
+                    <label class="form-check-label makeflex ">
+
+                        @*<div> <input class="form-check-input" asp-for="IsClient" /></div>*@
+                        @Html.RadioButtonFor(model => model.compORsug, 'c')
+                        <div class="marginright">شكوي</div>
+
+                        @*@Html.DisplayNameFor(model => model.IsClient)*@
+                    </label>
                 </div>
-            
-                @Html.TextAreaFor(model=>model.description,new { @class = "boxx" })
-               @Html.ValidationMessageFor(model=>model.description,"",new { @class = "text-danger" })
-               <br>
+            </div>
 
-                <input type="submit" value="ارسال" class="ersal"/>
-                 
 
-                 </div>
-                
-           }
+            <div style="width:100%">
+                @Html.TextBoxFor(model => model.Title, new { @class= "form-control fullWidth", placeholder = "عنوان الموضوع" } )
+                @Html.ValidationMessageFor(model => model.Title, "")
+
+            </div>
+            <br />
+            @Html.TextAreaFor(model => model.description, new { @class = "form-control height200 fullWidth" })
+            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            <br>
+
+            <div class="center">
+                <input type="submit" value="ارسال" class="ersal center defultbutton rightButton"  />
+            </div>
+
+
+        </div>
+
+        }
+    </div>
+</div>

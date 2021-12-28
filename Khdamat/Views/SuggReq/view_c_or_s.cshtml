@@ -9,87 +9,134 @@
 <h2 class="makeflex">التفاصيل</h2>
 <hr />
 <div>
-    @if (Model.suggreq.compORsug == 'c')
-    {
-        <label>:رقم الشكوي</label>
-    }
-    @if(Model.suggreq.compORsug=='s')
-    {
-       <label>:رقم المقترح</label>
-    }
-    <p>@Model.suggreq.ID</p>
-</div>
-<div>
-    @if (Model.suggreq.compORsug == 'c')
-    {
-        <label> : عنوان الشكوي</label>
-    }
-    @if(Model.suggreq.compORsug=='s')
-    {
-       <label> : عنوان المقترح</label>
-    }
-    
-    <p>@Model.suggreq.Title</p>
-</div>
-<div>
-    <label> : اسم العميل</label>
-    <p>@Model.f_name @Model.l_name</p>
-</div>
-<div>
-    <label> : نوع العميل</label>
-    <p>@Model.c_or_w</p>
-</div>
-<div>
-    <label> : ايميل العميل</label>
-    <p>@Model.email</p>
-</div>
-<div>
-    @if (Model.suggreq.compORsug == 'c')
-    {
-        <label> : تفاصيل الشكوي</label>
-    }
-    @if(Model.suggreq.compORsug=='s')
-    {
-       <label> : تفاصيل المقترح</label>
-    }
-    <p>@Model.suggreq.description</p>
-</div>
-<div>
-    @if (Model.suggreq.compORsug == 'c')
-    {
-        <a class="btn-primary" href=@Url.Action("take_c_or_s","SuggReq",new { @Model.suggreq, @Model.suggreq.ID, @Model.c_or_w, @Model.f_name, @Model.l_name, @Model.email, @Model.suggreq.description, @Model.suggreq.Title})>حل المشكلة</a>
-        
-    }
-    @if(Model.suggreq.compORsug=='s')
-    {
-        <a class="btn-primary" href=@Url.Action("take_c_or_s","SuggReq",new { @Model.suggreq, @Model.suggreq.ID, @Model.c_or_w, @Model.f_name, @Model.l_name, @Model.email, @Model.suggreq.description, @Model.suggreq.Title})>قبول المقترح</a>
+    <div class="makeflex">
 
-    }
+        @if (Model.suggreq.compORsug == 'c')
+        {
 
-</div>
-<div>
-    @if (Model.suggreq.compORsug == 'c')
-    {
-        <a class="btn-primary" href=@Url.Action("delete_c_or_s","SuggReq",new {@Model.id})>حذف المشكلة</a>
-    }
-    @if(Model.suggreq.compORsug =='s')
-    {
-        <a class="btn-primary" href=@Url.Action("delete_c_or_s","SuggReq",new {@Model.id})>حذف المقترح</a>
-    }
+            <p class="rigthTitle graycolor">
+                رقم الشكوي:
+            </p>
+        }
+        @if (Model.suggreq.compORsug == 's')
+        {
 
-</div>
-<div>
-    @if (Model.suggreq.compORsug == 'c')
-    {
-        @*<a class="btn-primary" href=@Url.Action("manage_c_or_s","SuggReq", 'c')>رجوع</a>*@
-        <a class="btn-primary" asp-area="" asp-route-t="c" asp-controller="SuggReq" asp-action="manage_c_or_s">رجوع</a>
+            <p class="rigthTitle graycolor">
+                رقم المقترح:
+            </p>
+        }
+        <p class="leftInfo">@Model.suggreq.ID</p>
+    </div>
 
-    }
-    @if(Model.suggreq.compORsug =='s')
-    {
-        <a class="btn-primary" asp-area="" asp-route-t="s" asp-controller="SuggReq" asp-action="manage_c_or_s">رجوع</a>
-        
 
-    }
-    
+    <div class="makeflex">
+
+        @if (Model.suggreq.compORsug == 'c')
+        {
+
+            <p class="rigthTitle graycolor">
+                عنوان الشكوي:
+            </p>
+        }
+        @if (Model.suggreq.compORsug == 's')
+        {
+
+            <p class="rigthTitle graycolor">
+                عنوان المقترح:
+            </p>
+        }
+        <p class="leftInfo">@Model.suggreq.Title</p>
+    </div>
+
+    <div class="makeflex">
+        <p class="rigthTitle">
+            اسم العميل:
+        </p>
+        <p class="leftInfo">
+            @Model.l_name
+        </p>
+    </div>
+
+    <div class="makeflex">
+        <p class="rigthTitle">
+            نوع العميل:
+        </p>
+        <p class="leftInfo">
+            @Model.c_or_w
+        </p>
+    </div>
+
+    <div class="makeflex">
+        <p class="rigthTitle">
+            ايميل العميل:
+        </p>
+        <p class="leftInfo">
+            @Model.email
+        </p>
+    </div>
+
+  
+    @*<div>
+            <label> : اسم العميل</label>
+            <p>@Model.f_name @Model.l_name</p>
+        </div>*@
+    @*<div>
+        <label> : نوع العميل</label>
+        <p>@Model.c_or_w</p>
+    </div>
+    <div>
+        <label> : ايميل العميل</label>
+        <p>@Model.email</p>
+    </div>*@
+    <div class="makeflex">
+        @if (Model.suggreq.compORsug == 'c')
+        {
+            <p class="rigthTitle">تفاصيل الشكوي:</p>
+        }
+        @if (Model.suggreq.compORsug == 's')
+        {
+            <p class="rigthTitle">تفاصيل المقترح:</p>
+        }
+        <p class="leftInfo">@Model.suggreq.description</p>
+    </div>
+    <div class="makeflex">
+        @if (Model.suggreq.compORsug == 'c')
+        {
+            <a class="btn-primary defultbutton rightButton" href=@Url.Action("take_c_or_s","SuggReq",new { @Model.suggreq, @Model.suggreq.ID, @Model.c_or_w, @Model.f_name, @Model.l_name, @Model.email, @Model.suggreq.description, @Model.suggreq.Title})>حل المشكلة</a>
+
+        }
+        @if (Model.suggreq.compORsug == 's')
+        {
+            <a class="btn-primary defultbutton rightButton" href=@Url.Action("take_c_or_s","SuggReq",new { @Model.suggreq, @Model.suggreq.ID, @Model.c_or_w, @Model.f_name, @Model.l_name, @Model.email, @Model.suggreq.description, @Model.suggreq.Title})>قبول المقترح</a>
+
+        }
+
+    @*</div>
+    <div class="makeflex">*@
+        @if (Model.suggreq.compORsug == 'c')
+        {
+         <a class="btn-primary defultbutton leftButton" href=@Url.Action("delete_c_or_s","SuggReq",new {@Model.id})>حذف المشكلة</a>
+        }
+        @if (Model.suggreq.compORsug == 's')
+        {
+    <a class="btn-primary defultbutton leftButton" href=@Url.Action("delete_c_or_s","SuggReq",new {@Model.id})>حذف المقترح</a>
+        }
+
+    </div>
+    <br />
+    <div class="makeflex">
+        @if (Model.suggreq.compORsug == 'c')
+        {
+            @*<a class="btn-primary" href=@Url.Action("manage_c_or_s","SuggReq", 'c')>رجوع</a>*@
+            <a class="btn-primary defultbutton rightButton" asp-area="" asp-route-t="c" asp-controller="SuggReq" asp-action="manage_c_or_s">رجوع</a>
+
+        }
+        @if (Model.suggreq.compORsug == 's')
+        {
+            <a class="btn-primary defultbutton rightButton" asp-area="" asp-route-t="s" asp-controller="SuggReq" asp-action="manage_c_or_s">رجوع</a>
+
+
+        }
+
+    </div>
 </div>

@@ -9,146 +9,104 @@
 <h2 class="makeflex">التحكم في الزباين</h2>
 <hr />
 
-<table class="zui-table">
-    <tr>
-        <th class="zui-table thead th">الاسم الاول</th>
-        <th class="zui-table thead th">الاسم الاخير</th>
-        <th class="zui-table thead th">البريد الالكتروني</th>
-        @*<th class="zui-table thead th">الرقم القومي</th>*@
-        <th class="zui-table thead th">البلد</th>
-        <th class="zui-table thead th">المدينة</th>
-        <th class="zui-table thead th">الشارع</th>
-        <th class="zui-table thead th">رقم الهاتف</th>
-        <th class="zui-table thead th">النوع</th>
-        <th class="zui-table thead th">تاريخ الميلاد</th>
-        <th class="zui-table thead th">التحكم في العميل</th>
 
-    </tr>
     @foreach (var item in Model)
-   {
-       @Html.HiddenFor(x=>item.client.Natoinal_ID)
-       <tr>
-           <td class="zui-table tbody td">@item.client.First_Name</td>
-           <td class="zui-table tbody td">@item.client.Last_Name</td>
-           <td class="zui-table tbody td">@item.client.Client_Email</td>
-           @*<td class="zui-table tbody td">@item.client.Natoinal_ID</td>*@
+    {
+        <div>
+            <div class="makeflex">
+                <p class="rigthTitle">الاسم الاول:</p>
+                <p class="leftInfo">@item.client.First_Name</p>
+            </div>
+            <div class="makeflex">
+                <p class="rigthTitle">الاسم الاخير:</p>
+                <p class="leftInfo">@item.client.Last_Name</p>
+            </div>
+            <div class="makeflex">
+                <p class="rigthTitle">البريد الالكتروني:</p>
+                <p class="leftInfo">@item.client.Client_Email</p>
+            </div>
+            @*<div class="makeflex">
+                    <p class="rigthTitle">الرقم القومي:</p>
+                    <p class="leftInfo">@item.client.Natoinal_ID</p>
+                </div>*@
+            <div class="makeflex">
+                <p class="rigthTitle">البلد:</p>
+                <p class="leftInfo">@item.client.Country</p>
+            </div>
+            <div class="makeflex">
+                <p class="rigthTitle">المدينة:</p>
+                <p class="leftInfo">@item.client.City</p>
+            </div>
+            <div class="makeflex">
+                <p class="rigthTitle">الشارع:</p>
+                <p class="leftInfo">@item.client.Street</p>
+            </div>
+            <div class="makeflex">
+                <p class="rigthTitle">رقم الهاتف:</p>
+                <p class="leftInfo">@item.client.Phone</p>
+            </div>
 
-           <td class="zui-table tbody td">@item.client.Country</td>
-           <td class="zui-table tbody td">@item.client.Country</td>
-           <td class="zui-table tbody td">@item.client.City</td>
-           <td class="zui-table tbody td">@item.client.Phone</td>
-           <td class="zui-table tbody td">@item.client.Gender</td>
-           <td class="zui-table tbody td">@item.client.Birth_Date.ToString("dd/MM/yyyy",CultureInfo.InvariantCulture)</td>
-           <td>
-                @if (item.user.ToString() == "Client")
+            <div class="makeflex">
+                <p class="rigthTitle">النوع:</p>
+                <p class="leftInfo">@item.client.Gender</p>
+            </div>
+            <div class="makeflex">
+                <p class="rigthTitle">تاريخ الميلاد:</p>
+                <p class="leftInfo">@item.client.Birth_Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)</p>
+            </div>
+            @*<div class="makeflex">
+                    <p class="rigthTitle"> التقييم:</p>
+                    <p class="leftInfo">@item.worker.Rating</p>
+                </div>*@
+
+         
+       
+            @if (item.user.ToString() == "Client")
+            {
+                @if (item.isAdmin == false && item.isSupporter == false)
                 {
-                    @if (item.isAdmin == false && item.isSupporter == false)
-                    {
+                    <div class="makeflex">
                         @if (Context.Session.GetInt32("isAdmin") == 1)
                         {
-                            <a class="btn-primary" href=@Url.Action("protosupporter","Clients",new {item.client,item.client.Client_Email})>خليه السابورتر</a>
+                            <a class="btn-primary defultbutton rightButton" href=@Url.Action("protosupporter","Clients",new {item.client,item.client.Client_Email})>خليه السابورتر</a>
                         }
-                        @if (item.isBlocked == false )
+                        @if (item.isBlocked == false)
                         {
-                            <a class="btn-primary" href="@Url.Action("BlockClient","Clients",new {item.client,item.client.Client_Email})">بلوك</a>
-                        } 
-
-                        @if (item.isBlocked == true )
-                        {
-                            <a class="btn-primary" href="@Url.Action("UNBlockClient","Clients",new {item.client,item.client.Client_Email})">ازل البلوك</a>
-                        }
-                    }
-                    @if (item.isAdmin == true || item.isSupporter == true)
-                    {
-                        <td class="zui-table tbody td">Is Supporter/Admin</td>
-                    }
-               }
-                @if (item.user.ToString() == "Supporter")
-                {
-                    @if (item.isBlocked == false && Context.Session.GetInt32("isAdmin") == 1)
-                        {
-                            <a class="btn-primary" href="@Url.Action("BlockClient","Clients",new {item.client,item.client.Client_Email})">بلوك</a>
+                            <a class="btn-primary defultbutton rightButton" href="@Url.Action("BlockClient","Clients",new {item.client,item.client.Client_Email})">بلوك</a>
                         }
 
-                        @if (item.isBlocked == true && Context.Session.GetInt32("isAdmin") == 1)
+                        @if (item.isBlocked == true)
                         {
-                            <a class="btn-primary" href="@Url.Action("UNBlockClient","Clients",new {item.client,item.client.Client_Email})">ازل البلوك</a>
+                            <a class="btn-primary defultbutton leftButton" href="@Url.Action("UNBlockClient","Clients",new {item.client,item.client.Client_Email})">ازل البلوك</a>
                         }
+                    </div>
                 }
-                
-
-       </tr>
-   }
-</table>
-
-@*@foreach (var item in Model)
-    {
-
-<div>
-    <div class="makeflex">
-        <p class="rigthTitle">الاسم الاول:</p>
-        <p class="leftInfo">@Html.DisplayFor(modelItem => item.client.First_Name)</p>
-    </div>
-    <div class="makeflex">
-        <p class="rigthTitle">الاسم الاخير:</p>
-        <p class="leftInfo">@Html.DisplayFor(modelItem => item.client.Last_Name)</p>
-    </div>
-    <div class="makeflex">
-        <p class="rigthTitle">البريد الالكتروني:</p>
-        <p class="leftInfo">@Html.DisplayFor(modelItem => item.client.Client_Email)</p>
-    </div>
-    <div class="makeflex">
-        <p class="rigthTitle">الرقم القومي:</p>
-        <p class="leftInfo">@Html.DisplayFor(modelItem => item.client.Natoinal_ID)</p>
-    </div>
-    <div class="makeflex">
-        <p class="rigthTitle">البلد:</p>
-        <p class="leftInfo">@Html.DisplayFor(modelItem => item.client.Country)</p>
-    </div>
-    <div class="makeflex">
-        <p class="rigthTitle">المدينة:</p>
-        <p class="leftInfo">@Html.DisplayFor(modelItem => item.client.City)</p>
-    </div>
-    <div class="makeflex">
-        <p class="rigthTitle">الشارع:</p>
-        <p class="leftInfo">@Html.DisplayFor(modelItem => item.client.Street)</p>
-    </div>
-    <div class="makeflex">
-        <p class="rigthTitle">رقم الهاتف:</p>
-        <p class="leftInfo">@Html.DisplayFor(modelItem => item.client.Phone)</p>
-    </div>
-    <div class="makeflex">
-        <p class="rigthTitle">النوع:</p>
-        <p class="leftInfo">@Html.DisplayFor(modelItem => item.client.Gender)</p>
-    </div>
-    <div class="makeflex">
-        <p class="rigthTitle">تاريخ الميلاد:</p>
-        <p class="leftInfo">@Html.DisplayFor(modelItem => item.client.Birth_Date)</p>
-    </div>
-    
-    @if (item.isAdmin == false)
-    {
-            <div class="makeflex">
-                @if (item.isSupporter == false)
+                @if (item.isAdmin == true || item.isSupporter == true)
                 {
-                    <a class="defultbutton rightButton" href=@Url.Action("protosupporter","Clients",item.client)>خليه السابورتر</a>
+                    <div class="makeflex">
+                        <p class="rigthTitle">ادمن/سابورتر</p>
+                    </div>
                 }
-            @if (item.isBlocked == false)
+            }
+            @if (item.user.ToString() == "Supporter")
             {
-                <a class="defultbutton leftButton" href="@Url.Action("BlockClient","Clients", item.client)">بلوك</a>
+        <div class="makeflex">
+            @if (item.isBlocked == false && Context.Session.GetInt32("isAdmin") == 1)
+            {
+                <a class="btn-primary defultbutton rightButton" href="@Url.Action("BlockClient","Clients",new {item.client,item.client.Client_Email})">بلوك</a>
             }
 
-            @if (item.isBlocked == true)
+            @if (item.isBlocked == true && Context.Session.GetInt32("isAdmin") == 1)
             {
-                <a class="defultbutton leftButton" href="@Url.Action("UNBlockClient","Clients", item.client)">ازل البلوك</a>
+                <a class="btn-primary defultbutton rightButton" href="@Url.Action("UNBlockClient","Clients",new {item.client,item.client.Client_Email})">ازل البلوك</a>
             }
-
         </div>
-    }
-</div>
-<hr />
+            }
 
 
-}*@
+            </div>
+        <hr />
+        }
+
 
 
