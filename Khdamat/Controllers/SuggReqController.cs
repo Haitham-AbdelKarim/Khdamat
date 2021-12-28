@@ -42,6 +42,7 @@ namespace Khdamat.Controllers
             {
                 con.Open();
                 com.Connection = con;
+
                 //string query = "SELECT max(ID) from Complain_Suggestion";
                 //SqlCommand cmd = new SqlCommand(query, con);
                 //int max;
@@ -56,6 +57,7 @@ namespace Khdamat.Controllers
                 {
                     com.CommandText="select * from Worker where Worker_Email='"+email+"';";
                     dr=com.ExecuteReader();dr.Read();
+
                     com.CommandText = "INSERT INTO Complain_Suggestion (Title ,Worker_ID, Descriptions,C_or_S) values ('"+suggreq.Title+"','" +dr["Natoinal_ID"]+"','" +suggreq.description +"','"+ suggreq.compORsug+"');";
                     dr.Close();
                 }

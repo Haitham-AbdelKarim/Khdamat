@@ -9,6 +9,7 @@ using Khdamat.Data;
 using Khdamat.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Http;
+using System.Globalization;
 
 namespace Khdamat.Controllers
 {
@@ -190,11 +191,18 @@ namespace Khdamat.Controllers
         }
 
         // GET: Clients/clientsControl
-        public IActionResult clientsControl(string id)
+        public IActionResult clientsControl(string user)
         {
             con.Open();
             com.Connection = con;
-            com.CommandText = "SELECT Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_b, S_Blocked FROM Client, Account WHERE Email = Client_Email;";
+            if (user == "Client")
+            {
+                com.CommandText = "SELECT Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_b, S_Blocked,Supporter_b FROM Client, Account WHERE Email = Client_Email;";
+            }
+            else if (user == "Supporter")
+            {
+                com.CommandText = "SELECT Natoinal_ID, Supporter_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_b, S_Blocked,Supporter_b FROM Supporter, Account WHERE Email = Supporter_Email;";
+            }
             dr = com.ExecuteReader();
             List<ClientDetails> clients = new List<ClientDetails>();
             ClientDetails clientsDetails;
@@ -202,7 +210,7 @@ namespace Khdamat.Controllers
             {
                 clientsDetails = new ClientDetails();
                 clientsDetails.client.Natoinal_ID = dr["Natoinal_ID"].ToString();
-                clientsDetails.client.Client_Email = dr["Client_Email"].ToString();
+                clientsDetails.client.Client_Email = dr[user+"_Email"].ToString();
                 clientsDetails.client.First_Name = dr["F_Name"].ToString();
                 clientsDetails.client.Last_Name = dr["L_Name"].ToString();
                 clientsDetails.client.Country = dr["Country"].ToString();
@@ -210,15 +218,24 @@ namespace Khdamat.Controllers
                 clientsDetails.client.Street = dr["Street"].ToString();
                 clientsDetails.client.Phone = dr["Phone"].ToString();
                 clientsDetails.client.Gender = dr["Gender"].ToString()[0];
-                if(dr["Admin_b"].ToString() == "True")
+                clientsDetails.client.Birth_Date = ((DateTime)dr["Birth_Date"]);
+                clientsDetails.user = user;
+                if (dr["Admin_b"].ToString() == "True")
                     clientsDetails.isAdmin = true;
                 else
                     clientsDetails.isAdmin = false;
 
-                if (dr["Admin_b"].ToString() == "True")
+                if (dr["S_Blocked"].ToString() == "True")
                     clientsDetails.isBlocked = true;
                 else
                     clientsDetails.isBlocked = false;
+                if (string.IsNullOrEmpty(dr["Supporter_b"].ToString()))
+                {
+                    clientsDetails.isSupporter = false;
+                }
+                else if (dr["Supporter_b"].ToString() == "True")
+                    clientsDetails.isSupporter = true;
+                else clientsDetails.isSupporter = false;
                 clients.Add(clientsDetails);
             }
             dr.Close();
@@ -339,6 +356,233 @@ namespace Khdamat.Controllers
 
             return View(client);
         }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public IActionResult BlockClient(Client c,string e)
+        {
+            string user;
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "SELECT Supporter_b FROM Account WHERE Email='" + c.Client_Email + "';";
+            dr = com.ExecuteReader();
+            dr.Read();
+            if (string.IsNullOrEmpty(dr["Supporter_b"].ToString()) ||dr["Supporter_b"].ToString() == "False")
+                user = "Client";
+            else
+                user = "Supporter";
+            con.Close();
+            dr.Close();
+
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "UPDATE Account SET S_Blocked= '"+true+"' WHERE Email='"+ c.Client_Email +"';";
+            com.ExecuteNonQuery();
+            con.Close();
+            con.Open();
+            if (user == "Client")
+            {
+                com.CommandText = "SELECT Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_b, S_Blocked,Supporter_b FROM Client, Account WHERE Email = Client_Email;";
+            }
+            else if (user == "Supporter")
+            {
+                com.CommandText = "SELECT Natoinal_ID, Supporter_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_b, S_Blocked,Supporter_b FROM Supporter, Account WHERE Email = Supporter_Email;";
+            }
+            dr = com.ExecuteReader();
+            List<ClientDetails> clients = new List<ClientDetails>();
+            ClientDetails clientsDetails;
+            while (dr.Read())
+            {
+                clientsDetails = new ClientDetails();
+                clientsDetails.client.Natoinal_ID = dr["Natoinal_ID"].ToString();
+                clientsDetails.client.Client_Email = dr[user+"_Email"].ToString();
+                clientsDetails.client.First_Name = dr["F_Name"].ToString();
+                clientsDetails.client.Last_Name = dr["L_Name"].ToString();
+                clientsDetails.client.Country = dr["Country"].ToString();
+                clientsDetails.client.City = dr["City"].ToString();
+                clientsDetails.client.Street = dr["Street"].ToString();
+                clientsDetails.client.Phone = dr["Phone"].ToString();
+                clientsDetails.client.Gender = dr["Gender"].ToString()[0];
+                clientsDetails.client.Birth_Date = ((DateTime)dr["Birth_Date"]);
+                clientsDetails.user = user;
+                if (dr["Admin_b"].ToString() == "True")
+                    clientsDetails.isAdmin = true;
+                else
+                    clientsDetails.isAdmin = false;
+
+                if (dr["S_Blocked"].ToString() == "True")
+                    clientsDetails.isBlocked = true;
+                else
+                    clientsDetails.isBlocked = false;
+                if (string.IsNullOrEmpty(dr["Supporter_b"].ToString()))
+                {
+                    clientsDetails.isSupporter = false;
+                }
+                else if (dr["Supporter_b"].ToString() == "True")
+                    clientsDetails.isSupporter = true;
+                else clientsDetails.isSupporter = false;
+                clients.Add(clientsDetails);
+            }
+            dr.Close();
+            con.Close();
+            return View("clientsControl",clients);
+        }
+
+        //[HttpGet("{c:Client}")]
+        public IActionResult UNBlockClient(Client c, string e)
+        {
+            string user;
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "SELECT Supporter_b FROM Account WHERE Email='" + c.Client_Email + "';";
+            dr = com.ExecuteReader();
+            dr.Read();
+            if (string.IsNullOrEmpty(dr["Supporter_b"].ToString()) || dr["Supporter_b"].ToString() == "False")
+                user = "Client";
+            else
+                user = "Supporter";
+            con.Close();
+            dr.Close();
+
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "UPDATE Account SET S_Blocked= '" + false + "' WHERE Email='" + c.Client_Email + "';";
+            com.ExecuteNonQuery();
+            con.Close();
+            con.Open();
+            if (user == "Client")
+            {
+                com.CommandText = "SELECT Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_b, S_Blocked,Supporter_b FROM Client, Account WHERE Email = Client_Email;";
+            }
+            else if (user == "Supporter")
+            {
+                com.CommandText = "SELECT Natoinal_ID, Supporter_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_b, S_Blocked,Supporter_b FROM Supporter, Account WHERE Email = Supporter_Email;";
+            }
+            dr = com.ExecuteReader();
+            List<ClientDetails> clients = new List<ClientDetails>();
+            ClientDetails clientsDetails;
+            while (dr.Read())
+            {
+                clientsDetails = new ClientDetails();
+                clientsDetails.client.Natoinal_ID = dr["Natoinal_ID"].ToString();
+                clientsDetails.client.Client_Email = dr[user + "_Email"].ToString();
+                clientsDetails.client.First_Name = dr["F_Name"].ToString();
+                clientsDetails.client.Last_Name = dr["L_Name"].ToString();
+                clientsDetails.client.Country = dr["Country"].ToString();
+                clientsDetails.client.City = dr["City"].ToString();
+                clientsDetails.client.Street = dr["Street"].ToString();
+                clientsDetails.client.Phone = dr["Phone"].ToString();
+                clientsDetails.client.Gender = dr["Gender"].ToString()[0];
+                clientsDetails.client.Birth_Date = ((DateTime)dr["Birth_Date"]);
+                clientsDetails.user = user;
+                if (dr["Admin_b"].ToString() == "True")
+                    clientsDetails.isAdmin = true;
+                else
+                    clientsDetails.isAdmin = false;
+
+                if (dr["S_Blocked"].ToString() == "True")
+                    clientsDetails.isBlocked = true;
+                else
+                    clientsDetails.isBlocked = false;
+                if (string.IsNullOrEmpty(dr["Supporter_b"].ToString()))
+                {
+                    clientsDetails.isSupporter = false;
+                }
+                else if (dr["Supporter_b"].ToString() == "True")
+                    clientsDetails.isSupporter = true;
+                else clientsDetails.isSupporter = false;
+                clients.Add(clientsDetails);
+            }
+            dr.Close();
+            con.Close();
+            return View("clientsControl", clients);
+        }
+
+        public IActionResult protosupporter(Client c, string e)
+        {
+            string user;
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "SELECT Supporter_b FROM Account WHERE Email='" + c.Client_Email + "';";
+            dr = com.ExecuteReader();
+            dr.Read();
+            if (string.IsNullOrEmpty(dr["Supporter_b"].ToString()) || dr["Supporter_b"].ToString() == "False")
+                user = "Client";
+            else
+                user = "Supporter";
+            con.Close();
+            dr.Close();
+
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "UPDATE Account SET Supporter_b='"+true+"' WHERE Email='" + c.Client_Email + "';";
+            com.ExecuteNonQuery();
+            string email = HttpContext.Session.GetString("Email");
+            com.CommandText = "SELECT Natoinal_ID FROM Administrator WHERE Admin_Email='" + email + "';";
+            dr = com.ExecuteReader();
+            dr.Read();
+            string id = dr["Natoinal_ID"].ToString();
+            dr.Close();
+            com.CommandText = "SELECT Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date FROM Client WHERE Client_Email='" + c.Client_Email + "';";
+            dr = com.ExecuteReader();
+            dr.Read();
+
+            //com.CommandText = "SELECT Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_b, S_Blocked FROM Client, Account WHERE Email = Client_Email;";
+            com.CommandText = "INSERT INTO Supporter (Natoinal_ID, Supporter_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_ID) values ('"
+                    + dr["Natoinal_ID"] + "','"
+                    + dr["Client_Email"] +"','"
+                    + dr["F_Name"] + "','"
+                    + dr["L_Name"] + "','"
+                    + dr["Country"] + "','"
+                    + dr["City"] + "','"
+                    + dr["Street"] + "','"
+                    + dr["Phone"] + "','"
+                    + dr["Gender"] + "','"
+                    + dr["Birth_Date"] + "','"
+                    + id
+                    + "');";
+            dr.Close();
+            com.ExecuteNonQuery();
+            dr.Close();
+            com.CommandText = "SELECT Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_b, S_Blocked,Supporter_b FROM Client, Account WHERE Email = Client_Email;";
+            dr = com.ExecuteReader();
+            List<ClientDetails> clients = new List<ClientDetails>();
+            ClientDetails clientsDetails;
+            while (dr.Read())
+            {
+                clientsDetails = new ClientDetails();
+                clientsDetails.client.Natoinal_ID = dr["Natoinal_ID"].ToString();
+                clientsDetails.client.Client_Email = dr["Client_Email"].ToString();
+                clientsDetails.client.First_Name = dr["F_Name"].ToString();
+                clientsDetails.client.Last_Name = dr["L_Name"].ToString();
+                clientsDetails.client.Country = dr["Country"].ToString();
+                clientsDetails.client.City = dr["City"].ToString();
+                clientsDetails.client.Street = dr["Street"].ToString();
+                clientsDetails.client.Phone = dr["Phone"].ToString();
+                clientsDetails.client.Gender = dr["Gender"].ToString()[0];
+                clientsDetails.client.Birth_Date = ((DateTime)dr["Birth_Date"]);
+                clientsDetails.user = user;
+                if (dr["Admin_b"].ToString() == "True")
+                    clientsDetails.isAdmin = true;
+                else
+                    clientsDetails.isAdmin = false;
+
+                if (dr["S_Blocked"].ToString() == "True")
+                    clientsDetails.isBlocked = true;
+                else
+                    clientsDetails.isBlocked = false;
+                if (string.IsNullOrEmpty(dr["Supporter_b"].ToString()))
+                {
+                    clientsDetails.isSupporter = false;
+                }
+                else if (dr["Supporter_b"].ToString() == "True")
+                    clientsDetails.isSupporter = true;
+                else clientsDetails.isSupporter = false;
+                clients.Add(clientsDetails);
+            }
+            dr.Close();
+            con.Close();
+            return View("clientsControl", clients);
+        }
 
         // POST: Clients/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -355,5 +599,7 @@ namespace Khdamat.Controllers
         {
             return _context.Client.Any(e => e.Natoinal_ID == id);
         }
+
+
     }
 }

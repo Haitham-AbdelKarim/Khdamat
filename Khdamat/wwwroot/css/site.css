@@ -1,4 +1,4 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+﻿﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
 :root {
@@ -105,7 +105,6 @@ body {
     transition:var(--main--trasition);
     margin:0 5px;
 }
-
 .myNav:hover{*/
     /*font-size:25px;*/
     /*color:grey;
@@ -176,13 +175,13 @@ body {
     justify-content:space-between;
 }
 
-.comFooter{
-    color:white;
-    text-decoration:none;
-    margin:0;
-    padding:0;
-    transition:var(--main--trasition);
-    font-size:13px;
+.comFooter {
+    color: #343a40;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    transition: var(--main--trasition);
+    font-size: 13px;
 }
     .comFooter:hover{
         color:var(--main-color);
@@ -453,7 +452,7 @@ footer span .fa-google-plus:hover {
         -webkit-transform: translateY(0);
     }
 
-    0 {
+    0% {
         opacity: 0;
         -webkit-transform: translateY(0);
     }
@@ -541,20 +540,29 @@ p,
     background-color: #eeeeee7d !important;
 }
 
-a:hover
-{
-    text-decoration:none !important;
+
+.boxx{
+    height:200px;
+    width:700px;
+     
 }
 
-.rightButton {
-    padding: 5px 10px;
-    color: white;
+.registerdes {
+    margin: 0 auto !important;
+    background: #eeeeee4f;
     border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px #d9d5d5;
+    display: flex;
+    padding-left:0;
+    flex-direction:column;
+      align-items:center;
+        
 }
-
-.leftButton {
-    margin-right: 20px;
-    padding: 5px 10px;
-    color: white;
-    border-radius: 5px;
+.desc{
+   /*display:flex;*/
+   /*margin-top:5px;*/
+}
+.ersal{
+    color:red;
 }
