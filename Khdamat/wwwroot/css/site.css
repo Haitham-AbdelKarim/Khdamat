@@ -13,53 +13,55 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 
@@ -75,14 +77,14 @@ body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
     font-family: 'Cairo', sans-serif;
-
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
 }
 
 
@@ -92,12 +94,12 @@ body {
 
 .newFont {
     font-family: 'Lalezar', cursive;
-    font-size:30px;
-    color:var(--main-color) !important; 
+    font-size: 30px;
+    color: var(--main-color) !important;
 }
 
-.homePar{
-    color:var(--main-gray-text);
+.homePar {
+    color: var(--main-gray-text);
 }
 
 /*.myNav {
@@ -107,8 +109,8 @@ body {
 }
 
 .myNav:hover{*/
-    /*font-size:25px;*/
-    /*color:grey;
+/*font-size:25px;*/
+/*color:grey;
     transform:scale(1.1,1.1);
 }*/
 
@@ -118,7 +120,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-  /*  padding: 0 30px;*/
+    /*  padding: 0 30px;*/
     position: relative;
     transition: var(--main--trasition);
     overflow: hidden;
@@ -149,7 +151,7 @@ body {
     }
 
     .myNav:hover {
-        color: var(--main-gray-text)!important;
+        color: var(--main-gray-text) !important;
         background-color: #fafafa;
     }
 
@@ -168,31 +170,32 @@ body {
 }*/
 
 .blackFooter {
-    background-color:var(--main--black);
+    background-color: var(--main--black);
 }
 
 .flexFooter {
-    display:flex;
-    justify-content:space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
-.comFooter{
-    color:white;
-    text-decoration:none;
-    margin:0;
-    padding:0;
-    transition:var(--main--trasition);
-    font-size:13px;
+.comFooter {
+    color: white;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    transition: var(--main--trasition);
+    font-size: 13px;
 }
-    .comFooter:hover{
-        color:var(--main-color);
+
+    .comFooter:hover {
+        color: var(--main-color);
     }
 
 footer span i {
     font-size: 23px;
     margin: 0 5px;
     transition: var(--main--trasition);
-    color:var(--main-gray-text)
+    color: var(--main-gray-text)
 }
 
 footer span .fa-facebook:hover {
@@ -200,11 +203,11 @@ footer span .fa-facebook:hover {
 }
 
 footer span .fa-instagram:hover {
-    color:purple;
+    color: purple;
 }
 
 footer span .fa-google-plus:hover {
-    color:red;
+    color: red;
 }
 
 @media (max-width: 767px) {
@@ -221,7 +224,7 @@ footer span .fa-google-plus:hover {
 }
 
 .dropdown-toggle::after {
-    margin:3px 5px 0 0;
+    margin: 3px 5px 0 0;
 }
 
 .register {
@@ -232,10 +235,9 @@ footer span .fa-google-plus:hover {
     box-shadow: 0px 0px 10px #d9d5d5;
 }
 
-.typeofuser 
-{
-    display:flex;
-    justify-content:space-around;
+.typeofuser {
+    display: flex;
+    justify-content: space-around;
 }
 
 .center {
@@ -244,43 +246,37 @@ footer span .fa-google-plus:hover {
     align-items: center;
 }
 
-.makeflex 
-{
-    display:flex !important;
+.makeflex {
+    display: flex !important;
 }
 
-.graycolor
-{
-    color:gray;
+.graycolor {
+    color: gray;
 }
 
 .logofont {
     font-family: 'Lalezar', cursive !important;
 }
 
-.marginright
-{
-    margin:0 20px 0 0;
+.marginright {
+    margin: 0 20px 0 0;
 }
 
-.defultbutton
-{
-    background-color:orangered;
-    border:none;
-    transition:var(--main--trasition);
+.defultbutton {
+    background-color: orangered;
+    border: none;
+    transition: var(--main--trasition);
 }
 
-.defultbutton:hover
-{
-    background-color:gray;
-    color:black;
-}
+    .defultbutton:hover {
+        background-color: gray;
+        color: black;
+    }
 
-.rigthTitle
-{
-    font-weight:bold;
-    font-size:18px;
-    color:var(--main--rightGray);
+.rigthTitle {
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--main--rightGray);
 }
 
 .leftInfo {
@@ -289,15 +285,14 @@ footer span .fa-google-plus:hover {
     margin: 3px 15px 0 0;
 }
 
-.grayBack 
-{
-    background-color:gray;
-    color:white;
-    transition:var(--main--trasition);
-    text-decoration:none;
-    padding:5px 10px;
-    border-radius:5px;
-    font-size:12px;
+.grayBack {
+    background-color: gray;
+    color: white;
+    transition: var(--main--trasition);
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
 }
 
     .grayBack :hover {
@@ -320,107 +315,107 @@ footer span .fa-google-plus:hover {
     width: 70px;
 }*/
 
-    .vertical-nav li {
-        list-style: none;
-        display: block;
-        width: 100%;
-        border-bottom: solid 1px #f2f5ff;
-        text-align: center;
-        position: relative;
-        flex-grow: 1;
-        align-items: stretch;
-        display: flex;
+.vertical-nav li {
+    list-style: none;
+    display: block;
+    width: 100%;
+    border-bottom: solid 1px #f2f5ff;
+    text-align: center;
+    position: relative;
+    flex-grow: 1;
+    align-items: stretch;
+    display: flex;
+}
+
+    .vertical-nav li:last-child {
+        border: none;
     }
 
-        .vertical-nav li:last-child {
-            border: none;
-        }
+    .vertical-nav li a {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-flow: column;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
 
-        .vertical-nav li a {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            flex-flow: column;
-            justify-content: center;
+    .vertical-nav li:hover > a {
+        background: #fafafa;
+        transition: all 0.2s ease;
+    }
+
+        .vertical-nav li:hover > a .feather {
+            transform: scale(1.1);
             transition: all 0.2s ease;
         }
 
-        .vertical-nav li:hover > a {
-            background: #fafafa;
-            transition: all 0.2s ease;
-        }
+    .vertical-nav li:hover > .hover-menu,
+    .vertical-nav li:focus-within > .hover-menu {
+        visibility: visible;
+        opacity: 1;
+        -webkit-animation: slide-down 0.2s ease-out;
+        -moz-animation: slide-down 0.2s ease-out;
+        transition: all 0.5s ease;
+        display: block;
+    }
 
-            .vertical-nav li:hover > a .feather {
-                transform: scale(1.1);
-                transition: all 0.2s ease;
-            }
+    .vertical-nav li .hover-menu {
+        background: white;
+        visibility: hidden;
+        transition: all 0.5s ease;
+        opacity: 0;
+        display: none;
+        position: absolute;
+        left: 100%;
+        min-width: 200px;
+        margin: 0;
+        padding: 0;
+        top: -20%;
+        box-shadow: 0 0 40px #00000021;
+    }
 
-        .vertical-nav li:hover > .hover-menu,
-        .vertical-nav li:focus-within > .hover-menu {
-            visibility: visible;
-            opacity: 1;
-            -webkit-animation: slide-down 0.2s ease-out;
-            -moz-animation: slide-down 0.2s ease-out;
-            transition: all 0.5s ease;
-            display: block;
-        }
-
-        .vertical-nav li .hover-menu {
-            background: white;
-            visibility: hidden;
-            transition: all 0.5s ease;
-            opacity: 0;
-            display: none;
+        .vertical-nav li .hover-menu:after {
+            right: 100%;
+            top: 20%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
             position: absolute;
-            left: 100%;
-            min-width: 200px;
+            pointer-events: none;
+            border-color: rgba(255, 255, 255, 0);
+            border-right-color: #ffffff;
+            border-width: 10px;
+            margin-top: -10px;
+        }
+
+        .vertical-nav li .hover-menu ul {
             margin: 0;
             padding: 0;
-            top: -20%;
-            box-shadow: 0 0 40px #00000021;
         }
 
-            .vertical-nav li .hover-menu:after {
-                right: 100%;
-                top: 20%;
-                border: solid transparent;
-                content: " ";
-                height: 0;
-                width: 0;
-                position: absolute;
-                pointer-events: none;
-                border-color: rgba(255, 255, 255, 0);
-                border-right-color: #ffffff;
-                border-width: 10px;
-                margin-top: -10px;
+            .vertical-nav li .hover-menu ul li {
+                list-style: none;
+                display: block;
+                width: 100%;
+                text-align: center;
             }
 
-            .vertical-nav li .hover-menu ul {
-                margin: 0;
-                padding: 0;
-            }
-
-                .vertical-nav li .hover-menu ul li {
-                    list-style: none;
-                    display: block;
+                .vertical-nav li .hover-menu ul li a {
                     width: 100%;
-                    text-align: center;
+                    display: block !important;
+                    text-decoration: none;
+                    padding: 15px 20px;
+                    text-align: left;
+                    height: auto !important;
+                    font-weight: 400;
                 }
 
-                    .vertical-nav li .hover-menu ul li a {
-                        width: 100%;
-                        display: block !important;
-                        text-decoration: none;
-                        padding: 15px 20px;
-                        text-align: left;
-                        height: auto !important;
-                        font-weight: 400;
+                    .vertical-nav li .hover-menu ul li a:hover {
+                        background: #fafafa;
+                        transition: 0.3s ease;
                     }
-
-                        .vertical-nav li .hover-menu ul li a:hover {
-                            background: #fafafa;
-                            transition: 0.3s ease;
-                        }
 
 .menu-header {
     font-family: "Roboto Condensed", sans-serif;
@@ -478,19 +473,19 @@ footer span .fa-google-plus:hover {
     margin: 0 auto;
 }
 
-/*h1,
+    /*h1,
 h2 {
     color: #343535;
     font-weight: 400;
 }*/
 
-p,
-.content li {
-    color: #949494;
-    line-height: 29px;
-    font-size: 16px;
-    font-weight: 300;
-}
+    p,
+    .content li {
+        color: #949494;
+        line-height: 29px;
+        font-size: 16px;
+        font-weight: 300;
+    }
 
 .header-image {
     height: 300px;
@@ -532,18 +527,16 @@ p,
         padding: 20px;
     }
 
-    li a:hover 
-    {
-        text-decoration:none !important;
-    }
+li a:hover {
+    text-decoration: none !important;
+}
 
 .navbar {
     background-color: #eeeeee7d !important;
 }
 
-a:hover
-{
-    text-decoration:none !important;
+a:hover {
+    text-decoration: none !important;
 }
 
 .rightButton {

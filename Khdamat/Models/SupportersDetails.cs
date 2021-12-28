@@ -1,17 +1,16 @@
 ﻿namespace Khdamat.Models
 {
-    public class ClientDetails
+    public class SupportersDetails
     {
-        public Client client { get; set; }
+        public Supporter supporter { get; set; }
         public bool isAdmin { get; set; }
         public bool isBlocked { get; set; }
 
         public bool isSupporter { get; set; }
-        public string user { get; set; }
 
-        public ClientDetails()
+        public SupportersDetails()
         {
-            client = new Client();
+            supporter = new Supporter();
         }
     }
 }

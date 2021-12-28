@@ -1,12 +1,12 @@
-﻿@model List<Khdamat.Models.ClientDetails>
+﻿@model List<Khdamat.Models.WorkerDetails>
 @using Microsoft.AspNetCore.Http;
 @using System.Globalization
 
 @{
-    ViewData["Title"] = "clientsControl";
+    ViewData["Title"] = "workersControl";
 }
 
-<h2 class="makeflex">التحكم في الزباين</h2>
+<h2 class="makeflex">التحكم في العمال</h2>
 <hr />
 
 <table class="zui-table">
@@ -14,7 +14,7 @@
         <th class="zui-table thead th">الاسم الاول</th>
         <th class="zui-table thead th">الاسم الاخير</th>
         <th class="zui-table thead th">البريد الالكتروني</th>
-        @*<th class="zui-table thead th">الرقم القومي</th>*@
+        <th class="zui-table thead th">الرقم القومي</th>
         <th class="zui-table thead th">البلد</th>
         <th class="zui-table thead th">المدينة</th>
         <th class="zui-table thead th">الشارع</th>
@@ -22,60 +22,45 @@
         <th class="zui-table thead th">النوع</th>
         <th class="zui-table thead th">تاريخ الميلاد</th>
         <th class="zui-table thead th">التحكم في العميل</th>
+        <th class="zui-table thead th">التقييم</th>
 
     </tr>
     @foreach (var item in Model)
    {
-       @Html.HiddenFor(x=>item.client.Natoinal_ID)
        <tr>
-           <td class="zui-table tbody td">@item.client.First_Name</td>
-           <td class="zui-table tbody td">@item.client.Last_Name</td>
-           <td class="zui-table tbody td">@item.client.Client_Email</td>
-           @*<td class="zui-table tbody td">@item.client.Natoinal_ID</td>*@
+           <td class="zui-table tbody td">@item.worker.First_Name</td>
+           <td class="zui-table tbody td">@item.worker.Last_Name</td>
+           <td class="zui-table tbody td">@item.worker.Client_Email</td>
+           <td class="zui-table tbody td">@item.worker.Natoinal_ID</td>
+           <td class="zui-table tbody td">@item.worker.Country</td>
+           <td class="zui-table tbody td">@item.worker.Country</td>
+           <td class="zui-table tbody td">@item.worker.City</td>
+           <td class="zui-table tbody td">@item.worker.Phone</td>
+           <td class="zui-table tbody td">@item.worker.Gender</td>
+           <td class="zui-table tbody td">@item.worker.Birth_Date.ToString("dd/MM/yyyy",CultureInfo.InvariantCulture)</td>
+           <td class="zui-table tbody td">@item.worker.Rating</td>
 
-           <td class="zui-table tbody td">@item.client.Country</td>
-           <td class="zui-table tbody td">@item.client.Country</td>
-           <td class="zui-table tbody td">@item.client.City</td>
-           <td class="zui-table tbody td">@item.client.Phone</td>
-           <td class="zui-table tbody td">@item.client.Gender</td>
-           <td class="zui-table tbody td">@item.client.Birth_Date.ToString("dd/MM/yyyy",CultureInfo.InvariantCulture)</td>
            <td>
-                @if (item.user.ToString() == "Client")
+                @if (item.isAdmin == false && item.isSupporter == false)
                 {
-                    @if (item.isAdmin == false && item.isSupporter == false)
+                    @if (Context.Session.GetInt32("isAdmin") == 1)
                     {
-                        @if (Context.Session.GetInt32("isAdmin") == 1)
-                        {
-                            <a class="btn-primary" href=@Url.Action("protosupporter","Clients",new {item.client,item.client.Client_Email})>خليه السابورتر</a>
-                        }
-                        @if (item.isBlocked == false )
-                        {
-                            <a class="btn-primary" href="@Url.Action("BlockClient","Clients",new {item.client,item.client.Client_Email})">بلوك</a>
-                        } 
-
-                        @if (item.isBlocked == true )
-                        {
-                            <a class="btn-primary" href="@Url.Action("UNBlockClient","Clients",new {item.client,item.client.Client_Email})">ازل البلوك</a>
-                        }
+                        <a class="btn-primary" href=@Url.Action("protosupporter","Workers",item.worker)>خليه السابورتر</a>
                     }
-                    @if (item.isAdmin == true || item.isSupporter == true)
+                    @if (item.isBlocked == false)
                     {
-                        <td class="zui-table tbody td">Is Supporter/Admin</td>
+                        <a class="btn-primary" href="@Url.Action("BlockWorker","Workers", item.worker)">بلوك</a>
                     }
-               }
-                @if (item.user.ToString() == "Supporter")
-                {
-                    @if (item.isBlocked == false && Context.Session.GetInt32("isAdmin") == 1)
-                        {
-                            <a class="btn-primary" href="@Url.Action("BlockClient","Clients",new {item.client,item.client.Client_Email})">بلوك</a>
-                        }
 
-                        @if (item.isBlocked == true && Context.Session.GetInt32("isAdmin") == 1)
-                        {
-                            <a class="btn-primary" href="@Url.Action("UNBlockClient","Clients",new {item.client,item.client.Client_Email})">ازل البلوك</a>
-                        }
+                    @if (item.isBlocked == true)
+                    {
+                        <a class="btn-primary" href="@Url.Action("UNBlockWorker","Workers", item.worker)">ازل البلوك</a>
+                    }
                 }
-                
+                @if (item.isAdmin == true || item.isSupporter == true)
+                {
+                    <td class="zui-table tbody td">Is Supporter/Admin</td>
+                }
 
        </tr>
    }
@@ -125,8 +110,8 @@
         <p class="rigthTitle">تاريخ الميلاد:</p>
         <p class="leftInfo">@Html.DisplayFor(modelItem => item.client.Birth_Date)</p>
     </div>
-    
-    @if (item.isAdmin == false)
+
+    @if (item.isAdmin == false && item.isSupporter == false)
     {
             <div class="makeflex">
                 @if (item.isSupporter == false)
