@@ -42,13 +42,14 @@ namespace Khdamat.Controllers
             {
                 con.Open();
                 com.Connection = con;
-                string query = "SELECT max(ID) from Complain_Suggestion";
-                SqlCommand cmd = new SqlCommand(query, con);
-                int max;
-                if (string.IsNullOrEmpty(cmd.ExecuteScalar().ToString()))
-                    max = 0;
-                else max = (int)cmd.ExecuteScalar();
-                max++;
+
+                //string query = "SELECT max(ID) from Complain_Suggestion";
+                //SqlCommand cmd = new SqlCommand(query, con);
+                //int max;
+                //if (string.IsNullOrEmpty(cmd.ExecuteScalar().ToString()))
+                //    max = 0;
+                //else max = (int)cmd.ExecuteScalar();
+                //max++;
                 string email = HttpContext.Session.GetString("Email");
                
 
@@ -56,14 +57,15 @@ namespace Khdamat.Controllers
                 {
                     com.CommandText="select * from Worker where Worker_Email='"+email+"';";
                     dr=com.ExecuteReader();dr.Read();
-                    com.CommandText = "INSERT INTO Complain_Suggestion (ID,Title ,Worker_ID, Descriptions,C_or_S) values ("+max+",'"+suggreq.Title+"','" +dr["Natoinal_ID"]+"','" +suggreq.description +"','"+ suggreq.compORsug+"');";
+
+                    com.CommandText = "INSERT INTO Complain_Suggestion (Title ,Worker_ID, Descriptions,C_or_S) values ('"+suggreq.Title+"','" +dr["Natoinal_ID"]+"','" +suggreq.description +"','"+ suggreq.compORsug+"');";
                     dr.Close();
                 }
                 else if (HttpContext.Session.GetInt32("isClient")==1)
                 {
                     com.CommandText="select * from Client where Client_Email='"+email+"';";
                     dr=com.ExecuteReader();dr.Read();
-                    com.CommandText = "INSERT INTO Complain_Suggestion (ID,Title ,Client_ID, Descriptions,C_or_S) values (" + max+ ",'" + suggreq.Title + "','" + dr["Natoinal_ID"]+"','" +suggreq.description +"','"+ suggreq.compORsug+"');";
+                    com.CommandText = "INSERT INTO Complain_Suggestion (Title ,Client_ID, Descriptions,C_or_S) values ('" + suggreq.Title + "','" + dr["Natoinal_ID"]+"','" +suggreq.description +"','"+ suggreq.compORsug+"');";
                     dr.Close();
                 }
                 com.ExecuteNonQuery();
