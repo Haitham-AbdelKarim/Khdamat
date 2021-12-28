@@ -105,7 +105,10 @@ namespace Khdamat.Controllers
                 return View(account);
             }
             dr.Read();
-            HttpContext.Session.SetString("Email", dr["Email"].ToString());
+            if (account.Password != dr["Password"].ToString())
+                return View(account);
+
+                HttpContext.Session.SetString("Email", dr["Email"].ToString());
             if (dr["Admin_b"] != null && dr["Admin_b"].ToString() == "True")
             {
                 HttpContext.Session.SetInt32("isAdmin", 1);
