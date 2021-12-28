@@ -1,0 +1,52 @@
+﻿@model List<Khdamat.Models.RequestDetails>
+@using Microsoft.AspNetCore.Http;
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "managereq";
+}
+
+<h2>الخدمات</h2>
+
+<hr />
+
+<table class="zui-table">
+    <tr>
+        <th class="zui-table thead th">رقم الخدمة</th>
+        <th class="zui-table thead th">عنوان الخدمة</th>
+        <th class="zui-table thead th">نوع الخدمة</th>
+        @*<th class="zui-table thead th">اسم العميل</th>
+
+        <th class="zui-table thead th">الايميل</th>*@
+        <th class="zui-table thead th">اقل سن</th>
+        <th class="zui-table thead th">اكبر سن</th>
+        <th class="zui-table thead th">النوع</th>
+
+    </tr>
+    @foreach (var item in Model)
+   {
+       <tr>
+           <td class="zui-table tbody td">@item.id</td>
+           <td class="zui-table tbody td" width=200%>@item.request.Title</td>
+           <td class="zui-table tbody td">@item.sname</td>
+           @*<td class="zui-table tbody td">@item.f_name @item.l_name</td>
+
+           <td class="zui-table tbody td">@item.email</td>*@
+           <td class="zui-table tbody td">@item.request.Min_Age</td>
+           <td class="zui-table tbody td">@item.request.Max_Age</td>
+           @if (@item.request.Gender == 'm')
+            {
+                <td class="zui-table tbody td">ذكر</td>
+            }
+            @if (@item.request.Gender == 'f')
+            {
+                <td class="zui-table tbody td">انثي</td>
+            }
+           <td>
+               <a class="btn-primary" href="@Url.Action("viewreq","Request",new { @item.request, @item.id, @item.f_name, @item.l_name, @item.email, @item.sname})">عرض تفاصيل الخدمة</a> 
+
+           </td>
+           
+       </tr>    
+    }
+</table>

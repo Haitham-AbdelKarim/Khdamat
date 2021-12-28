@@ -20,6 +20,11 @@
                 شكوي  
                 @Html.RadioButtonFor(model => model.compORsug,'c') 
                 </div>
+               <div>
+                    @Html.TextBoxFor(model=>model.Title,new {placeholder = "عنوان الموضوع"})
+                    @Html.ValidationMessageFor(model=>model.Title,"")
+               
+                </div>
             
                 @Html.TextAreaFor(model=>model.description,new { @class = "boxx" })
                @Html.ValidationMessageFor(model=>model.description,"",new { @class = "text-danger" })

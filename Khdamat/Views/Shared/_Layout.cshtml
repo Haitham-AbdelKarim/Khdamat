@@ -76,15 +76,34 @@
                                 <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">العروض المرسلة</a>
                             </li>
                         }
+                        @if(Context.Session.GetInt32("isAdmin") == 1)
+                        {
+                            <li class="dropdown vertical-nav">
 
-                        @if (Context.Session.GetInt32("isAdmin") == 1 || Context.Session.GetInt32("isSupporter") == 1)
+                            <a class="nav-link text-dark  dropdown-toggle control" data-toggle="dropdown" asp-area="" asp-controller="Home" asp-action="#">التحكم</a>
+                            <ul class="dropdown-menu">
+                                <li>
+
+                                    <a class="nav-link text-dark myNav" asp-area="" asp-route-user="Client" asp-controller="Clients" asp-action="clientsControl">التحكم في الزباين</a>
+
+                                </li>
+                                <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Workers" asp-action="workersControl">التحكم في العمال</a></li>
+                                <li>
+                                    <a class="nav-link text-dark myNav"  asp-area="" asp-route-user="Supporter" asp-controller="Clients" asp-action="clientsControl">التحكم في السابورتارز</a>
+                                </li>
+                            </ul>
+                            </li>
+
+                            
+                        }
+                        @if (/*Context.Session.GetInt32("isAdmin") == 1 ||*/ Context.Session.GetInt32("isSupporter") == 1)
                         {
                             <li class="dropdown vertical-nav">
 
                                 <a class="nav-link text-dark  dropdown-toggle control" data-toggle="dropdown" asp-area="" asp-controller="Home" asp-action="#">التحكم</a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في الطلبات</a>
+                                        <a class="nav-link text-dark myNav" asp-area="" asp-controller="Request" asp-action="managereq">التحكم في الطلبات</a>
 
                                     </li>
                                     @*  <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في العملاء</a></li>*@
@@ -93,13 +112,14 @@
                                     <div class="hover-menu">
                                         <ul>
                                             <li>
-                                                <a class="nav-link text-dark myNav" asp-area="" asp-controller="Clients" asp-action="clientsControl">التحكم في الزباين</a>
+
+                                                <a class="nav-link text-dark myNav" asp-area="" asp-route-user="Client" asp-controller="Clients" asp-action="clientsControl">التحكم في الزباين</a>
 
                                             </li>
-                                            <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في العمال</a></li>
-                                            <li>
-                                                <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في السابورتارز</a>
-                                            </li>
+                                            <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Workers" asp-action="workersControl">التحكم في العمال</a></li>
+                                            @*<li>
+                                                <a class="nav-link text-dark myNav"  asp-area="" asp-route-user="Supporter" asp-controller="Clients" asp-action="clientsControl">التحكم في السابورتارز</a>
+                                            </li>*@
                                         </ul>
 
                                     </div>
@@ -110,7 +130,8 @@
                                         <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في البلاغات</a>
 
                                     </li>
-                                    <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">التحكم في الشكاوي</a></li>
+                                    <li><a class="nav-link text-dark myNav" asp-area="" asp-route-t="c" asp-controller="SuggReq" asp-action="manage_c_or_s">التحكم في الشكاوي</a></li>
+                                    <li><a class="nav-link text-dark myNav" asp-area="" asp-route-t="s" asp-controller="SuggReq" asp-action="manage_c_or_s">عرض المقترحات</a></li>
 
                                 </ul>
 

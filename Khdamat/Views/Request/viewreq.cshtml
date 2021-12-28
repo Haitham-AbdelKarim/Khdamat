@@ -1,0 +1,75 @@
+﻿@model Khdamat.Models.RequestDetails
+@using Microsoft.AspNetCore.Http;
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "viewreq";
+}
+
+<h2 class="makeflex">التفاصيل</h2>
+<hr />
+
+<div>
+    <label> : رقم الخدمة</label>
+    <p>@Model.id</p>
+</div>
+<div>
+    <label> : اسم العميل</label>
+    <p>@Model.f_name @Model.l_name</p>
+</div>
+<div>
+    <label> : ايميل العميل</label>
+    <p>@Model.email</p>
+</div>
+<div>
+    <label> : اسم الخدمة</label>
+    <p>@Model.request.Title</p>
+</div>
+<div>
+    <label> : نوع الخدمة</label>
+    <p>@Model.sname</p>
+</div>
+
+<div>
+    <label> : اقل سن</label>
+    <p>@Model.request.Min_Age</p>
+</div>
+<div>
+    <label> : اكبر سن</label>
+    <p>@Model.request.Max_Age</p>
+</div>
+<div>
+    <label> : اقل سعر</label>
+    <p>@Model.request.Min_Price</p>
+</div>
+<div>
+    <label> : النوع </label>
+    @if (@Model.request.Gender == 'm')
+    {
+        <p>ذكر</p>
+    }
+    @if (@Model.request.Gender == 'f')
+    {
+        <p>انثي</p>
+    }
+</div>
+<div>
+    <label> : تاريخ تحقق الخدمة </label>
+    <p>@Model.request.Date_Req.ToShortDateString()</p>
+</div>
+<div>
+    <label> : المدينة</label>
+    <p>@Model.request.City</p>
+</div>
+
+<div>
+    <a class="btn-primary" href=@Url.Action("acceptreq","Request",new { @Model.request, @Model.id, @Model.f_name, @Model.l_name, @Model.email, @Model.sname})>قبول الخدمة</a>
+</div>
+<div>
+    <a class="btn-primary" href=@Url.Action("deletereq","Request",new {@Model.id})>حذف الخدمة</a>
+    
+</div>
+<div>
+    <a class="btn-primary" href=@Url.Action("managereq","Request")>رجوع</a>
+    
+</div>

@@ -37,7 +37,7 @@ namespace Khdamat.Models
         [Required(ErrorMessage = "Invalid Input")]
         public DateTime Date_Req { get; set; }
 
-        public bool Done { get; set; }
+        public char Status { get; set; }
 
         [Required(ErrorMessage = "Invalid Input")]
         [StringLength(maximumLength: 200)]

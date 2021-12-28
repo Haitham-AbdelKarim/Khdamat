@@ -8,6 +8,9 @@ namespace Khdamat.Models
         [Required]
         public int ID { set; get; }
 
+        [StringLength(maximumLength:100)]
+        public string Title { set; get; }
+
         [StringLength(maximumLength: 20)]
         public string Worker_ID { set; get; }
 
