@@ -65,6 +65,8 @@ namespace Khdamat.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(!account.IsClient && !account.IsWorker)
+                    return View(account);
                     con.Open();
                     com.Connection = con;
                     com.CommandText = "INSERT INTO Account (Email, Password, S_Blocked) values ('" + account.Email.ToString() + "','" + account.Password.ToString() + "', '0');";
