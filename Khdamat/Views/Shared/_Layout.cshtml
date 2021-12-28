@@ -76,27 +76,8 @@
                                 <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="#">العروض المرسلة</a>
                             </li>
                         }
-                        @if(Context.Session.GetInt32("isAdmin") == 1)
-                        {
-                            <li class="dropdown vertical-nav">
-
-                            <a class="nav-link text-dark  dropdown-toggle control" data-toggle="dropdown" asp-area="" asp-controller="Home" asp-action="#">التحكم</a>
-                            <ul class="dropdown-menu">
-                                <li>
-
-                                    <a class="nav-link text-dark myNav" asp-area="" asp-route-user="Client" asp-controller="Clients" asp-action="clientsControl">التحكم في الزباين</a>
-
-                                </li>
-                                <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Workers" asp-action="workersControl">التحكم في العمال</a></li>
-                                <li>
-                                    <a class="nav-link text-dark myNav"  asp-area="" asp-route-user="Supporter" asp-controller="Clients" asp-action="clientsControl">التحكم في السابورتارز</a>
-                                </li>
-                            </ul>
-                            </li>
-
-                            
-                        }
-                        @if (/*Context.Session.GetInt32("isAdmin") == 1 ||*/ Context.Session.GetInt32("isSupporter") == 1)
+                        
+                        @if (Context.Session.GetInt32("isAdmin") == 1 || Context.Session.GetInt32("isSupporter") == 1)
                         {
                             <li class="dropdown vertical-nav">
 
