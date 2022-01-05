@@ -16,7 +16,6 @@
                     <span asp-validation-for="Request.Title" class="text-danger makeflex"></span>
                 </div>
                 <div class="form-group">
-
                     <input asp-for="Request.Min_Age" type="number" value="" class="form-control" placeholder="اقل سن" />
                     <span asp-validation-for="Request.Min_Age" class="text-danger makeflex"></span>
                 </div>
@@ -32,7 +31,6 @@
                     <input asp-for="Request.City" class="form-control" placeholder="المدينة" />
                     <span asp-validation-for="Request.City" class="text-danger makeflex"></span>
                 </div>
-
                 @*<div class="center">
                     نوع مقدم الخدمة
                 </div>*@
@@ -94,7 +92,6 @@
 
                 <div class="form-group">
                     @*<input asp-for="Description_Req" class="form-control" placeholder="تفاصيل الخدمة"/>
-
             <span asp-validation-for="Description_Req" class="text-danger makeflex"></span>*@
                     @Html.TextAreaFor(x => x.Request.Description_Req, new { @class = "form-control", @id = "textAnswer", @name = "textAnswer", @rows = "10", @placeholder = "تفاصيل الخدمة" })
                 </div>

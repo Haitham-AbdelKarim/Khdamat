@@ -7,7 +7,7 @@ namespace Khdamat.Models
         [Key]
         [Required]
         public int ID { set; get; }
-      
+
         [StringLength(maximumLength:100)]
         public string Title { set; get; }
 

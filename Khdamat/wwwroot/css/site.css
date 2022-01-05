@@ -1,4 +1,4 @@
-﻿﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
 :root {
@@ -16,12 +16,6 @@ a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
-}
-#appdes {
-    visibility: hidden;
-}
-.ersal2 {
-    visibility: hidden;
 }
 
 /* Provide sufficient contrast against white background */
@@ -113,6 +107,7 @@ body {
     transition:var(--main--trasition);
     margin:0 5px;
 }
+
 .myNav:hover{*/
 /*font-size:25px;*/
 /*color:grey;
@@ -184,7 +179,6 @@ body {
 }
 
 .comFooter {
-
     color: white;
     text-decoration: none;
     margin: 0;
@@ -454,7 +448,7 @@ footer span .fa-google-plus:hover {
         -webkit-transform: translateY(0);
     }
 
-    0% {
+    0 {
         opacity: 0;
         -webkit-transform: translateY(0);
     }
@@ -541,152 +535,27 @@ li a:hover {
     background-color: #eeeeee7d !important;
 }
 
-
 a:hover {
     text-decoration: none !important;
 }
 
-.registerdes {
-    margin: 0 auto !important;
-    background: #eeeeee4f;
+.rightButton {
+    padding: 5px 10px;
+    color: white;
     border-radius: 5px;
-    padding: 20px;
-    box-shadow: 0px 0px 10px #d9d5d5;
-    display: flex;
-    padding-left:0;
-    flex-direction:column;
-      align-items:center;
-        
-}
-.desc{
-   /*display:flex;*/
-   /*margin-top:5px;*/
-}
-.ersal{
-    color:red;
-}
-.atab {
-   color:red;
-}
-table {
-   border-collapse:collapse;
-   margin:25px 0px;
-   font-size:1.3em;
-   min-width:1100px;
-border-radius:5px 5px 0 0;
-overflow:hidden;
-box-shadow:0 0 20px rgba(0,0,0,0.15)
-   
-}
-table thead tr{
-    background-color:#009879;
-    text-align:right;
-    font-weight:bold;
-}
-table th,table td{
-    padding:12px 15px
-}
-tbody tr{
-    text-align:right;
-
-}
-    tbody tr:last-of-type {
-        border-bottom: 2px solid #009879;
-    }
-    tbody tr:hover {
-        background-color: #dddddd;
-        color: #009879;
-        cursor:pointer
-    }
-    .tit{
-       text-align:center
-    }
-.elem {
-    min-width: 1100px;
-    background-color: #dddddd;
-    margin-bottom: 10px;
-    text-align: right;
-    min-height: 70px;
-    display: flex;
-    align-items: center;
-    border-radius: 7px 7px 7px 0;
-    border-right: 5px solid #009879;
 }
 
-    .elem label {
-        padding-right: 30px;
-    }
-.cont {
-    font-size: 1.3em;
-    padding-right:30px;
-    display:inline;
-   
-}
-#btn {
-    display: flex;
-    margin: 20px 20px;
-    width: 100px;
-    height: 40px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    background-color: #009879;
+.leftButton {
+    margin-right: 20px;
+    padding: 5px 10px;
     color: white;
-    border: none;
-    outline: none;
-   
-}
-    #btn:hover {
-        color: #009879;
-        background-color: #dddddd;
-    }
-.app {
-    height: 200px;
-    width: 800px;
-    display:flex;
-
-}
-.ersal2 {
-    display: flex;
-    margin: 20px 20px;
-    width: 100px;
-    height: 40px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    background-color: #009879;
-    color: white;
-    border: none;
-    outline: none;
-}
-.ersal2:hover {
-    color: #009879;
-    background-color: #dddddd;
-}
-.asel {
-    display: flex;
-  
- align-items:center;
- padding:30px 10px 0px;
- min-width:600px;
-
-}
-.asel select,.asel label{
-    margin-left:30px;
+    border-radius: 5px;
 }
 
-    .asel .abtn {
-        display: flex;
-        
-        width: 100px;
-        height: 40px;
-        justify-content: center;
-        align-items: center;
-        border-radius: 10px;
-        background-color: #009879;
-        color: white;
-        border: none;
-        outline: none;
-        margin-right:70px;
-    }
+.fullWidth{
+    width:100%!important;
+}
 
+.height200{
+    height:200px!important;
+}
