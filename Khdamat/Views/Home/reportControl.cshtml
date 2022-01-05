@@ -1,0 +1,31 @@
+﻿
+@*@{
+    ViewData["Title"] = "reportControl";
+}
+
+<h2 class="makeflex">التحكم في البلاغات</h2>
+<hr />
+@foreach (var item in Model)
+{
+
+    <div>
+        <div class="makeflex">
+            <p class="rigthTitle">اي دي الريبورت:</p>
+            <p class="leftInfo">@Html.DisplayFor(modelItem => item.Report_ID)</p>
+        </div>
+        <div class="makeflex">
+            <p class="rigthTitle">اي دي السابورتر:</p>
+            <p class="leftInfo">@Html.DisplayFor(modelItem => item.Supporter_ID)</p>
+        </div>
+        <div class="makeflex">
+            <p class="rigthTitle">الوصف:</p>
+            <p class="leftInfo">@Html.DisplayFor(modelItem => item.Description)</p>
+        </div>
+        
+    </div>
+    <hr />
+
+
+}*@
+
+

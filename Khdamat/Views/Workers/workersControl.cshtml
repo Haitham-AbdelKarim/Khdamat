@@ -1,0 +1,97 @@
+﻿@model List<Khdamat.Models.WorkerDetails>
+@using Microsoft.AspNetCore.Http;
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "workersControl";
+}
+
+<h2 class="makeflex">التحكم في العمال</h2>
+<hr />
+
+
+    @foreach (var item in Model)
+   {
+
+
+    <div>
+        <div class="makeflex">
+            <p class="rigthTitle">الاسم الاول:</p>
+            <p class="leftInfo">@item.worker.First_Name</p>
+        </div>
+        <div class="makeflex">
+            <p class="rigthTitle">الاسم الاخير:</p>
+            <p class="leftInfo">@item.worker.Last_Name</p>
+        </div>
+        <div class="makeflex">
+            <p class="rigthTitle">البريد الالكتروني:</p>
+            <p class="leftInfo">@item.worker.Client_Email</p>
+        </div>
+        <div class="makeflex">
+            <p class="rigthTitle">الرقم القومي:</p>
+            <p class="leftInfo">@item.worker.Natoinal_ID</p>
+        </div>
+        <div class="makeflex">
+            <p class="rigthTitle">البلد:</p>
+            <p class="leftInfo">@item.worker.Country</p>
+        </div>
+        <div class="makeflex">
+            <p class="rigthTitle">المدينة:</p>
+            <p class="leftInfo">@item.worker.City</p>
+        </div>
+        <div class="makeflex">
+            <p class="rigthTitle">الشارع:</p>
+            <p class="leftInfo">@item.worker.Street</p>
+        </div>
+        <div class="makeflex">
+            <p class="rigthTitle">رقم الهاتف:</p>
+            <p class="leftInfo">@item.worker.Phone</p>
+        </div>
+
+        <div class="makeflex">
+            <p class="rigthTitle">النوع:</p>
+            <p class="leftInfo">@item.worker.Gender</p>
+        </div>
+        <div class="makeflex">
+            <p class="rigthTitle">تاريخ الميلاد:</p>
+            <p class="leftInfo">@item.worker.Birth_Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)</p>
+        </div>
+        <div class="makeflex">
+            <p class="rigthTitle"> التقييم:</p>
+            <p class="leftInfo">@item.worker.Rating</p>
+        </div>
+
+        @if (item.isAdmin == false && item.isSupporter == false)
+        {
+            <div class="makeflex">
+                @if (Context.Session.GetInt32("isAdmin") == 1)
+                {
+                    <a class="btn-primary defultbutton rightButton" href=@Url.Action("protosupporter","Workers",item.worker)>خليه السابورتر</a>
+                }
+                @if (item.isBlocked == false)
+                {
+                    <a class="btn-primary defultbutton leftButton" href="@Url.Action("BlockWorker","Workers", item.worker)">بلوك</a>
+                }
+
+                @if (item.isBlocked == true)
+                {
+                    <a class="btn-primary defultbutton leftButton" href="@Url.Action("UNBlockWorker","Workers", item.worker)">ازل البلوك</a>
+                }
+
+            </div>
+        }
+
+        @if (item.isAdmin == true || item.isSupporter == true)
+        {
+        <div class="makeflex">
+            <p class="rigthTitle">ادمن/سابورتر</p>
+        </div>
+         }
+
+        </div>
+        <hr />
+    }
+
+
+    
+       

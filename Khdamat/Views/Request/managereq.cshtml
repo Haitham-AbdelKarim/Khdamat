@@ -1,0 +1,92 @@
+﻿@model List<Khdamat.Models.RequestDetails>
+@using Microsoft.AspNetCore.Http;
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "managereq";
+}
+
+<h2 class="makeflex">التحكم في الخدمات</h2>
+
+<hr />
+
+<!--<table class="zui-table">
+    <tr>
+        <th class="zui-table thead th">رقم الخدمة</th>
+        <th class="zui-table thead th">عنوان الخدمة</th>
+        <th class="zui-table thead th">نوع الخدمة</th>-->
+        @*<th class="zui-table thead th">اسم العميل</th>
+
+            <th class="zui-table thead th">الايميل</th>*@
+        <!--<th class="zui-table thead th">اقل سن</th>
+        <th class="zui-table thead th">اكبر سن</th>
+        <th class="zui-table thead th">النوع</th>
+
+    </tr>-->
+    @foreach (var item in Model)
+    {
+
+<div>
+    <div class="makeflex">
+        <p class="rigthTitle">رقم الخدمة:</p>
+        <p class="leftInfo">@item.id</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">عنوان الخدمة:</p>
+        <p class="leftInfo">@item.request.Title</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">نوع الخدمة:</p>
+        <p class="leftInfo">@item.sname</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">اقل سن:</p>
+        <p class="leftInfo">@item.request.Min_Age</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">اكبر سن:</p>
+        <p class="leftInfo">@item.request.Max_Age</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">النوع:</p>
+        @if (@item.request.Gender == 'm')
+        {
+            <p class="leftInfo">ذكر</p>
+        }
+        @if (@item.request.Gender == 'f')
+        {
+            <p class="leftInfo">انثي</p>
+        }
+
+    </div>
+    <div class="makeflex">
+        <div class="rightTitle"><a class="btn-primary defultbutton rightButton" href="@Url.Action(" viewreq","Request",new { @item.request , @item.id , @item.f_name , @item.l_name , @item.email , @item.sname })">عرض تفاصيل الخدمة</a></div>
+    </div>
+
+    <!--<tr>
+        <td class="zui-table tbody td">@item.id</td>
+        <td class="zui-table tbody td" width=200%>@item.request.Title</td>
+        <td class="zui-table tbody td">@item.sname</td>-->
+    @*<td class="zui-table tbody td">@item.f_name @item.l_name</td>
+
+        <td class="zui-table tbody td">@item.email</td>*@
+    <!--<td class="zui-table tbody td">@item.request.Min_Age</td>
+        <td class="zui-table tbody td">@item.request.Max_Age</td>
+        @if (@item.request.Gender == 'm')
+        {
+            <td class="zui-table tbody td">ذكر</td>
+        }
+        @if (@item.request.Gender == 'f')
+        {
+            <td class="zui-table tbody td">انثي</td>
+        }
+        <td>
+            <a class="btn-primary" href="@Url.Action("viewreq","Request",new { @item.request, @item.id, @item.f_name, @item.l_name, @item.email, @item.sname})">عرض تفاصيل الخدمة</a>
+
+        </td>
+
+    </tr>-->
+</div>
+    <hr />
+    }
+

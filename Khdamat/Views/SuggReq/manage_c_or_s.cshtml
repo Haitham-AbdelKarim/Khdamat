@@ -1,0 +1,131 @@
+﻿@model List<Khdamat.Models.SuggReqDetails>
+@using Microsoft.AspNetCore.Http;
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "manage_c_or_s";
+}
+
+@if ((char)ViewData["c_or_s"] == 'c')
+{
+    <h2 class="makeflex">التحكم في الشكاوي</h2>
+}
+@if ((char)ViewData["c_or_s"] == 's')
+{
+    <h2 class="makeflex">التحكم في الاقتراحات</h2>
+}
+
+<hr />
+
+@*<table class="zui-table">
+    <tr>*@
+@*@if ((char)ViewData["c_or_s"] == 'c')
+{
+    <th class="zui-table thead th">رقم الشكوي</th>
+}
+@if ((char)ViewData["c_or_s"] == 's')
+{
+    <th class="zui-table thead th">رقم الاقتراح</th>
+}
+
+@if ((char)ViewData["c_or_s"] == 'c')
+{
+    <th class="zui-table thead th">عنوان الشكوي</th>
+}
+@if ((char)ViewData["c_or_s"] == 's')
+{
+    <th class="zui-table thead th">عنوان الاقتراح</th>
+}
+
+
+<th class="zui-table thead th">اسم العميل</th>
+<th class="zui-table thead th">نوع العميل</th>
+<th class="zui-table thead th">الايميل</th>*@
+
+
+
+    </tr>
+@foreach (var item in Model)
+{
+
+<div>
+
+    @if ((char)ViewData["c_or_s"] == 'c')
+    {
+        <div class="makeflex">
+            <p class="rigthTitle">رقم الشكوي:</p>
+            <p class="leftInfo">@item.suggreq.ID</p>
+        </div>
+    }
+    @if ((char)ViewData["c_or_s"] == 's')
+    {
+        <div class="makeflex">
+            <p class="rigthTitle">رقم الاقتراح:</p>
+            <p class="leftInfo">@item.suggreq.ID</p>
+        </div>
+    }
+
+    @if ((char)ViewData["c_or_s"] == 'c')
+    {
+        <div class="makeflex">
+            <p class="rigthTitle">عنوان الشكوي:</p>
+            <p class="leftInfo">@item.suggreq.Title</p>
+        </div>
+    }
+    @if ((char)ViewData["c_or_s"] == 's')
+    {
+        <div class="makeflex">
+            <p class="rigthTitle">عنوان الاقتراح:</p>
+            <p class="leftInfo">@item.suggreq.Title</p>
+        </div>
+    }
+
+    <div class="makeflex">
+        <p class="rigthTitle">اسم العميل:</p>
+        <p class="leftInfo">@item.f_name @item.l_name</p>
+    </div>
+
+    <div class="makeflex">
+        <p class="rigthTitle">نوع العميل:</p>
+        <p class="leftInfo">@item.c_or_w</p>
+    </div>
+
+    <div class="makeflex">
+        <p class="rigthTitle">الايميل:</p>
+        <p class="leftInfo">@item.email</p>
+    </div>
+
+    <div class="makeflex">
+        @if ((char)ViewData["c_or_s"] == 'c')
+        {
+            <a class="btn-primary defultbutton rightButton" href="@Url.Action("view_c_or_s","SuggReq",new { @item.suggreq, @item.suggreq.ID, @item.c_or_w, @item.f_name, @item.l_name, @item.email, @item.suggreq.description, @item.suggreq.Title})">عرض المشكلة</a>
+        }
+        @if ((char)ViewData["c_or_s"] == 's')
+        {
+            <a class="btn-primary defultbutton rightButton" href="@Url.Action("view_c_or_s","SuggReq",new { @item.suggreq, @item.suggreq.ID, @item.c_or_w, @item.f_name, @item.l_name, @item.email, @item.suggreq.description, @item.suggreq.Title})">عرض المقترح</a>
+        }
+    </div>
+
+    @*<tr>
+        <td class="zui-table tbody td">@item.suggreq.ID</td>
+        <td class="zui-table tbody td" width=200%>@item.suggreq.Title</td>
+        <td class="zui-table tbody td">@item.f_name @item.l_name</td>
+        <td class="zui-table tbody td">@item.c_or_w</td>
+        <td class="zui-table tbody td">@item.email</td>
+        <td>
+            @if ((char)ViewData["c_or_s"] == 'c')
+            {
+                <a class="btn-primary" href="@Url.Action("view_c_or_s","SuggReq",new { @item.suggreq, @item.suggreq.ID, @item.c_or_w, @item.f_name, @item.l_name, @item.email, @item.suggreq.description, @item.suggreq.Title})">عرض المشكلة</a>
+            }
+            @if ((char)ViewData["c_or_s"] == 's')
+            {
+                <a class="btn-primary" href="@Url.Action("view_c_or_s","SuggReq",new { @item.suggreq, @item.suggreq.ID, @item.c_or_w, @item.f_name, @item.l_name, @item.email, @item.suggreq.description, @item.suggreq.Title})">عرض المقترح</a>
+            }
+
+        </td>*@
+
+</div>
+<hr />
+
+    }
+

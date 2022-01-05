@@ -12,218 +12,66 @@ using Microsoft.AspNetCore.Http;
 
 namespace Khdamat.Controllers
 {
-    public class WorkersController : Controller
+    public class SupportersController : Controller
     {
         SqlCommand com = new SqlCommand();
         SqlConnection con = new SqlConnection();
         SqlDataReader dr;
         private readonly ApplicationDbContext _context;
 
-        public WorkersController(ApplicationDbContext context)
+        public SupportersController(ApplicationDbContext context)
         {
             _context = context;
             con.ConnectionString = Khdamat.Properties.Resources.ConnectionString;
         }
-
-        // GET: Workers
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Worker.ToListAsync());
-        }
-
-        // GET: Workers/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var worker = await _context.Worker
-                .FirstOrDefaultAsync(m => m.Natoinal_ID == id);
-            if (worker == null)
-            {
-                return NotFound();
-            }
-
-            return View(worker);
-        }
-
-        // GET: Workers/Register
-        public IActionResult Register()
-        {
-            if (HttpContext.Session.GetString("Email") == null)
-                return RedirectToAction("Register", "Accounts");
-            if (HttpContext.Session.GetInt32("isWorker") != null)
-                return RedirectToAction("Register", "Accounts");
-            Worker worker = new Worker();
-            return View(worker);
-        }
-
-        // POST: Workers/Register
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Register([Bind("Natoinal_ID,Worker_Email,First_Name,Last_Name,Country,City,Street,Phone,Gender,Birth_Date")] Worker worker)
-        {
-            if (ModelState.IsValid)
-            {
-                if (HttpContext.Session.GetString("Email") == null)
-                    return RedirectToAction("Register", "Accounts");
-                con.Open();
-                com.Connection = con;
-                com.CommandText = "INSERT INTO Worker (Natoinal_ID, Worker_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date) values ('"
-                    + worker.Natoinal_ID + "','"
-                    + HttpContext.Session.GetString("Email") + "','"
-                    + worker.First_Name + "','"
-                    + worker.Last_Name + "','"
-                    + worker.Country + "','"
-                    + worker.City + "','"
-                    + worker.Street + "','"
-                    + worker.Phone + "','"
-                    + worker.Gender.ToString() + "','"
-                    + worker.Birth_Date.ToString("yyyy-MM-dd")
-                    + "');";
-                try
-                {
-                    com.ExecuteNonQuery();
-                    com.CommandText = "UPDATE ACCOUNT SET Worker_b = '1' WHERE Email = '"
-                        + HttpContext.Session.GetString("Email") + "';";
-                    com.ExecuteNonQuery();
-                    HttpContext.Session.SetInt32("isWorker", 1);
-                    HttpContext.Session.SetString("FirstName", worker.First_Name.ToString());
-                }
-                catch (Exception error)
-                {
-
-                    throw error;
-                }
-                con.Close();
-                return RedirectToAction("Index", "Home");
-            }
-            return View(worker);
-        }
-
-
-        // GET: Workers/profile
-        public IActionResult profile()
+        public IActionResult Index()
         {
             return View();
         }
 
-
-        // POST: Workers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Natoinal_ID,Client_Email,First_Name,Last_Name,Country,City,Street,Phone,Gender,Birth_Date,Rating")] Worker worker)
-        {
-            if (id != worker.Natoinal_ID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(worker);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!WorkerExists(worker.Natoinal_ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(worker);
-        }
-
-        // GET: Workers/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var worker = await _context.Worker
-                .FirstOrDefaultAsync(m => m.Natoinal_ID == id);
-            if (worker == null)
-            {
-                return NotFound();
-            }
-
-            return View(worker);
-        }
-
-        // POST: Workers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            var worker = await _context.Worker.FindAsync(id);
-            _context.Worker.Remove(worker);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool WorkerExists(string id)
-        {
-            return _context.Worker.Any(e => e.Natoinal_ID == id);
-        }
-        public IActionResult workersControl(string id)
+        public IActionResult supportersControl(string id)
         {
             con.Open();
             com.Connection = con;
-            com.CommandText = "SELECT Natoinal_ID, Worker_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Rating, Admin_b, S_Blocked,Supporter_b FROM Worker, Account WHERE Email = Worker_Email;";
+            com.CommandText = "SELECT Natoinal_ID, Worker_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_ID, Admin_b, S_Blocked,Supporter_b FROM Worker, Account WHERE Email = Supporter_Email;";
             dr = com.ExecuteReader();
-            List<WorkerDetails> workers = new List<WorkerDetails>();
-            WorkerDetails workersDetails;
+            List<SupportersDetails> supporters = new List<SupportersDetails>();
+            SupportersDetails supportersDetails;
             while (dr.Read())
             {
-                workersDetails = new WorkerDetails();
-                workersDetails.worker.Natoinal_ID = dr["Natoinal_ID"].ToString();
-                workersDetails.worker.Client_Email = dr["Worker_Email"].ToString();
-                workersDetails.worker.First_Name = dr["F_Name"].ToString();
-                workersDetails.worker.Last_Name = dr["L_Name"].ToString();
-                workersDetails.worker.Country = dr["Country"].ToString();
-                workersDetails.worker.City = dr["City"].ToString();
-                workersDetails.worker.Street = dr["Street"].ToString();
-                workersDetails.worker.Phone = dr["Phone"].ToString();
-                workersDetails.worker.Gender = dr["Gender"].ToString()[0];
-                workersDetails.worker.Birth_Date = ((DateTime)dr["Birth_Date"]);
-                workersDetails.worker.Rating =float.Parse(dr["Rating"].ToString());
+                supportersDetails = new SupportersDetails();
+                supportersDetails.supporter.Natoinal_ID = dr["Natoinal_ID"].ToString();
+                supportersDetails.supporter.Client_Email = dr["Worker_Email"].ToString();
+                supportersDetails.supporter.First_Name = dr["F_Name"].ToString();
+                supportersDetails.supporter.Last_Name = dr["L_Name"].ToString();
+                supportersDetails.supporter.Country = dr["Country"].ToString();
+                supportersDetails.supporter.City = dr["City"].ToString();
+                supportersDetails.supporter.Street = dr["Street"].ToString();
+                supportersDetails.supporter.Phone = dr["Phone"].ToString();
+                supportersDetails.supporter.Gender = dr["Gender"].ToString()[0];
+                supportersDetails.supporter.Birth_Date = ((DateTime)dr["Birth_Date"]);
+                //supportersDetails.supporter.r = float.Parse(dr["Rating"].ToString());
                 if (dr["Admin_b"].ToString() == "True")
-                    workersDetails.isAdmin = true;
+                    supportersDetails.isAdmin = true;
                 else
-                    workersDetails.isAdmin = false;
+                    supportersDetails.isAdmin = false;
 
                 if (dr["S_Blocked"].ToString() == "True")
-                    workersDetails.isBlocked = true;
+                    supportersDetails.isBlocked = true;
                 else
-                    workersDetails.isBlocked = false;
+                    supportersDetails.isBlocked = false;
                 if (string.IsNullOrEmpty(dr["Supporter_b"].ToString()))
                 {
-                    workersDetails.isSupporter = false;
+                    supportersDetails.isSupporter = false;
                 }
                 else if (dr["Supporter_b"].ToString() == "True")
-                    workersDetails.isSupporter = true;
-                else workersDetails.isSupporter = false;
-                workers.Add(workersDetails);
+                    supportersDetails.isSupporter = true;
+                else supportersDetails.isSupporter = false;
+                supporters.Add(supportersDetails);
             }
             dr.Close();
             con.Close();
-            return View(workers);
+            return View(supporters);
         }
 
         public IActionResult BlockWorker(Worker c)
@@ -388,5 +236,7 @@ namespace Khdamat.Controllers
             con.Close();
             return View("workersControl", workers);
         }
+
+        
     }
 }

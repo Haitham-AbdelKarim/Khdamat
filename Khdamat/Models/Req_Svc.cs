@@ -7,7 +7,9 @@ namespace Khdamat.Models
     public class Req_Svc
     {
         public Request Request { get; set; }
+      
         public List<Service> Services { get; set; }
+
         public List<Request> Requests { get; set; }
 
         public Req_Svc()
@@ -15,7 +17,6 @@ namespace Khdamat.Models
             Services = new List<Service>();
             
             Request = new Request();
-            //Requests=new List<Request>();
         }
     }
     
