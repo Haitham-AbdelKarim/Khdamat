@@ -32,7 +32,7 @@ namespace Khdamat.Controllers
             //req_svc.SERV= services;
 
 
-           WaitingRequests Req_Svc = new WaitingRequests();
+           Req_Svc Req_Svc = new Req_Svc();
 
             con.Open();
             com.Connection = con;
