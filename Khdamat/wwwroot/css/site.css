@@ -690,3 +690,566 @@ tbody tr{
         margin-right:70px;
     }
 
+
+
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+:root {
+    --main-color: #2196f3;
+    --main-color-alt: #1787e0;
+    --main--trasition: 0.3s;
+    --main-gray-text: #424242;
+    --main-padding: 100px;
+    --section-background: #ececec;
+    --main--black: #1c1c1c;
+    --main--rightGray: #4a4a4a;
+}
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+    direction: rtl;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    font-family: 'Cairo', sans-serif;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+
+
+
+/*///////////////////////////////////////////////*/
+
+.newFont {
+    font-family: 'Lalezar', cursive;
+    font-size: 30px;
+    color: var(--main-color) !important;
+}
+
+.homePar {
+    color: var(--main-gray-text);
+}
+
+/*.myNav {
+    color:var(--main-gray-text);
+    transition:var(--main--trasition);
+    margin:0 5px;
+}
+
+.myNav:hover{*/
+/*font-size:25px;*/
+/*color:grey;
+    transform:scale(1.1,1.1);
+}*/
+
+.myNav {
+    color: black;
+    /*height: 72px;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*  padding: 0 30px;*/
+    position: relative;
+    transition: var(--main--trasition);
+    overflow: hidden;
+}
+
+
+
+    .myNav::before {
+        content: "";
+        position: absolute;
+        width: 50%;
+        height: 2px;
+        top: 0;
+        left: -100%;
+        background-color: var(--main-color);
+        transition: var(--main--trasition);
+    }
+
+    .myNav::after {
+        content: "";
+        position: absolute;
+        width: 50%;
+        height: 2px;
+        top: 0;
+        right: -100%;
+        background-color: var(--main-color);
+        transition: var(--main--trasition);
+    }
+
+    .myNav:hover {
+        color: var(--main-gray-text) !important;
+        background-color: #fafafa;
+    }
+
+        .myNav:hover::before {
+            left: 0;
+        }
+
+        .myNav:hover::after {
+            right: 0;
+        }
+
+/*@media (max-width: 767px) {
+    .header .mega-menu ul {
+        width: 100%;
+    }
+}*/
+
+.blackFooter {
+    background-color: var(--main--black);
+}
+
+.flexFooter {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comFooter {
+    color: white;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    transition: var(--main--trasition);
+    font-size: 13px;
+}
+
+    .comFooter:hover {
+        color: var(--main-color);
+    }
+
+footer span i {
+    font-size: 23px;
+    margin: 0 5px;
+    transition: var(--main--trasition);
+    color: var(--main-gray-text)
+}
+
+footer span .fa-facebook:hover {
+    color: var(--main-color);
+}
+
+footer span .fa-instagram:hover {
+    color: purple;
+}
+
+footer span .fa-google-plus:hover {
+    color: red;
+}
+
+@media (max-width: 767px) {
+    .myNav {
+        margin-left: 39px !important;
+        border-bottom: 1px solid #eee;
+    }
+
+    .control {
+        text-align: center;
+        margin: 0 0 0 20px;
+        border-bottom: 1px solid #eee;
+    }
+}
+
+.dropdown-toggle::after {
+    margin: 3px 5px 0 0;
+}
+
+.register {
+    margin: 0 auto !important;
+    background: #eeeeee4f;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px #d9d5d5;
+}
+
+.typeofuser {
+    display: flex;
+    justify-content: space-around;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.makeflex {
+    display: flex !important;
+}
+
+.graycolor {
+    color: gray;
+}
+
+.logofont {
+    font-family: 'Lalezar', cursive !important;
+}
+
+.marginright {
+    margin: 0 20px 0 0;
+}
+
+.defultbutton {
+    background-color: orangered;
+    border: none;
+    transition: var(--main--trasition);
+}
+
+    .defultbutton:hover {
+        background-color: gray;
+        color: black;
+    }
+
+.rigthTitle {
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--main--rightGray);
+}
+
+.leftInfo {
+    font-size: 14px;
+    color: var(--main-gray-text);
+    margin: 3px 15px 0 0;
+}
+
+.grayBack {
+    background-color: gray;
+    color: white;
+    transition: var(--main--trasition);
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+    .grayBack :hover {
+        background-color: white;
+        color: var(--main-gray-text);
+        text-decoration: none;
+    }
+
+/*.vertical-nav {
+    position: fixed;
+    background: white;
+    box-shadow: 0 0 40px #00000021;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 70px;
+}*/
+
+.vertical-nav li {
+    list-style: none;
+    display: block;
+    width: 100%;
+    border-bottom: solid 1px #f2f5ff;
+    text-align: center;
+    position: relative;
+    flex-grow: 1;
+    align-items: stretch;
+    display: flex;
+}
+
+    .vertical-nav li:last-child {
+        border: none;
+    }
+
+    .vertical-nav li a {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-flow: column;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+
+    .vertical-nav li:hover > a {
+        background: #fafafa;
+        transition: all 0.2s ease;
+    }
+
+        .vertical-nav li:hover > a .feather {
+            transform: scale(1.1);
+            transition: all 0.2s ease;
+        }
+
+    .vertical-nav li:hover > .hover-menu,
+    .vertical-nav li:focus-within > .hover-menu {
+        visibility: visible;
+        opacity: 1;
+        -webkit-animation: slide-down 0.2s ease-out;
+        -moz-animation: slide-down 0.2s ease-out;
+        transition: all 0.5s ease;
+        display: block;
+    }
+
+    .vertical-nav li .hover-menu {
+        background: white;
+        visibility: hidden;
+        transition: all 0.5s ease;
+        opacity: 0;
+        display: none;
+        position: absolute;
+        left: 100%;
+        min-width: 200px;
+        margin: 0;
+        padding: 0;
+        top: -20%;
+        box-shadow: 0 0 40px #00000021;
+    }
+
+        .vertical-nav li .hover-menu:after {
+            right: 100%;
+            top: 20%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-color: rgba(255, 255, 255, 0);
+            border-right-color: #ffffff;
+            border-width: 10px;
+            margin-top: -10px;
+        }
+
+        .vertical-nav li .hover-menu ul {
+            margin: 0;
+            padding: 0;
+        }
+
+            .vertical-nav li .hover-menu ul li {
+                list-style: none;
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+
+                .vertical-nav li .hover-menu ul li a {
+                    width: 100%;
+                    display: block !important;
+                    text-decoration: none;
+                    padding: 15px 20px;
+                    text-align: left;
+                    height: auto !important;
+                    font-weight: 400;
+                }
+
+                    .vertical-nav li .hover-menu ul li a:hover {
+                        background: #fafafa;
+                        transition: 0.3s ease;
+                    }
+
+.menu-header {
+    font-family: "Roboto Condensed", sans-serif;
+    color: #929292;
+    font-size: 13px;
+    text-align: left !important;
+    padding: 12px 20px 5px 20px;
+    font-weight: 600;
+    border-bottom: none !important;
+}
+
+.log-out a {
+    background: #1e85c9;
+    color: white;
+}
+
+    .log-out a:hover {
+        color: #1e85c9;
+        background: white;
+    }
+
+@-webkit-keyframes slide-down {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-5%);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+
+    0 {
+        opacity: 0;
+        -webkit-transform: translateY(0);
+    }
+}
+
+@-moz-keyframes slide-down {
+    0% {
+        opacity: 0;
+        -moz-transform: translateY(-5%);
+    }
+
+    100% {
+        opacity: 1;
+        -moz-transform: translateY(0);
+    }
+}
+
+.content {
+    padding: 40px;
+    color: #464646;
+    width: 1170px;
+    margin: 0 auto;
+}
+
+    /*h1,
+h2 {
+    color: #343535;
+    font-weight: 400;
+}*/
+
+    p,
+    .content li {
+        color: #949494;
+        line-height: 29px;
+        font-size: 16px;
+        font-weight: 300;
+    }
+
+.header-image {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+/* Zui table (modified) - https://jsfiddle.net/zinoui/dB93J/ */
+.zui-table {
+    border: solid 1px #ddeeee;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    box-shadow: 0 0 40px #00000021;
+    margin: 50px 0;
+}
+
+    .zui-table thead th {
+        background-color: #fff;
+        border: solid 1px #dee;
+        color: #343535;
+        border: solid 1px #f5f9f9;
+        padding: 20px;
+        text-align: left;
+    }
+
+    .zui-table tbody td {
+        border: solid 1px #edf1f1;
+        color: #949494;
+        font-size: 16px;
+        padding: 20px;
+    }
+
+li a:hover {
+    text-decoration: none !important;
+}
+
+.navbar {
+    background-color: #eeeeee7d !important;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+.rightButton {
+    padding: 5px 10px;
+    color: white;
+    border-radius: 5px;
+}
+
+.leftButton {
+    margin-right: 20px;
+    padding: 5px 10px;
+    color: white;
+    border-radius: 5px;
+}
+
+.fullWidth {
+    width: 100% !important;
+}
+
+.height200 {
+    height: 200px !important;
+}
