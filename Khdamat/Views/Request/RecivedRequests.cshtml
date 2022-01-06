@@ -1,4 +1,4 @@
-﻿@model List<Khdamat.Models.AppliedRequests>
+﻿@model List<Khdamat.Models.ApplicationDetails>
 @{
     ViewData["Title"] = "RecivedRequests";
 }
@@ -13,17 +13,13 @@
 
 <div>
     <div class="makeflex">
-        <p class="rigthTitle">عنوان الطلب:</p>
-        <p class="leftInfo">حط عنوان الطلب هنا</p>
-    </div>
-    <div class="makeflex">
         <p class="rigthTitle">الاسم:</p>
         <p class="leftInfo">@item.worker.First_Name @item.worker.Last_Name</p>
     </div>
    
     <div class="makeflex">
         <p class="rigthTitle">التفاصيل:</p>
-        <p class="leftInfo">حط الديسكريبشن اللي العامل كاتبه هنا</p>
+        <p class="leftInfo">@item.description</p>
     </div>
     <div class="makeflex">
         <p class="rigthTitle">الرقم القومي:</p>
@@ -45,7 +41,7 @@
 
     <div class="makeflex">
         <p class="rigthTitle">النوع:</p>
-        <p class="leftInfo">@item.worker.Gender</p>
+        <p class="leftInfo">@((item.worker.Gender == 'M') ? "ذكر" : "انثى")</p>
     </div>
    
     <div class="makeflex">

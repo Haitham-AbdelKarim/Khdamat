@@ -1,5 +1,6 @@
-﻿
-@*@{
+﻿@model List<Khdamat.Models.Request>
+@using System.Globalization
+@{
     ViewData["Title"] = "MyRequests";
 }
 
@@ -14,28 +15,33 @@
 <div>
     <div class="makeflex">
         <p class="rigthTitle">عنوان الطلب:</p>
-        <p class="leftInfo">حط عنوان الطلب هنا</p>
+        <p class="leftInfo">@item.Title</p>
     </div>
     <div class="makeflex">
         <p class="rigthTitle">التفاصيل:</p>
-        <p class="leftInfo">حط الديسكريبشن اللي الزبون كاتبه هنا</p>
+        <p class="leftInfo">@item.Description_Req</p>
     </div>
 
 
     <div class="makeflex">
-        <p class="rigthTitle">اكثر سعر:</p>
-        <p class="leftInfo">حط السعر هنا</p>
+        <p class="rigthTitle">اعلى سعر:</p>
+        <p class="leftInfo">@item.Max_Price</p>
     </div>
     <div class="makeflex">
-        <p class="rigthTitle">السن:</p>
-        <p class="leftInfo">حط السن هنا</p>
+        <p class="rigthTitle">اصغر سن:</p>
+        <p class="leftInfo">@item.Min_Age</p>
     </div>
+    <div class="makeflex">
+        <p class="rigthTitle">اكبر سن:</p>
+        <p class="leftInfo">@item.Max_Age</p>
+    </div>
+    
 
 
 
     <div class="makeflex">
 
-        <a class="btn-primary defultbutton rightButton" href=@Url.Action("protosupporter","Workers",item.worker)> الطلبات الواردة</a>
+        <a class="btn-primary defultbutton rightButton" href=@Url.Action("RecivedRequests","Request",new {@item.Req_ID})> الطلبات الواردة</a>
 
 
     </div>
@@ -45,5 +51,5 @@
 
 </div>
     <hr />
-}*@
+}
 

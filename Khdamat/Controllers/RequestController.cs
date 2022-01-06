@@ -382,44 +382,68 @@ namespace Khdamat.Controllers
 
         }
 
-
-        public IActionResult RecivedRequests()
+        public IActionResult MyRequests()
         {
             con.Open();
             com.Connection = con;
-            com.CommandText = "SELECT * FROM Request, Apply_Req, Worker, Client WHERE Request.Req_ID = Apply_Req.Req_ID AND Request.Client_ID = Client.Natoinal_ID AND Apply_Req.Worker_ID = Worker.Natoinal_ID AND Client.Client_Email = '" + HttpContext.Session.GetString("Email") + "';";
+            com.CommandText = "SELECT * FROM Request, Client WHERE Client_ID = Natoinal_ID AND Client_Email = '" + HttpContext.Session.GetString("Email") + "';";
             com.ExecuteNonQuery();
             dr = com.ExecuteReader();
-            List<AppliedRequests> requests = new List<AppliedRequests>();
-            AppliedRequests appliedRequests;
+            List<Request> requests = new List<Request>();
+            Request request;
             while (dr.Read())
             {
-                appliedRequests = new AppliedRequests();
-                appliedRequests.request.Req_ID = int.Parse(dr["Req_ID"].ToString());
-                appliedRequests.request.Title = dr["Title"].ToString();
-                appliedRequests.request.Description_Req = dr["Description_Req"].ToString();
-                appliedRequests.request.Max_Price = int.Parse(dr["Max_Price"].ToString());
-                appliedRequests.request.Gender = char.Parse(dr["Gender"].ToString());
-                appliedRequests.request.Date_Req = DateTime.Parse(dr["Date_Req"].ToString());
-                appliedRequests.request.City = dr["City"].ToString();
-                appliedRequests.request.Status = dr["Status"].ToString()[0];
-                appliedRequests.worker.Natoinal_ID = dr["Natoinal_ID"].ToString();
-                appliedRequests.worker.Client_Email = dr["Worker_Email"].ToString();
-                appliedRequests.worker.First_Name = dr["F_Name"].ToString();
-                appliedRequests.worker.Last_Name = dr["L_Name"].ToString();
-                appliedRequests.worker.Country = dr["Country"].ToString();
-                appliedRequests.worker.City = dr["City"].ToString();
-                appliedRequests.worker.Phone = dr["Phone"].ToString();
-                appliedRequests.worker.Gender = dr["Gender"].ToString()[0];
-                appliedRequests.worker.Rating = float.Parse(dr["Rating"].ToString());
-
-
-                requests.Add(appliedRequests);
+                request = new Request();
+                request.Req_ID = int.Parse(dr["Req_ID"].ToString());
+                request.Title = dr["Title"].ToString();
+                request.Description_Req = dr["Description_Req"].ToString();
+                request.Min_Age = int.Parse(dr["Min_Age"].ToString());
+                request.Max_Age = int.Parse(dr["Max_Age"].ToString());
+                request.Max_Price = int.Parse(dr["Max_Price"].ToString());
+                request.Gender = char.Parse(dr["Gender"].ToString());
+                request.Date_Req = DateTime.Parse(dr["Date_Req"].ToString());
+                request.City = dr["City"].ToString();
+                request.Status = dr["Status"].ToString()[0];
+                requests.Add(request);
             }
             dr.Close();
             con.Close();
 
             return View(requests);
+        }
+
+
+        public IActionResult RecivedRequests(int Req_ID)
+        {
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "SELECT * FROM Apply_Req, Worker WHERE Apply_Req.Worker_ID = Worker.Natoinal_ID AND Req_ID = '" + Req_ID + "';";
+            com.ExecuteNonQuery();
+            dr = com.ExecuteReader();
+            List<ApplicationDetails> applicationDetailsList = new List<ApplicationDetails>();
+            ApplicationDetails applicationDetails;
+            while (dr.Read())
+            {
+                applicationDetails = new ApplicationDetails();
+                applicationDetails.ID = Req_ID;
+                applicationDetails.description = dr["Comment"].ToString();
+                applicationDetails.worker.Natoinal_ID = dr["Natoinal_ID"].ToString();
+                applicationDetails.worker.Client_Email = dr["Worker_Email"].ToString();
+                applicationDetails.worker.First_Name = dr["F_Name"].ToString();
+                applicationDetails.worker.Last_Name = dr["L_Name"].ToString();
+                applicationDetails.worker.Country = dr["Country"].ToString();
+                applicationDetails.worker.City = dr["City"].ToString();
+                applicationDetails.worker.Phone = dr["Phone"].ToString();
+                applicationDetails.worker.Gender = dr["Gender"].ToString()[0];
+                applicationDetails.worker.Rating = float.Parse(dr["Rating"].ToString());
+
+
+                applicationDetailsList.Add(applicationDetails);
+            }
+            dr.Close();
+            con.Close();
+
+            return View(applicationDetailsList);
 
         }
     }
