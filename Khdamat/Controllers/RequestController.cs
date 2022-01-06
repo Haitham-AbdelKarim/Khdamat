@@ -72,7 +72,7 @@ namespace Khdamat.Controllers
                 rnew.Description_Req=dr["Description_Req"].ToString();
                 rnew.Min_Age=int.Parse(dr["Min_Age"].ToString());
                 rnew.Max_Age=int.Parse(dr["Max_Age"].ToString());
-                rnew.Min_Price=int.Parse(dr["Min_Price"].ToString());
+                rnew.Max_Price=int.Parse(dr["Max_Price"].ToString());
                 rnew.Supporter_ID=dr["Supporter_ID"].ToString();
                 rnew.Gender=char.Parse(dr["Gender"].ToString());
                 rnew.Date_Req=DateTime.Parse(dr["Date_Req"].ToString());
@@ -142,7 +142,7 @@ namespace Khdamat.Controllers
                 rnew.Description_Req=dr["Description_Req"].ToString();
                 rnew.Min_Age=int.Parse(dr["Min_Age"].ToString());
                 rnew.Max_Age=int.Parse(dr["Max_Age"].ToString());
-                rnew.Min_Price=int.Parse(dr["Min_Price"].ToString());
+                rnew.Max_Price=int.Parse(dr["Max_Price"].ToString());
                 rnew.Supporter_ID=dr["Supporter_ID"].ToString();
                 rnew.Gender=char.Parse(dr["Gender"].ToString());
                 rnew.Date_Req=DateTime.Parse(dr["Date_Req"].ToString());
@@ -186,7 +186,7 @@ namespace Khdamat.Controllers
             if(lists.loc!=null)
                 v+=" and r.City='"+lists.loc+"'";
             if (lists.price!=0)
-                v+=" and r.Min_Price>="+lists.price;
+                v+=" and r.Max_Price>="+lists.price;
             if (lists.id==0&&lists.gender=='\0'&&lists.loc==null&&lists.price==0)
                 v="";
             //else v="select * from Request as r,Service as s where r.Status='w' and r.Service_ID=s.Service_ID and s.Service_ID="+lists.id+";";
@@ -197,7 +197,7 @@ namespace Khdamat.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Add_Req(/*[Bind("Request.Title,Request.Min_Age,Request.Max_Age,Request.Min_Price,Request.Gender,Request.Date_Req,Request.Description_Req,Request.Service_ID")]*/ Req_Svc Req_Svc)
+        public IActionResult Add_Req(/*[Bind("Request.Title,Request.Min_Age,Request.Max_Age,Request.Max_Price,Request.Gender,Request.Date_Req,Request.Description_Req,Request.Service_ID")]*/ Req_Svc Req_Svc)
         {
             var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
@@ -219,14 +219,14 @@ namespace Khdamat.Controllers
                 con.Close();
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "INSERT INTO Request (Client_ID,Title,Description_Req,Service_ID,Min_Age,Max_Age,Min_Price,Gender,Date_Req,Status,City) values ('"
+                com.CommandText = "INSERT INTO Request (Client_ID,Title,Description_Req,Service_ID,Min_Age,Max_Age,Max_Price,Gender,Date_Req,Status,City) values ('"
                     + id + "','"
                     + Req_Svc.Request.Title.ToString() + "','"
                     + des + "','"
                     + Req_Svc.Request.Service_ID + "','"
                     + Req_Svc.Request.Min_Age + "','"
                     + Req_Svc.Request.Max_Age + "','"
-                    + Req_Svc.Request.Min_Price + "','"
+                    + Req_Svc.Request.Max_Price + "','"
                     + Req_Svc.Request.Gender.ToString() + "','"
                     + Req_Svc.Request.Date_Req + "','W','"
                     + Req_Svc.Request.City +"');";
@@ -260,7 +260,7 @@ namespace Khdamat.Controllers
             
             con.Open();
             com.Connection = con;
-            com.CommandText = "SELECT r.City,r.Supporter_ID, r.Req_ID,r.Title,r.Description_Req,r.Min_Age,r.Max_Age,r.Min_Price,r.Gender,r.Date_Req,c.Client_Email,c.F_Name,c.L_Name,s.Name  FROM Request as r,Client as c,Service as s WHERE c.Natoinal_ID=r.Client_ID AND s.Service_ID=r.Service_ID AND r.Status='w';";
+            com.CommandText = "SELECT r.City,r.Supporter_ID, r.Req_ID,r.Title,r.Description_Req,r.Min_Age,r.Max_Age,r.Max_Price,r.Gender,r.Date_Req,c.Client_Email,c.F_Name,c.L_Name,s.Name  FROM Request as r,Client as c,Service as s WHERE c.Natoinal_ID=r.Client_ID AND s.Service_ID=r.Service_ID AND r.Status='w';";
             dr = com.ExecuteReader();
             List<RequestDetails> reqlist = new List<RequestDetails>();
             RequestDetails req;
@@ -279,7 +279,7 @@ namespace Khdamat.Controllers
                     req.request.Description_Req = dr["Description_Req"].ToString();
                     req.request.Min_Age = int.Parse(dr["Min_Age"].ToString());
                     req.request.Max_Age = int.Parse(dr["Max_Age"].ToString());
-                    req.request.Min_Price = int.Parse(dr["Min_Price"].ToString());
+                    req.request.Max_Price = int.Parse(dr["Max_Price"].ToString());
                     req.request.Gender =char.Parse(dr["Gender"].ToString());
                     req.request.Date_Req = DateTime.Parse(dr["Date_Req"].ToString());
                     req.request.City = dr["City"].ToString();
@@ -295,7 +295,7 @@ namespace Khdamat.Controllers
             req.request.Req_ID = req.id;
             con.Open();
             com.Connection = con;
-            com.CommandText = "SELECT r.Req_ID,r.Title,r.Description_Req,r.Min_Age,r.Max_Age,r.Min_Price,r.Gender,r.Date_Req,r.City FROM Request as r WHERE r.Req_ID='" + req.id + "';";
+            com.CommandText = "SELECT r.Req_ID,r.Title,r.Description_Req,r.Min_Age,r.Max_Age,r.Max_Price,r.Gender,r.Date_Req,r.City FROM Request as r WHERE r.Req_ID='" + req.id + "';";
             //com.CommandText = "SELECT Natoinal_ID FROM SUPPORTER WHERE Supporter_Email='"+HttpContext.Session.GetString("Email")+"'";
             dr = com.ExecuteReader();
             dr.Read();
@@ -304,7 +304,7 @@ namespace Khdamat.Controllers
             req.request.Description_Req = dr["Description_Req"].ToString();
             req.request.Min_Age = int.Parse(dr["Min_Age"].ToString());
             req.request.Max_Age = int.Parse(dr["Max_Age"].ToString());
-            req.request.Min_Price = int.Parse(dr["Min_Price"].ToString());
+            req.request.Max_Price = int.Parse(dr["Max_Price"].ToString());
             req.request.Gender = char.Parse(dr["Gender"].ToString());
             req.request.Date_Req = DateTime.Parse(dr["Date_Req"].ToString());
             req.request.City = dr["City"].ToString();
@@ -351,7 +351,7 @@ namespace Khdamat.Controllers
 
         }
 
-        public IActionResult AppliedReq(int id)
+        public IActionResult AppliedRequests()
         {
             con.Open();
             com.Connection = con;
@@ -368,12 +368,53 @@ namespace Khdamat.Controllers
                 request.Description_Req = dr["Description_Req"].ToString(); 
                 request.Min_Age = int.Parse(dr["Min_Age"].ToString());
                 request.Max_Age = int.Parse(dr["Max_Age"].ToString());
-                request.Min_Price = int.Parse(dr["Min_Price"].ToString());
+                request.Max_Price = int.Parse(dr["Max_Price"].ToString());
                 request.Gender = char.Parse(dr["Gender"].ToString());
                 request.Date_Req = DateTime.Parse(dr["Date_Req"].ToString());
                 request.City = dr["City"].ToString();
                 request.Status = dr["Status"].ToString()[0];
                 requests.Add(request);
+            }
+            dr.Close();
+            con.Close();
+
+            return View(requests);
+
+        }
+
+
+        public IActionResult RecivedRequests()
+        {
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "SELECT * FROM Request, Apply_Req, Worker, Client WHERE Request.Req_ID = Apply_Req.Req_ID AND Request.Client_ID = Client.Natoinal_ID AND Apply_Req.Worker_ID = Worker.Natoinal_ID AND Client.Client_Email = '" + HttpContext.Session.GetString("Email") + "';";
+            com.ExecuteNonQuery();
+            dr = com.ExecuteReader();
+            List<AppliedRequests> requests = new List<AppliedRequests>();
+            AppliedRequests appliedRequests;
+            while (dr.Read())
+            {
+                appliedRequests = new AppliedRequests();
+                appliedRequests.request.Req_ID = int.Parse(dr["Req_ID"].ToString());
+                appliedRequests.request.Title = dr["Title"].ToString();
+                appliedRequests.request.Description_Req = dr["Description_Req"].ToString();
+                appliedRequests.request.Max_Price = int.Parse(dr["Max_Price"].ToString());
+                appliedRequests.request.Gender = char.Parse(dr["Gender"].ToString());
+                appliedRequests.request.Date_Req = DateTime.Parse(dr["Date_Req"].ToString());
+                appliedRequests.request.City = dr["City"].ToString();
+                appliedRequests.request.Status = dr["Status"].ToString()[0];
+                appliedRequests.worker.Natoinal_ID = dr["Natoinal_ID"].ToString();
+                appliedRequests.worker.Client_Email = dr["Worker_Email"].ToString();
+                appliedRequests.worker.First_Name = dr["F_Name"].ToString();
+                appliedRequests.worker.Last_Name = dr["L_Name"].ToString();
+                appliedRequests.worker.Country = dr["Country"].ToString();
+                appliedRequests.worker.City = dr["City"].ToString();
+                appliedRequests.worker.Phone = dr["Phone"].ToString();
+                appliedRequests.worker.Gender = dr["Gender"].ToString()[0];
+                appliedRequests.worker.Rating = float.Parse(dr["Rating"].ToString());
+
+
+                requests.Add(appliedRequests);
             }
             dr.Close();
             con.Close();

@@ -26,7 +26,7 @@ namespace Khdamat.Models
 
         public int Min_Age { get; set; }
         public int Max_Age { get; set; }
-        public int Min_Price { get; set; }
+        public int Max_Price { get; set; }
 
 
         [StringLength(maximumLength: 20)]
