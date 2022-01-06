@@ -1321,3 +1321,46 @@ a:hover {
 .col-md-4 .lap {
     height: 200px;
 }
+
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 82px;
+    height: 37px;
+    background-color: #2196f3;
+    border-radius: 30px;
+    border: 2px solid gray;
+   /* transition:var(--main--trasition)*/
+}
+
+    /* After slide changes */
+    .toggle:after {
+        content: '';
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: gray;
+        top: 0px;
+        left: 0px;
+        transition: var(--main--trasition) !important;
+    }
+
+/* Toggle text */
+
+
+/* Checkbox checked effect */
+.checkbox:checked + .toggle::after {
+   /* left: 49px;*/
+    right:0;
+}
+
+/* Checkbox checked toggle label bg color */
+.checkbox:checked + .toggle {
+    background-color: orange;
+}
+
+/* Checkbox vanished */
+.checkbox {
+    display: none;
+}
