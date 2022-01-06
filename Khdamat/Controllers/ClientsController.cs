@@ -282,7 +282,21 @@ namespace Khdamat.Controllers
         // GET: Clients/profile
         public IActionResult profile()
         {
-            return View();  
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "SELECT Client_Email, F_Name, L_Name, Phone, Gender FROM Client, Account WHERE Email = Client_Email AND Email = '"+HttpContext.Session.GetString("Email")+" ';";
+            dr = com.ExecuteReader();
+            dr.Read();
+            Client client = new Client();
+            client.First_Name = dr["F_Name"].ToString();
+            client.Last_Name = dr["L_Name"].ToString();
+            client.Client_Email = dr["Client_Email"].ToString();
+            client.Phone = dr["Phone"].ToString();
+            client.Gender = dr["Gender"].ToString()[0];
+            dr.Close();
+            con.Close();
+
+            return View(client);  
         }
 
 

@@ -1,4 +1,4 @@
-﻿
+﻿@model Khdamat.Models.Client
 @{
     ViewData["Title"] = "profile";
 }
@@ -8,14 +8,20 @@
 <div>
     <div class="makeflex">
         <p class="rigthTitle">الاسم:</p>
-        <p class="leftInfo">حط الاسم هنا</p>
+        <p class="leftInfo">@Model.First_Name @Model.Last_Name</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">النوع:</p>
+        <p class="leftInfo">
+            @((Model.Gender == 'M') ? "ذكر" : "انثى")
+            </p>
     </div>
     <div class="makeflex">
         <p class="rigthTitle">البريد الالكتروني:</p>
-        <p class="leftInfo">حط الميل هنا</p>
+        <p class="leftInfo">@Model.Client_Email</p>
     </div>
     <div class="makeflex">
         <p class="rigthTitle">رقم الهاتف:</p>
-        <p class="leftInfo">حط الرقم هنا</p>
+        <p class="leftInfo">@Model.Phone</p>
     </div>
 </div>

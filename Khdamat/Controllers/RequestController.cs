@@ -350,5 +350,36 @@ namespace Khdamat.Controllers
             return RedirectToAction("managereq", "Request");
 
         }
+
+        public IActionResult AppliedReq(int id)
+        {
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "SELECT * FROM Request, Apply_Req, Worker WHERE Request.Req_ID = Apply_Req.Req_ID AND Worker_ID = Natoinal_ID AND Worker.Worker_Email = '" + HttpContext.Session.GetString("Email") + "';";
+            com.ExecuteNonQuery();
+            dr = com.ExecuteReader();
+            List<Request> requests = new List<Request>();
+            Request request;
+            while (dr.Read())
+            {
+                request = new Request();
+                request.Req_ID = int.Parse(dr["Req_ID"].ToString());
+                request.Title = dr["Title"].ToString();
+                request.Description_Req = dr["Description_Req"].ToString(); 
+                request.Min_Age = int.Parse(dr["Min_Age"].ToString());
+                request.Max_Age = int.Parse(dr["Max_Age"].ToString());
+                request.Min_Price = int.Parse(dr["Min_Price"].ToString());
+                request.Gender = char.Parse(dr["Gender"].ToString());
+                request.Date_Req = DateTime.Parse(dr["Date_Req"].ToString());
+                request.City = dr["City"].ToString();
+                request.Status = dr["Status"].ToString()[0];
+                requests.Add(request);
+            }
+            dr.Close();
+            con.Close();
+
+            return View(requests);
+
+        }
     }
 }

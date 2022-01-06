@@ -109,7 +109,22 @@ namespace Khdamat.Controllers
         // GET: Workers/profile
         public IActionResult profile()
         {
-            return View();
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "SELECT Worker_Email, F_Name, L_Name, Phone, Gender, Rating FROM Worker, Account WHERE Email = Worker_Email AND Email = '" + HttpContext.Session.GetString("Email") + " ';";
+            dr = com.ExecuteReader();
+            dr.Read();
+            Worker worker = new Worker();
+            worker.First_Name = dr["F_Name"].ToString();
+            worker.Last_Name = dr["L_Name"].ToString();
+            worker.Client_Email = dr["Worker_Email"].ToString();
+            worker.Phone = dr["Phone"].ToString();
+            worker.Gender = dr["Gender"].ToString()[0];
+            worker.Rating = (float)dr["Rating"].ToString()[0] - 48;
+            dr.Close();
+            con.Close();
+
+            return View(worker);
         }
 
 
