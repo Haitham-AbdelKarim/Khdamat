@@ -1,0 +1,75 @@
+﻿
+@*@{
+    ViewData["Title"] = "RecivedRequests";
+}
+
+<h2 class="makeflex">الطلبات الواردة</h2>
+<hr />
+
+
+@foreach (var item in Model)
+{
+
+
+<div>
+    <div class="makeflex">
+        <p class="rigthTitle">عنوان الطلب:</p>
+        <p class="leftInfo">حط عنوان الطلب هنا</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">الاسم:</p>
+        <p class="leftInfo">@item.worker.First_Name @item.worker.Last_Name</p>
+    </div>
+   
+    <div class="makeflex">
+        <p class="rigthTitle">التفاصيل:</p>
+        <p class="leftInfo">حط الديسكريبشن اللي العامل كاتبه هنا</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">الرقم القومي:</p>
+        <p class="leftInfo">@item.worker.Natoinal_ID</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">البلد:</p>
+        <p class="leftInfo">@item.worker.Country</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">المدينة:</p>
+        <p class="leftInfo">@item.worker.City</p>
+    </div>
+   
+    <div class="makeflex">
+        <p class="rigthTitle">رقم الهاتف:</p>
+        <p class="leftInfo">@item.worker.Phone</p>
+    </div>
+
+    <div class="makeflex">
+        <p class="rigthTitle">النوع:</p>
+        <p class="leftInfo">@item.worker.Gender</p>
+    </div>
+   
+    <div class="makeflex">
+        <p class="rigthTitle"> التقييم:</p>
+        <p class="leftInfo">@item.worker.Rating</p>
+    </div>
+
+
+    <div class="makeflex">
+
+        <a class="btn-primary defultbutton rightButton" href=@Url.Action("protosupporter","Workers",item.worker)>اقبل</a>
+
+
+        <a class="btn-primary defultbutton leftButton" href="@Url.Action("BlockWorker","Workers", item.worker)">ريبورت</a>
+
+
+
+
+    </div>
+
+
+  
+
+</div>
+    <hr />
+}*@
+
