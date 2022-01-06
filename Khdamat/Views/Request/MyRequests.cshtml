@@ -1,7 +1,49 @@
 ﻿
-@{
+@*@{
     ViewData["Title"] = "MyRequests";
 }
 
-<h1>MyRequests</h1>
+<h2 class="makeflex">طلباتي</h2>
+<hr />
+
+
+@foreach (var item in Model)
+{
+
+
+<div>
+    <div class="makeflex">
+        <p class="rigthTitle">عنوان الطلب:</p>
+        <p class="leftInfo">حط عنوان الطلب هنا</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">التفاصيل:</p>
+        <p class="leftInfo">حط الديسكريبشن اللي الزبون كاتبه هنا</p>
+    </div>
+
+
+    <div class="makeflex">
+        <p class="rigthTitle">اكثر سعر:</p>
+        <p class="leftInfo">حط السعر هنا</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">السن:</p>
+        <p class="leftInfo">حط السن هنا</p>
+    </div>
+
+
+
+    <div class="makeflex">
+
+        <a class="btn-primary defultbutton rightButton" href=@Url.Action("protosupporter","Workers",item.worker)> الطلبات الواردة</a>
+
+
+    </div>
+
+
+
+
+</div>
+    <hr />
+}*@
 
