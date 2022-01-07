@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Khdamat.Data;
-using Khdamat.Models;
-using Microsoft.Data.SqlClient;
+﻿using Khdamat.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 
 namespace Khdamat.Controllers
 {
@@ -101,14 +94,19 @@ namespace Khdamat.Controllers
             con.Open();
             com.Connection = con;
             com.CommandText = "SELECT * FROM Account WHERE Email = '" + account.Email+ "';";
-            dr = com.ExecuteReader();
-            if(dr == null)
+                dr = com.ExecuteReader();
+
+            if(!dr.HasRows)
             {
+                TempData["AlertMessage"] = "Unregistered Email";
                 return View(account);
             }
             dr.Read();
             if (account.Password != dr["Password"].ToString())
+            {
+                TempData["AlertMessage"] = "Wrong Password";
                 return View(account);
+            }
 
                 HttpContext.Session.SetString("Email", dr["Email"].ToString());
             if (dr["Admin_b"] != null && dr["Admin_b"].ToString() == "True")
@@ -173,6 +171,13 @@ namespace Khdamat.Controllers
             }
             dr.Close();
             con.Close();
+
+            if (HttpContext.Session.GetInt32("isWorker") == 1)
+                HttpContext.Session.SetString("CurrentView", "Worker");
+            else
+                HttpContext.Session.SetString("CurrentView", "Client");
+
+
             if (HttpContext.Session.GetString("FirstName") == null)
                 return RedirectToAction(actionName: "Choose", controllerName: "Accounts");
 
@@ -184,6 +189,20 @@ namespace Khdamat.Controllers
         {
             HttpContext.Session.Clear();
             return RedirectToAction(actionName: "Index", controllerName: "Home");
+        }
+
+
+        public IActionResult Toggle()
+        {
+            if (HttpContext.Session.GetInt32("isClient") == 1 && HttpContext.Session.GetInt32("isWorker") == 1)
+                if (HttpContext.Session.GetString("CurrentView") == "Client")
+                    HttpContext.Session.SetString("CurrentView","Worker");
+                else
+                    HttpContext.Session.SetString("CurrentView", "Client");
+            else if(HttpContext.Session.GetInt32("isClient") == 1)
+                return RedirectToAction(actionName: "Register", controllerName: "Workers");
+
+            return RedirectToAction(actionName: "Register", controllerName: "Clients");
         }
 
         // GET: Accounts/Choose

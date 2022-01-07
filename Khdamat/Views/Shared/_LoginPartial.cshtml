@@ -3,20 +3,27 @@
 <ul class="navbar-nav">
 @if (Context.Session.GetString("Email") != null)
 {
-    <li class="nav-item">
-        <a asp-area="" asp-controller="" asp-action="">
-            <input type="checkbox" id="switch"
-                   class="checkbox" />
-            <label for="switch" class="toggle makeflex" style="justify-content:space-between; padding:5px; ">
-                <p style="color: white; font-size: 13px; font-weight: bold;">
-                    عامل
-                </p>
-                <p style="color: white; font-size: 13px; font-weight: bold;">زبون</p>
 
-            </label>
-        </a>
-    </li>
-    <li class="nav-item">
+        <li class="nav-item">
+            <a href="@Url.Action("Toggle","Accounts")">
+                <input type="checkbox" id="switch"
+                class="checkbox"
+                value = "Client"
+                
+               @if(Context.Session.GetString("CurrentView") == "Client")
+                    {<text>checked </text>}
+                />
+                <label for="switch" class="toggle makeflex" style="justify-content:space-between; padding:5px; ">
+                        <p style="color: white; font-size: 13px; font-weight: bold;">
+                            عامل
+                        </p>
+                    <p style="color: white; font-size: 13px; font-weight: bold;">زبون</p>
+
+                </label>
+            </a>
+        </li>
+
+        <li class="nav-item">
         <a  class="nav-link text-dark"  title="Manage">مرحبا 
             @((Context.Session.GetString("FirstName") == null)
                ? Context.Session.GetString("Email")

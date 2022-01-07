@@ -52,7 +52,7 @@
 
     <div class="makeflex">
 
-        <a class="btn-primary defultbutton rightButton" href=@Url.Action("protosupporter","Workers",item.worker)>اقبل</a>
+        <a class="btn-primary defultbutton rightButton" href=@Url.Action("acceptApplication","Requests",new {item.ID, item.worker.Natoinal_ID})>اقبل</a>
 
 
         <a class="btn-primary defultbutton leftButton" href="@Url.Action("BlockWorker","Workers", item.worker)">ريبورت</a>
