@@ -446,5 +446,18 @@ namespace Khdamat.Controllers
             return View(applicationDetailsList);
 
         }
+
+        public IActionResult acceptApplication(int Req_ID, string Worker_ID)
+        {
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "UPDATE Apply_Req SET Taken = 'True' WHERE Req_ID = '" + Req_ID.ToString() + "' AND Worker_ID = '" + Worker_ID.ToString() + "';";
+            com.ExecuteNonQuery();
+            com.CommandText = "UPDATE Request SET Status = 'T' WHERE Req_ID = '" + Req_ID.ToString() + "';";
+            com.ExecuteNonQuery();
+            con.Close();
+            return RedirectToAction("managereq", "Request");
+
+        }
     }
 }
