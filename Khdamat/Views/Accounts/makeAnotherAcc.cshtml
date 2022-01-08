@@ -1,0 +1,33 @@
+﻿
+@*@{
+    ViewData["Title"] = "makeAnotherAcc";
+}
+
+<div class="row">
+    <div class="col-md-4 Login register">
+
+     
+            <h2 class="makeflex graycolor logofont">خدمات</h2>
+            @if (ده زبون)
+                    {
+                <p class="makeflex">اذا كنت ترغب بالمتابعة كعامل اضغط</p>
+            }
+            @if (ده عامل)
+                    {
+                <p class="makeflex">اذا كنت ترغب بالمتابعة كزبون اضغط</p>
+            }
+           
+            <div class="form-group center">
+                <input type="submit" value="متابعة" class="btn btn-primary defultbutton" />
+            </div>
+
+          
+       
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}*@
+
+
