@@ -4,7 +4,7 @@
     ViewData["Title"] = "WaitingRequests";
 }
 
-<h2 class="tit">الخدمات المتاحة</h2>
+<h2 class="tit makeflex">الخدمات المتاحة</h2>
 
 
 
@@ -19,7 +19,7 @@
     <div class="asel">
 
     <label >نوع الخدمة</label>
-     <select  asp-for="id" >
+     <select  asp-for="id" style="border-color: #ced4da; ">
          <option value=0>الكل</option>
      @if (Model.Services != null)
                   {
@@ -31,7 +31,7 @@
                   </select>
                   
                   <label>المكان</label>
-                   <select asp-for="loc" >
+                   <select asp-for="loc" style=" border-color: #ced4da; ">
          <option value="">الكل</option>
      @if (Model.cities != null)
                   {
@@ -42,7 +42,7 @@
                   }
                   </select>
                   <label>النوع</label>
-                   <select asp-for="gender" >
+                   <select asp-for="gender" style=" border-color: #ced4da; ">
                         <option value=' '>الكل</option>
                         <option  value="m">ذكر</option>
                         <option  value="f">انثي</option>
@@ -51,7 +51,7 @@
                   </select>
 
                   <label>السعر</label>
-                 @Html.TextBoxFor(m=>m.price,new { @value = 0})
+                  <span style="border-color: #ced4da; ">@Html.TextBoxFor(m => m.price, new { @value = 0 } )</span>
                   <input class="abtn" type="submit" value="بحث" />
                  </div>
                    
@@ -61,9 +61,9 @@
 
 
 
+<hr />
 
-
-<table class="content-table">
+<table class="content-table" style="ba">
     <thead>
         <tr>
             <th>عنوان الخدمة</th>

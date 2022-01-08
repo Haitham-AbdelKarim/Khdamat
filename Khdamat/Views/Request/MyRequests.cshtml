@@ -35,17 +35,34 @@
         <p class="rigthTitle">اكبر سن:</p>
         <p class="leftInfo">@item.Max_Age</p>
     </div>
-    
+
+    @*@if (تحت المراجعة)
+{
+<div class="makeflex">
+    <p class="rigthTitle">الحالة:</p>
+    <p class="leftInfo">تحت المراجعة</p>
+</div>
+}
+
+    @if (تم النشر)
+{
+<div class="makeflex">
+    <p class="rigthTitle">الحالة:</p>
+    <p class="leftInfo">تم النشر</p>
+</div>
+}
+  
 
 
+    @if (في طلبات)
+{*@
+<div class="makeflex">
 
-    <div class="makeflex">
-
-        <a class="btn-primary defultbutton rightButton" href=@Url.Action("RecivedRequests","Request",new {@item.Req_ID})> الطلبات الواردة</a>
+    <a class="btn-primary defultbutton rightButton" href=@Url.Action("RecivedRequests", "Request", new { @item.Req_ID })> الطلبات الواردة</a>
 
 
-    </div>
-
+</div>
+@* } *@
 
 
 

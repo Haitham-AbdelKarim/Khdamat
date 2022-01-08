@@ -1364,3 +1364,7 @@ a:hover {
 .checkbox {
     display: none;
 }
+
+input#price {
+    border: 1px solid #ced4da;
+}
