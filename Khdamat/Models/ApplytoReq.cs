@@ -21,5 +21,8 @@ namespace Khdamat.Models
             description="";
             id=-1;
         }
+
+        public string Worker_ID { get; set; }
+
     }
 }

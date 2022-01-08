@@ -1,4 +1,4 @@
-﻿@model List<Khdamat.Models.Request>
+﻿@model List<Khdamat.Models.ApplytoReq>
 
 @{
     ViewData["Title"] = "AppliedRequests";
@@ -15,20 +15,16 @@
 <div>
     <div class="makeflex">
         <p class="rigthTitle">عنوان الطلب:</p>
-        <p class="leftInfo">حط عنوان الطلب هنا</p>
+        <p class="leftInfo">@item.Request.Title</p>
     </div>
     <div class="makeflex">
         <p class="rigthTitle">التفاصيل:</p>
-        <p class="leftInfo">حط الديسكريبشن اللي الزبون كاتبه هنا</p>
-    </div>
-    <div class="makeflex">
-        <p class="rigthTitle">الاسم:</p>
-        <p class="leftInfo">حط اسم صاحب الطلب هنا</p>
+        <p class="leftInfo">@item.Request.Description_Req</p>
     </div>
   
     <div class="makeflex">
         <p class="rigthTitle">محتوي الرسالة:</p>
-        <p class="leftInfo">حط الديسكريبشن اللي العامل كاتبه هنا</p>
+        <p class="leftInfo">@item.description</p>
     </div>
  
    @* <div class="makeflex">
@@ -37,12 +33,12 @@
     </div>*@
     <div class="makeflex">
         <p class="rigthTitle">المدينة:</p>
-        <p class="leftInfo">@item.City</p>
+        <p class="leftInfo">@item.Request.City</p>
     </div>
 
     <div class="makeflex">
         <p class="rigthTitle">اكثر سعر:</p>
-        <p class="leftInfo">حط السعر هنا</p>
+        <p class="leftInfo">@item.Request.Max_Price</p>
     </div>
 
 
@@ -50,7 +46,7 @@
 
     <div class="makeflex">
 
-        <a class="btn-primary defultbutton rightButton" href=@Url.Action("protosupporter","Workers",item.Req_ID)>الغاء الطلب</a>
+        <a class="btn-primary defultbutton rightButton" href=@Url.Action("deleteApply","Request",new {item.Request.Req_ID, item.Worker_ID})>الغاء الطلب</a>
 
 
        
