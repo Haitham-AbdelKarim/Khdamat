@@ -88,17 +88,19 @@ namespace Khdamat.Controllers
                 try
                 {
                     com.ExecuteNonQuery();
-                    com.CommandText = "UPDATE ACCOUNT SET Client_b = '1' WHERE Email = '"
-                        + HttpContext.Session.GetString("Email") + "';";
-                    com.ExecuteNonQuery();
-                    HttpContext.Session.SetInt32("isClient",1);
-                    HttpContext.Session.SetString("FirstName", client.First_Name.ToString());
                 }
-                catch (Exception error)
+                catch
                 {
-
-                    throw error;
+                    TempData["AlertMessage"] = "هذا الرقم القومى مسجل من قبل";
+                    return View(client);
                 }
+
+
+                com.CommandText = "UPDATE ACCOUNT SET Client_b = '1' WHERE Email = '"
+                    + HttpContext.Session.GetString("Email") + "';";
+                com.ExecuteNonQuery();
+                HttpContext.Session.SetInt32("isClient",1);
+                HttpContext.Session.SetString("FirstName", client.First_Name.ToString());
                 con.Close();
                 return RedirectToAction("Index", "Home");
             }
@@ -145,17 +147,19 @@ namespace Khdamat.Controllers
                 try
                 {
                     com.ExecuteNonQuery();
+                }
+                catch
+                {
+                    TempData["AlertMessage"] = "هذا الرقم القومى مسجل من قبل";
+                    return View(client);
+                }
+
+
                     com.CommandText = "UPDATE ACCOUNT SET Client_b = '1' WHERE Email = '"
                         + HttpContext.Session.GetString("Email") + "';";
                     com.ExecuteNonQuery();
                     HttpContext.Session.SetInt32("isClient", 1);
                     HttpContext.Session.SetString("FirstName", client.First_Name.ToString());
-                }
-                catch (Exception error)
-                {
-
-                    throw error;
-                }
 
                 com.Connection = con;
                 com.CommandText = "INSERT INTO Worker (Natoinal_ID, Worker_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date) values ('"
@@ -191,18 +195,12 @@ namespace Khdamat.Controllers
         }
 
         // GET: Clients/clientsControl
-        public IActionResult clientsControl(string user)
+        public IActionResult clientsControl()
         {
             con.Open();
             com.Connection = con;
-            if (user == "Client")
-            {
-                com.CommandText = "SELECT Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_b, S_Blocked,Supporter_b FROM Client, Account WHERE Email = Client_Email;";
-            }
-            else if (user == "Supporter")
-            {
-                com.CommandText = "SELECT Natoinal_ID, Supporter_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_b, S_Blocked,Supporter_b FROM Supporter, Account WHERE Email = Supporter_Email;";
-            }
+
+            com.CommandText = "SELECT Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_b, S_Blocked,Supporter_b FROM Client, Account WHERE Email = Client_Email;";
             dr = com.ExecuteReader();
             List<ClientDetails> clients = new List<ClientDetails>();
             ClientDetails clientsDetails;
@@ -210,7 +208,7 @@ namespace Khdamat.Controllers
             {
                 clientsDetails = new ClientDetails();
                 clientsDetails.client.Natoinal_ID = dr["Natoinal_ID"].ToString();
-                clientsDetails.client.Client_Email = dr[user+"_Email"].ToString();
+                clientsDetails.client.Client_Email = dr["Client_Email"].ToString();
                 clientsDetails.client.First_Name = dr["F_Name"].ToString();
                 clientsDetails.client.Last_Name = dr["L_Name"].ToString();
                 clientsDetails.client.Country = dr["Country"].ToString();
@@ -219,7 +217,6 @@ namespace Khdamat.Controllers
                 clientsDetails.client.Phone = dr["Phone"].ToString();
                 clientsDetails.client.Gender = dr["Gender"].ToString()[0];
                 clientsDetails.client.Birth_Date = ((DateTime)dr["Birth_Date"]);
-                clientsDetails.user = user;
                 if (dr["Admin_b"].ToString() == "True")
                     clientsDetails.isAdmin = true;
                 else

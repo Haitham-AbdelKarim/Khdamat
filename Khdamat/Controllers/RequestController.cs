@@ -228,7 +228,7 @@ namespace Khdamat.Controllers
                     + Req_Svc.Request.Max_Age + "','"
                     + Req_Svc.Request.Max_Price + "','"
                     + Req_Svc.Request.Gender.ToString() + "','"
-                    + Req_Svc.Request.Date_Req + "','W','"
+                    + Req_Svc.Request.Date_Req.ToString("yyyy-MM-dd") + "','W','"
                     + Req_Svc.Request.City +"');";
                 com.ExecuteNonQuery();
                 con.Close();
@@ -404,6 +404,7 @@ namespace Khdamat.Controllers
                 request.Date_Req = DateTime.Parse(dr["Date_Req"].ToString());
                 request.City = dr["City"].ToString();
                 request.Status = dr["Status"].ToString()[0];
+                request.Supporter_ID = dr["Supporter_ID"].ToString();
                 requests.Add(request);
             }
             dr.Close();

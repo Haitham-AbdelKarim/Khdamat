@@ -88,17 +88,18 @@ namespace Khdamat.Controllers
                 try
                 {
                     com.ExecuteNonQuery();
+                    
+                }
+                catch
+                {
+                    TempData["AlertMessage"] = "هذا الرقم القومى مسجل من قبل";
+                    return View(worker);
+                }
                     com.CommandText = "UPDATE ACCOUNT SET Worker_b = '1' WHERE Email = '"
                         + HttpContext.Session.GetString("Email") + "';";
                     com.ExecuteNonQuery();
                     HttpContext.Session.SetInt32("isWorker", 1);
                     HttpContext.Session.SetString("FirstName", worker.First_Name.ToString());
-                }
-                catch (Exception error)
-                {
-
-                    throw error;
-                }
                 con.Close();
                 return RedirectToAction("Index", "Home");
             }

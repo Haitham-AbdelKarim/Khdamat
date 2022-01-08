@@ -1,0 +1,36 @@
+﻿@model Khdamat.Models.Worker
+@{
+    ViewData["Title"] = "profile";
+}
+
+<h2 class="makeflex">معلومات الحساب </h2>
+<hr />
+<div>
+    <div class="makeflex">
+        <p class="rigthTitle">الاسم:</p>
+        <p class="leftInfo">@Model.First_Name @Model.Last_Name</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">النوع:</p>
+        <p class="leftInfo">
+            @((Model.Gender == 'M') ? "ذكر" : "انثى")
+            </p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">البريد الالكتروني:</p>
+        <p class="leftInfo">@Model.Client_Email</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">رقم الهاتف:</p>
+        <p class="leftInfo">@Model.Phone</p>
+    </div>
+    <div class="makeflex">
+        <p class="rigthTitle">التقييم:</p>
+        <p class="leftInfo">@Model.Rating</p>
+    </div>
+    <div class="makeflex">
+    <a class="defultbutton rightButton" asp-area="" asp-controller="Accounts" asp-action="changePassword">تغيير كلمة المرور</a>
+    </div>
+
+</div>
+

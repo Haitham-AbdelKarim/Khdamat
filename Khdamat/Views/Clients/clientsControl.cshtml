@@ -61,8 +61,7 @@
 
          
        
-            @if (item.user.ToString() == "Client")
-            {
+            
                 @if (item.isAdmin == false && item.isSupporter == false)
                 {
                     <div class="makeflex">
@@ -87,21 +86,6 @@
                         <p class="rigthTitle">ادمن/سابورتر</p>
                     </div>
                 }
-            }
-            @if (item.user.ToString() == "Supporter")
-            {
-        <div class="makeflex">
-            @if (item.isBlocked == false && Context.Session.GetInt32("isAdmin") == 1)
-            {
-                <a class="btn-primary defultbutton rightButton" href="@Url.Action("BlockClient","Clients",new {item.client,item.client.Client_Email})">بلوك</a>
-            }
-
-            @if (item.isBlocked == true && Context.Session.GetInt32("isAdmin") == 1)
-            {
-                <a class="btn-primary defultbutton rightButton" href="@Url.Action("UNBlockClient","Clients",new {item.client,item.client.Client_Email})">ازل البلوك</a>
-            }
-        </div>
-            }
 
 
             </div>
