@@ -125,7 +125,7 @@ namespace Khdamat.Controllers
             con.Open();
             com.Connection=con;
             if (comx=="")
-                com.CommandText="select * from Request where Status='w'";
+                com.CommandText= "select * from Request where Status='w' AND Supporter_ID <> 'NULL'";
             else
             {
                 com.CommandText=comx;
@@ -447,16 +447,16 @@ namespace Khdamat.Controllers
 
         }
 
-        public IActionResult acceptApplication(int Req_ID, string Worker_ID)
+        public IActionResult acceptApplication(int ID, string Natoinal_ID)
         {
             con.Open();
             com.Connection = con;
-            com.CommandText = "UPDATE Apply_Req SET Taken = 'True' WHERE Req_ID = '" + Req_ID.ToString() + "' AND Worker_ID = '" + Worker_ID.ToString() + "';";
+            com.CommandText = "UPDATE Apply_Req SET Taken = 'True' WHERE Req_ID = '" + ID.ToString() + "' AND Worker_ID = '" + Natoinal_ID.ToString() + "';";
             com.ExecuteNonQuery();
-            com.CommandText = "UPDATE Request SET Status = 'T' WHERE Req_ID = '" + Req_ID.ToString() + "';";
+            com.CommandText = "UPDATE Request SET Status = 't' WHERE Req_ID = '" + ID.ToString() + "';";
             com.ExecuteNonQuery();
             con.Close();
-            return RedirectToAction("managereq", "Request");
+            return RedirectToAction("MyRequests", "Request");
 
         }
     }

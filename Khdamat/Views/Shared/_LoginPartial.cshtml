@@ -5,22 +5,19 @@
 {
 
         <li class="nav-item">
-            <a href="@Url.Action("Toggle","Accounts")">
-                <input type="checkbox" id="switch"
-                class="checkbox"
-                value = "Client"
-                
+          
+                <input type="checkbox" id="switch" class="checkbox" 
                @if(Context.Session.GetString("CurrentView") == "Client")
                     {<text>checked </text>}
-                />
+                /> 
                 <label for="switch" class="toggle makeflex" style="justify-content:space-between; padding:5px; ">
-                        <p style="color: white; font-size: 13px; font-weight: bold;">
+                        <p style="color: white; font-size: 13px; font-weight: bold;"><a href = "@Url.Action("Toggle","Accounts")">
                             عامل
-                        </p>
-                    <p style="color: white; font-size: 13px; font-weight: bold;">زبون</p>
-
+                        </a></p>
+                        
+                    <p style="color: white; font-size: 13px; font-weight: bold;"><a href="@Url.Action("Toggle","Accounts")">زبون</a></p>
                 </label>
-            </a>
+            
         </li>
 
         <li class="nav-item">

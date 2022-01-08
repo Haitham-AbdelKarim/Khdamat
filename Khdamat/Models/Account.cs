@@ -23,6 +23,12 @@ namespace Khdamat.Models
         public bool IsWorker { get; set; }
         public bool IsClient { get; set; }
 
+        [Required]
+        [StringLength(maximumLength: 20, ErrorMessage = "Password should be between 8 and 20 characters long", MinimumLength = 8)]
+        [DataType(DataType.Password)]
+        public string CurrentPassword { get; set; }
+
+
         public Account()
         {
 

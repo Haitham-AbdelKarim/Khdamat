@@ -56,14 +56,23 @@ namespace Khdamat.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Register([Bind("Email,Password,ConfirmPassword,IsBlocked,IsAdmin,IsSupporter,IsWorker,IsClient")] Account account)
         {
+            ModelState.Remove("CurrentPassword");
             if (ModelState.IsValid)
             {
-                if(!account.IsClient && !account.IsWorker)
+                if (!account.IsClient && !account.IsWorker)
                     return View(account);
-                    con.Open();
-                    com.Connection = con;
-                    com.CommandText = "INSERT INTO Account (Email, Password, S_Blocked) values ('" + account.Email.ToString() + "','" + account.Password.ToString() + "', '0');";
-                    com.ExecuteNonQuery();
+                con.Open();
+                com.Connection = con;
+                com.CommandText = "INSERT INTO Account (Email, Password, S_Blocked) values ('" + account.Email.ToString() + "','" + account.Password.ToString() + "', '0');";
+                try {
+                com.ExecuteNonQuery();
+                }
+                catch
+                {
+                    TempData["AlertMessage"] = "حساب مسجل بالفعل، قم بتسجيل الدخول";
+                    con.Close();
+                    return View(account);
+                }
                     con.Close();
                     HttpContext.Session.SetString("Email", account.Email);
                 if (account.IsClient && account.IsWorker)
@@ -98,13 +107,13 @@ namespace Khdamat.Controllers
 
             if(!dr.HasRows)
             {
-                TempData["AlertMessage"] = "Unregistered Email";
+                TempData["AlertMessage"] = "حساب غير مسجل";
                 return View(account);
             }
             dr.Read();
             if (account.Password != dr["Password"].ToString())
             {
-                TempData["AlertMessage"] = "Wrong Password";
+                TempData["AlertMessage"] = "كلمة مرور غير صحيحة";
                 return View(account);
             }
 
@@ -191,6 +200,40 @@ namespace Khdamat.Controllers
             return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
 
+
+        public IActionResult changePassword()
+        {
+            Account account = new Account();
+            return View(account);
+        }
+
+        // POST: Accounts/Register
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult changePassword([Bind("Password, CurrentPassword, ConfirmPassword")] Account account)
+        {
+            ModelState.Remove("Email");
+            if (ModelState.IsValid)
+            { 
+                con.Open();
+                com.Connection = con;
+                com.CommandText = "SELECT Password FROM Account WHERE Email = '" + HttpContext.Session.GetString("Email") + "';";
+                dr = com.ExecuteReader();
+                dr.Read();
+                if(account.CurrentPassword != dr["Password"].ToString())
+                {
+                    TempData["AlertMessage"] = "كلمة مرور غير صحيحة";
+                    return View(account);
+                }
+                dr.Close();
+                com.CommandText = "UPDATE ACCOUNT SET PASSWORD = '" + account.Password.ToString() + "' FROM Account WHERE Email = '" + HttpContext.Session.GetString("Email") + "';";
+                com.ExecuteNonQuery();
+                con.Close();  
+            }
+            return View(account);
+        }
 
         public IActionResult Toggle()
         {
