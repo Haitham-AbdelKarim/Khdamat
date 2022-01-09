@@ -339,15 +339,15 @@ namespace Khdamat.Controllers
 
         }
 
-        public IActionResult deletereq(int id)
+        public IActionResult deletereq(int Req_ID)
         {
             con.Open();
             com.Connection = con;
-            com.CommandText = "DELETE FROM Request WHERE Req_ID='" + id + "';";
+            com.CommandText = "DELETE FROM Request WHERE Req_ID='" + Req_ID + "';";
             com.ExecuteNonQuery();
             con.Close();
 
-            return RedirectToAction("managereq", "Request");
+            return RedirectToAction("MyRequests", "Request");
 
         }
 
