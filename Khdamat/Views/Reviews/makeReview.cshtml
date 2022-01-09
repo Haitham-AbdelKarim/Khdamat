@@ -1,5 +1,5 @@
-﻿
-@*@{
+﻿@model Khdamat.Models.Review
+@{
     ViewData["Title"] = "makeReview";
 }
 
@@ -14,14 +14,14 @@
             <h4 class="makeflex">ريفيو</h4>
             <hr />
 
-            @Html.TextAreaFor(model => model.description, new { @class = "form-control height200 fullWidth", placeholder = "تفاصيل الريفيو" })
-            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control height200 fullWidth", placeholder = "تفاصيل الريفيو" })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             <br>
 
             <div class="makeflex">
                 <p class="rightTitle" style="color:black">تقييم</p>
                 <div class="leftInfo" style="width:60%">
-                    <select asp-for="Request.Service_ID" style="width: 100%; border-color: #ced4da; ">
+                    <select asp-for="Rating" style="width: 100%; border-color: #ced4da; ">
 
                         <option value=1>1</option>
                         <option value=2>2</option>
@@ -42,5 +42,4 @@
 
         }
     </div>
-</div>*@
-
+</div>

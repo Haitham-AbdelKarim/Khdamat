@@ -33,7 +33,7 @@
         <li class="nav-item ">
             <a class="nav-link text-dark myNav" asp-area="" asp-controller="Home" asp-action="Privacy">الخصوصية</a>
         </li>*@
-                        @if (Context.Session.GetInt32("isClient") == 1)
+                        @if (Context.Session.GetString("CurrentView") == "Client")
                         {
                             if (Context.Session.GetInt32("isClient") == 1 || Context.Session.GetInt32("isWorker") == 1)
                             {
@@ -56,28 +56,28 @@
                             <a class="nav-link text-dark myNav" asp-area="" asp-controller="Request" asp-action="WaitingRequests">الخدمات المطلوبة</a>
                         </li>
 
-                        @if (Context.Session.GetInt32("isClient") == 1)
+                        @if (Context.Session.GetString("CurrentView") == "Client")
                         {
                             <li class="nav-item ">
                                 <a class="nav-link text-dark myNav" asp-area="" asp-controller="Request" asp-action="Add_Req">إنشاء خدمة جديدة</a>
                             </li>
                         }
 
-                        @if (Context.Session.GetInt32("isClient") == 1)
+                        @if (Context.Session.GetString("CurrentView") == "Client")
                         {
                             <li class="nav-item ">
                                 <a class="nav-link text-dark myNav" asp-area="" asp-controller="Request" asp-action="MyRequests">طلباتي</a>
                             </li>
                         }
 
-                        @if (Context.Session.GetInt32("isWorker") == 1)
+                        @if (Context.Session.GetString("CurrentView") == "Worker")
                         {
                             <li class="nav-item ">
                                 <a class="nav-link text-dark myNav" asp-area="" asp-controller="Request" asp-action="AppliedRequests">العروض المرسلة</a>
                             </li>
                         }
                         
-                        @if (Context.Session.GetInt32("isAdmin") == 1 || Context.Session.GetInt32("isSupporter") == 1)
+                        @if (Context.Session.GetInt32("isSupporter") == 1)
                         {
                             <li class="dropdown vertical-nav">
 
@@ -98,11 +98,13 @@
 
                                             </li>
                                             <li><a class="nav-link text-dark myNav" asp-area="" asp-controller="Workers" asp-action="workersControl">التحكم في العمال</a></li>
-
-                                            <li>
-                                                <a class="nav-link text-dark myNav" asp-area="" asp-controller="Supporters" asp-action="SupportersControl">التحكم في السابورتارز</a>
-                                            </li>
-                                        </ul>
+                                                @if (Context.Session.GetInt32("isAdmin") == 1)
+                                                {
+                                                    <li>
+                                                        <a class="nav-link text-dark myNav" asp-area="" asp-controller="Supporters" asp-action="SupportersControl">التحكم في السابورتارز</a>
+                                                    </li>
+                                                }
+                                            </ul>
 
                                     </div>
 

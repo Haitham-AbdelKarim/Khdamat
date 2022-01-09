@@ -72,8 +72,20 @@
     <p class="rigthTitle">الحالة:</p>
     <p class="leftInfo">قيد التنفيذ</p>
 </div>
+            <div class="makeflex">
+            <a class="btn-primary defultbutton rightButton" href=@Url.Action("MakeReview", "Reviews", new { @item.Req_ID })> انهاء وتقييم</a>
+        </div>
+
 }
-  
+
+@if (item.Supporter_ID != "" && item.Status == 'D')
+        {
+            <div class="makeflex">
+                <p class="rigthTitle">الحالة:</p>
+                <p class="leftInfo">منتهية</p>
+            </div>
+        }
+
 
 
 

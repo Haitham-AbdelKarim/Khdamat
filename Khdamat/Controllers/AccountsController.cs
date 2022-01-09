@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using System;
 
 namespace Khdamat.Controllers
 {
@@ -241,17 +242,141 @@ namespace Khdamat.Controllers
             return View(account);
         }
 
-        public IActionResult Toggle()
+
+
+        public IActionResult makeAnotherAcc()
+        {
+            return View();
+        }
+
+        public IActionResult makeAnotherAccount()
+        {
+            con.Open();
+            com.Connection = con;
+            if(HttpContext.Session.GetInt32("isClient") == 1)
+            {   
+                com.CommandText = "SELECT * FROM Client WHERE Client_Email = '" + HttpContext.Session.GetString("Email") + "';";
+                dr = com.ExecuteReader();
+                dr.Read();
+                Client client = new Client();
+                client.Natoinal_ID = dr["Natoinal_ID"].ToString();
+                client.Client_Email = dr["Client_Email"].ToString();
+                client.First_Name = dr["F_Name"].ToString();
+                client.Last_Name = dr["L_Name"].ToString();
+                client.Country = dr["Country"].ToString();
+                client.City = dr["City"].ToString();
+                client.Street = dr["Street"].ToString();
+                client.Phone = dr["Phone"].ToString();
+                client.Gender = dr["Gender"].ToString()[0];
+                client.Birth_Date = ((DateTime)dr["Birth_Date"]);
+                dr.Close();
+                com.CommandText = "INSERT INTO Worker (Natoinal_ID, Worker_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date) values ('"
+                    + client.Natoinal_ID + "','"
+                    + HttpContext.Session.GetString("Email") + "','"
+                    + client.First_Name + "','"
+                    + client.Last_Name + "','"
+                    + client.Country + "','"
+                    + client.City + "','"
+                    + client.Street + "','"
+                    + client.Phone + "','"
+                    + client.Gender.ToString() + "','"
+                    + client.Birth_Date.ToString("yyyy-MM-dd")
+                    + "');";
+                try
+                {
+                    com.ExecuteNonQuery();
+                }
+                catch
+                {
+
+                }
+
+                com.CommandText = "UPDATE ACCOUNT SET Worker_b = '1' WHERE Email = '"
+                    + HttpContext.Session.GetString("Email") + "';";
+                com.ExecuteNonQuery();
+                HttpContext.Session.SetInt32("isWorker", 1);
+
+                HttpContext.Session.SetString("CurrentView", "Worker");
+            }
+            else
+            {
+                com.CommandText = "SELECT * FROM Worker WHERE Worker_Email = '" + HttpContext.Session.GetString("Email") + "';";
+                dr = com.ExecuteReader();
+                dr.Read();
+                Client client = new Client();
+                client.Natoinal_ID = dr["Natoinal_ID"].ToString();
+                client.Client_Email = dr["Client_Email"].ToString();
+                client.First_Name = dr["F_Name"].ToString();
+                client.Last_Name = dr["L_Name"].ToString();
+                client.Country = dr["Country"].ToString();
+                client.City = dr["City"].ToString();
+                client.Street = dr["Street"].ToString();
+                client.Phone = dr["Phone"].ToString();
+                client.Gender = dr["Gender"].ToString()[0];
+                client.Birth_Date = ((DateTime)dr["Birth_Date"]);
+                dr.Close();
+                com.CommandText = "INSERT INTO Client (Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date) values ('"
+                    + client.Natoinal_ID + "','"
+                    + HttpContext.Session.GetString("Email") + "','"
+                    + client.First_Name + "','"
+                    + client.Last_Name + "','"
+                    + client.Country + "','"
+                    + client.City + "','"
+                    + client.Street + "','"
+                    + client.Phone + "','"
+                    + client.Gender.ToString() + "','"
+                    + client.Birth_Date.ToString("yyyy-MM-dd")
+                    + "');";
+                try
+                {
+                    com.ExecuteNonQuery();
+                }
+                catch
+                {
+
+                }
+
+                com.CommandText = "UPDATE ACCOUNT SET Client_b = '1' WHERE Email = '"
+                    + HttpContext.Session.GetString("Email") + "';";
+                com.ExecuteNonQuery();
+                HttpContext.Session.SetInt32("isClient", 1);
+
+                HttpContext.Session.SetString("CurrentView", "Client");
+            }
+
+                con.Close();
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
+        }
+
+
+        public IActionResult GoToWorker()
         {
             if (HttpContext.Session.GetInt32("isClient") == 1 && HttpContext.Session.GetInt32("isWorker") == 1)
+            {
                 if (HttpContext.Session.GetString("CurrentView") == "Client")
-                    HttpContext.Session.SetString("CurrentView","Worker");
-                else
+                    HttpContext.Session.SetString("CurrentView", "Worker");
+            }
+            else if (HttpContext.Session.GetInt32("isClient") == 1)
+            {
+                return RedirectToAction(actionName: "makeAnotherAcc", controllerName: "Accounts");
+            }
+            HttpContext.Session.SetString("CurrentView", "Worker");
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
+        }
+        public IActionResult GoToClient()
+        {
+            if (HttpContext.Session.GetInt32("isClient") == 1 && HttpContext.Session.GetInt32("isWorker") == 1)
+            {
+                if (HttpContext.Session.GetString("CurrentView") == "Worker")
                     HttpContext.Session.SetString("CurrentView", "Client");
-            else if(HttpContext.Session.GetInt32("isClient") == 1)
-                return RedirectToAction(actionName: "Register", controllerName: "Workers");
+            }
+            else if (HttpContext.Session.GetInt32("isWorker") == 1)
+            {
+                return RedirectToAction(actionName: "makeAnotherAcc", controllerName: "Accounts");
+            }
 
-            return RedirectToAction(actionName: "Register", controllerName: "Clients");
+            HttpContext.Session.SetString("CurrentView", "Client");
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
 
         // GET: Accounts/Choose

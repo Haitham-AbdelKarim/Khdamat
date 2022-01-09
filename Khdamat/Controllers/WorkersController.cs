@@ -112,10 +112,11 @@ namespace Khdamat.Controllers
         {
             con.Open();
             com.Connection = con;
-            com.CommandText = "SELECT Worker_Email, F_Name, L_Name, Phone, Gender, Rating FROM Worker, Account WHERE Email = Worker_Email AND Email = '" + HttpContext.Session.GetString("Email") + " ';";
+            com.CommandText = "SELECT Natoinal_ID, Worker_Email, F_Name, L_Name, Phone, Gender, Rating FROM Worker, Account WHERE Email = Worker_Email AND Email = '" + HttpContext.Session.GetString("Email") + " ';";
             dr = com.ExecuteReader();
             dr.Read();
             Worker worker = new Worker();
+            worker.Natoinal_ID = dr["Natoinal_ID"].ToString();
             worker.First_Name = dr["F_Name"].ToString();
             worker.Last_Name = dr["L_Name"].ToString();
             worker.Client_Email = dr["Worker_Email"].ToString();
