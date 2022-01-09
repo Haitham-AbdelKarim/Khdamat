@@ -55,7 +55,7 @@
         <a class="btn-primary defultbutton rightButton" href=@Url.Action("acceptApplication","Request",new {item.ID, item.worker.Natoinal_ID})>اقبل</a>
 
 
-        <a class="btn-primary defultbutton leftButton" href="@Url.Action("BlockWorker","Workers", item.worker)">ريبورت</a>
+        <a class="btn-primary defultbutton leftButton" href="@Url.Action("MakeReport","Reports", new {item.worker.Natoinal_ID, item.ID})">ريبورت</a>
 
 
         <a class="btn-primary defultbutton leftButton" href="@Url.Action("BlockWorker","Workers", item.worker)">الريفيوهات</a>
