@@ -232,7 +232,7 @@ namespace Khdamat.Controllers
                     + Req_Svc.Request.City +"');";
                 com.ExecuteNonQuery();
                 con.Close();
-                ViewBag.Message = string.Format("Request has been Added Successfully ");
+                ViewBag.Message = string.Format("تم اضافة الخدمة بنجاح");
 
             }
             con.Open();

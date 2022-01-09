@@ -51,6 +51,7 @@ namespace Khdamat.Controllers
                 com.CommandText = "INSERT INTO Make_Report (Report_ID, Client_ID, Worker_ID) VALUES ('" + id + "', '" + CLient_ID + "', '" + report.Worker_ID.ToString() +"');";
                 com.ExecuteNonQuery();   
                 con.Close();
+                ViewBag.Message = string.Format("تم ايصال الريبورت بنجاح سيتم اتخاذ الاجراء اللازم من قبل المسؤلين");
             }
             return RedirectToAction(actionName: "MyRequests", controllerName: "Request");
         }

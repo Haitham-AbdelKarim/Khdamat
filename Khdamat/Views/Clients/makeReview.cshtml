@@ -9,18 +9,34 @@
         {
 
             @Html.AntiForgeryToken()
-           
 
-                <h4 class="makeflex">ريفيو</h4>
-                <hr />
 
-                @Html.TextAreaFor(model => model.description, new { @class = "form-control height200 fullWidth", placeholder = "تفاصيل الريفيو" })
-                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-                <br>
+            <h4 class="makeflex">ريفيو</h4>
+            <hr />
 
-                <div class="center">
-                    <input type="submit" value="ارسال" class="ersal center defultbutton rightButton" />
+            @Html.TextAreaFor(model => model.description, new { @class = "form-control height200 fullWidth", placeholder = "تفاصيل الريفيو" })
+            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            <br>
+
+            <div class="makeflex">
+                <p class="rightTitle" style="color:black">تقييم</p>
+                <div class="leftInfo" style="width:60%">
+                    <select asp-for="Request.Service_ID" style="width: 100%; border-color: #ced4da; ">
+
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5>5</option>
+
+
+                    </select>
                 </div>
+            </div>
+
+            <div class="center">
+                <input type="submit" value="ارسال" class="ersal center defultbutton rightButton" />
+            </div>
 
 
 

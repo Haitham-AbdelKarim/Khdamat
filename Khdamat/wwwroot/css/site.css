@@ -590,7 +590,7 @@ tbody tr{
 
 }
     tbody tr:last-of-type {
-        border-bottom: 2px solid #009879;
+        border-bottom: 2px solid #1c1c1c;
     }
     tbody tr:hover {
         background-color: #dddddd;
@@ -682,7 +682,7 @@ tbody tr{
         justify-content: center;
         align-items: center;
         border-radius: 10px;
-        background-color: #009879;
+        background-color: orangered;
         color: white;
         border: none;
         outline: none;
