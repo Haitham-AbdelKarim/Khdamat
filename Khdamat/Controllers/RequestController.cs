@@ -228,7 +228,7 @@ namespace Khdamat.Controllers
                     + Req_Svc.Request.Max_Age + "','"
                     + Req_Svc.Request.Max_Price + "','"
                     + Req_Svc.Request.Gender.ToString() + "','"
-                    + Req_Svc.Request.Date_Req + "','W','"
+                    + Req_Svc.Request.Date_Req.ToString("yyyy-MM-dd") + "','W','"
                     + Req_Svc.Request.City +"');";
                 com.ExecuteNonQuery();
                 con.Close();
@@ -339,15 +339,27 @@ namespace Khdamat.Controllers
 
         }
 
-        public IActionResult deletereq(int id)
+        public IActionResult deletereq(int Req_ID)
         {
             con.Open();
             com.Connection = con;
-            com.CommandText = "DELETE FROM Request WHERE Req_ID='" + id + "';";
+            com.CommandText = "DELETE FROM Request WHERE Req_ID='" + Req_ID + "';";
             com.ExecuteNonQuery();
             con.Close();
 
-            return RedirectToAction("managereq", "Request");
+            return RedirectToAction("MyRequests", "Request");
+
+        }
+
+        public IActionResult deleteApply(int Req_ID, string Worker_ID)
+        {
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "DELETE FROM Apply_Req WHERE Worker_ID='" + Worker_ID + "' AND Req_ID = '" + Req_ID.ToString() + "';";
+            com.ExecuteNonQuery();
+            con.Close();
+
+            return RedirectToAction("AppliedRequests", "Request");
 
         }
 
@@ -358,22 +370,24 @@ namespace Khdamat.Controllers
             com.CommandText = "SELECT * FROM Request, Apply_Req, Worker WHERE Request.Req_ID = Apply_Req.Req_ID AND Worker_ID = Natoinal_ID AND Worker.Worker_Email = '" + HttpContext.Session.GetString("Email") + "';";
             com.ExecuteNonQuery();
             dr = com.ExecuteReader();
-            List<Request> requests = new List<Request>();
-            Request request;
+            List<ApplytoReq> requests = new List<ApplytoReq>();
+            ApplytoReq applytoReq;
             while (dr.Read())
             {
-                request = new Request();
-                request.Req_ID = int.Parse(dr["Req_ID"].ToString());
-                request.Title = dr["Title"].ToString();
-                request.Description_Req = dr["Description_Req"].ToString(); 
-                request.Min_Age = int.Parse(dr["Min_Age"].ToString());
-                request.Max_Age = int.Parse(dr["Max_Age"].ToString());
-                request.Max_Price = int.Parse(dr["Max_Price"].ToString());
-                request.Gender = char.Parse(dr["Gender"].ToString());
-                request.Date_Req = DateTime.Parse(dr["Date_Req"].ToString());
-                request.City = dr["City"].ToString();
-                request.Status = dr["Status"].ToString()[0];
-                requests.Add(request);
+                applytoReq = new ApplytoReq();
+                applytoReq.Request.Req_ID = int.Parse(dr["Req_ID"].ToString());
+                applytoReq.Request.Title = dr["Title"].ToString();
+                applytoReq.Request.Description_Req = dr["Description_Req"].ToString();
+                applytoReq.Request.Min_Age = int.Parse(dr["Min_Age"].ToString());
+                applytoReq.Request.Max_Age = int.Parse(dr["Max_Age"].ToString());
+                applytoReq.Request.Max_Price = int.Parse(dr["Max_Price"].ToString());
+                applytoReq.Request.Gender = char.Parse(dr["Gender"].ToString());
+                applytoReq.Request.Date_Req = DateTime.Parse(dr["Date_Req"].ToString());
+                applytoReq.Request.City = dr["City"].ToString();
+                applytoReq.Request.Status = dr["Status"].ToString()[0];
+                applytoReq.description = dr["Comment"].ToString();
+                applytoReq.Worker_ID = dr["Worker_ID"].ToString();
+                requests.Add(applytoReq);
             }
             dr.Close();
             con.Close();
@@ -404,6 +418,7 @@ namespace Khdamat.Controllers
                 request.Date_Req = DateTime.Parse(dr["Date_Req"].ToString());
                 request.City = dr["City"].ToString();
                 request.Status = dr["Status"].ToString()[0];
+                request.Supporter_ID = dr["Supporter_ID"].ToString();
                 requests.Add(request);
             }
             dr.Close();

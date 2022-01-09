@@ -117,7 +117,13 @@ namespace Khdamat.Controllers
                 return View(account);
             }
 
-                HttpContext.Session.SetString("Email", dr["Email"].ToString());
+            if ((bool)dr["S_Blocked"] == true)
+            {
+                TempData["AlertMessage"] = "تم حظر هذا الحساب";
+                return View(account);
+            }
+
+            HttpContext.Session.SetString("Email", dr["Email"].ToString());
             if (dr["Admin_b"] != null && dr["Admin_b"].ToString() == "True")
             {
                 HttpContext.Session.SetInt32("isAdmin", 1);

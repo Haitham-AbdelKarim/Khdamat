@@ -1,4 +1,4 @@
-﻿@model Khdamat.Models.Client
+﻿@model Khdamat.Models.Worker
 @{
     ViewData["Title"] = "profile";
 }
@@ -25,6 +25,12 @@
         <p class="leftInfo">@Model.Phone</p>
     </div>
     <div class="makeflex">
+        <p class="rigthTitle">التقييم:</p>
+        <p class="leftInfo">@Model.Rating</p>
+    </div>
+    <div class="makeflex">
     <a class="defultbutton rightButton" asp-area="" asp-controller="Accounts" asp-action="changePassword">تغيير كلمة المرور</a>
     </div>
+
 </div>
+

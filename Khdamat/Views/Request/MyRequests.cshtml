@@ -36,33 +36,46 @@
         <p class="leftInfo">@item.Max_Age</p>
     </div>
 
-    @*@if (تحت المراجعة)
-{
-<div class="makeflex">
-    <p class="rigthTitle">الحالة:</p>
-    <p class="leftInfo">تحت المراجعة</p>
-</div>
-}
+    @if (item.Supporter_ID == "")
+    {
+        <div class="makeflex">
+            <p class="rigthTitle">الحالة:</p>
+            <p class="leftInfo">تحت المراجعة</p>
+        </div>
+        <div class="makeflex">
 
-    @if (تم النشر)
+            <a class="btn-primary defultbutton rightButton" href=@Url.Action("deletereq", "Request", new { @item.Req_ID })> الغاء الطلب</a>
+
+        </div>
+    }
+
+    @if (item.Supporter_ID != "" && item.Status == 'W')
+    {
+        <div class="makeflex">
+            <p class="rigthTitle">الحالة:</p>
+            <p class="leftInfo">تم النشر</p>
+        </div>
+
+        <div class="makeflex">
+
+            <a class="btn-primary defultbutton rightButton" href=@Url.Action("RecivedRequests", "Request", new { @item.Req_ID })> الطلبات الواردة</a>
+            <a class="btn-primary defultbutton leftButton" href=@Url.Action("deletereq", "Request", new { @item.Req_ID })> الغاء الطلب</a>
+
+        </div>
+
+    }
+
+
+@if (item.Supporter_ID != "" && item.Status == 't')
 {
 <div class="makeflex">
     <p class="rigthTitle">الحالة:</p>
-    <p class="leftInfo">تم النشر</p>
+    <p class="leftInfo">قيد التنفيذ</p>
 </div>
 }
   
 
 
-    @if (في طلبات)
-{*@
-<div class="makeflex">
-
-    <a class="btn-primary defultbutton rightButton" href=@Url.Action("RecivedRequests", "Request", new { @item.Req_ID })> الطلبات الواردة</a>
-
-
-</div>
-@* } *@
 
 
 

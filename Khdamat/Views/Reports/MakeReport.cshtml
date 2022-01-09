@@ -1,0 +1,29 @@
+﻿@model Khdamat.Models.Report
+
+@{
+    ViewData["Title"] = "MakeReport";
+}
+=
+<div class="row">
+    <div class="col-md-4 register">
+        @using (Html.BeginForm())
+        {
+
+            @Html.AntiForgeryToken()
+       
+
+            <h4 class="makeflex">بلاغ</h4>
+            <hr />
+
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control height200 fullWidth" , placeholder = "سبب البلاغ" })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            <br>
+            <div class="center">
+                <input type="submit" value="ارسال" class="ersal center defultbutton rightButton" asp-route-Worker_ID="@Model.Worker_ID"/>
+            </div>
+
+
+
+           }
+    </div>
+</div>

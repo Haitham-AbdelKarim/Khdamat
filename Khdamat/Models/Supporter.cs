@@ -9,7 +9,7 @@ namespace Khdamat.Models
         [StringLength(maximumLength: 20)]
         [Required]
         public string Natoinal_ID { get; set; }
-        public string Client_Email { get; set; }
+        public string Supporter_Email { get; set; }
         [Required]
         [StringLength(maximumLength: 20)]
         public string First_Name { get; set; }
@@ -35,6 +35,6 @@ namespace Khdamat.Models
 
         [Required]
         [StringLength(maximumLength: 20)]
-        public char Admin_ID { get; set; }
+        public string Admin_ID { get; set; }
     }
 }

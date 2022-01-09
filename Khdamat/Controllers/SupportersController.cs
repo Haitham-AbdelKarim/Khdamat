@@ -33,7 +33,7 @@ namespace Khdamat.Controllers
         {
             con.Open();
             com.Connection = con;
-            com.CommandText = "SELECT Natoinal_ID, Worker_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_ID, Admin_b, S_Blocked,Supporter_b FROM Worker, Account WHERE Email = Supporter_Email;";
+            com.CommandText = "SELECT Natoinal_ID, Supporter_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_ID, Admin_b, S_Blocked,Supporter_b FROM Supporter, Account WHERE Email = Supporter_Email;";
             dr = com.ExecuteReader();
             List<SupportersDetails> supporters = new List<SupportersDetails>();
             SupportersDetails supportersDetails;
@@ -41,7 +41,7 @@ namespace Khdamat.Controllers
             {
                 supportersDetails = new SupportersDetails();
                 supportersDetails.supporter.Natoinal_ID = dr["Natoinal_ID"].ToString();
-                supportersDetails.supporter.Client_Email = dr["Worker_Email"].ToString();
+                supportersDetails.supporter.Supporter_Email = dr["Supporter_Email"].ToString();
                 supportersDetails.supporter.First_Name = dr["F_Name"].ToString();
                 supportersDetails.supporter.Last_Name = dr["L_Name"].ToString();
                 supportersDetails.supporter.Country = dr["Country"].ToString();
@@ -50,7 +50,7 @@ namespace Khdamat.Controllers
                 supportersDetails.supporter.Phone = dr["Phone"].ToString();
                 supportersDetails.supporter.Gender = dr["Gender"].ToString()[0];
                 supportersDetails.supporter.Birth_Date = ((DateTime)dr["Birth_Date"]);
-                //supportersDetails.supporter.r = float.Parse(dr["Rating"].ToString());
+                supportersDetails.supporter.Admin_ID = dr["Admin_ID"].ToString();
                 if (dr["Admin_b"].ToString() == "True")
                     supportersDetails.isAdmin = true;
                 else
@@ -74,169 +74,209 @@ namespace Khdamat.Controllers
             return View(supporters);
         }
 
-        public IActionResult BlockWorker(Worker c)
+        public IActionResult BlockSupporter(Supporter c)
         {
             con.Open();
             com.Connection = con;
-            com.CommandText = "UPDATE Account SET S_Blocked= '" + true + "' WHERE Email='" + c.Client_Email + "';";
+            com.CommandText = "UPDATE Account SET S_Blocked= '" + true + "' WHERE Email='" + c.Supporter_Email + "';";
             com.ExecuteNonQuery();
-            com.CommandText = "SELECT Natoinal_ID, Worker_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Rating, Admin_b, S_Blocked,Supporter_b FROM Worker, Account WHERE Email = Worker_Email;";
+            com.CommandText = "SELECT Natoinal_ID, Supporter_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_ID, Admin_b, S_Blocked,Supporter_b FROM Supporter, Account WHERE Email = Supporter_Email;";
             dr = com.ExecuteReader();
-            List<WorkerDetails> workers = new List<WorkerDetails>();
-            WorkerDetails workersDetails;
+            List<SupportersDetails> supporters = new List<SupportersDetails>();
+            SupportersDetails supportersDetails;
             while (dr.Read())
             {
-                workersDetails = new WorkerDetails();
-                workersDetails.worker.Natoinal_ID = dr["Natoinal_ID"].ToString();
-                workersDetails.worker.Client_Email = dr["Worker_Email"].ToString();
-                workersDetails.worker.First_Name = dr["F_Name"].ToString();
-                workersDetails.worker.Last_Name = dr["L_Name"].ToString();
-                workersDetails.worker.Country = dr["Country"].ToString();
-                workersDetails.worker.City = dr["City"].ToString();
-                workersDetails.worker.Street = dr["Street"].ToString();
-                workersDetails.worker.Phone = dr["Phone"].ToString();
-                workersDetails.worker.Gender = dr["Gender"].ToString()[0];
-                workersDetails.worker.Birth_Date = ((DateTime)dr["Birth_Date"]);
-                workersDetails.worker.Rating = float.Parse(dr["Rating"].ToString());
+                supportersDetails = new SupportersDetails();
+                supportersDetails.supporter.Natoinal_ID = dr["Natoinal_ID"].ToString();
+                supportersDetails.supporter.Supporter_Email = dr["Supporter_Email"].ToString();
+                supportersDetails.supporter.First_Name = dr["F_Name"].ToString();
+                supportersDetails.supporter.Last_Name = dr["L_Name"].ToString();
+                supportersDetails.supporter.Country = dr["Country"].ToString();
+                supportersDetails.supporter.City = dr["City"].ToString();
+                supportersDetails.supporter.Street = dr["Street"].ToString();
+                supportersDetails.supporter.Phone = dr["Phone"].ToString();
+                supportersDetails.supporter.Gender = dr["Gender"].ToString()[0];
+                supportersDetails.supporter.Birth_Date = ((DateTime)dr["Birth_Date"]);
+                supportersDetails.supporter.Admin_ID = dr["Admin_ID"].ToString();
                 if (dr["Admin_b"].ToString() == "True")
-                    workersDetails.isAdmin = true;
+                    supportersDetails.isAdmin = true;
                 else
-                    workersDetails.isAdmin = false;
+                    supportersDetails.isAdmin = false;
 
                 if (dr["S_Blocked"].ToString() == "True")
-                    workersDetails.isBlocked = true;
+                    supportersDetails.isBlocked = true;
                 else
-                    workersDetails.isBlocked = false;
+                    supportersDetails.isBlocked = false;
                 if (string.IsNullOrEmpty(dr["Supporter_b"].ToString()))
                 {
-                    workersDetails.isSupporter = false;
+                    supportersDetails.isSupporter = false;
                 }
                 else if (dr["Supporter_b"].ToString() == "True")
-                    workersDetails.isSupporter = true;
-                else workersDetails.isSupporter = false;
-                workers.Add(workersDetails);
+                    supportersDetails.isSupporter = true;
+                else supportersDetails.isSupporter = false;
+                supporters.Add(supportersDetails);
             }
             dr.Close();
             con.Close();
-            return View("WorkersControl", workers);
+            return View("supportersControl", supporters);
         }
 
-        public IActionResult UNBlockWorker(Worker c)
+        public IActionResult UNBlockSupporter(Supporter c)
         {
             con.Open();
             com.Connection = con;
-            com.CommandText = "UPDATE Account SET S_Blocked= '" + false + "' WHERE Email='" + c.Client_Email + "';";
+            com.CommandText = "UPDATE Account SET S_Blocked= '" + false + "' WHERE Email='" + c.Supporter_Email + "';";
             com.ExecuteNonQuery();
-            com.CommandText = "SELECT Natoinal_ID, Worker_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Rating, Admin_b, S_Blocked,Supporter_b FROM Worker, Account WHERE Email = Worker_Email;";
+            com.CommandText = "SELECT Natoinal_ID, Supporter_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_ID, Admin_b, S_Blocked,Supporter_b FROM Supporter, Account WHERE Email = Supporter_Email;";
             dr = com.ExecuteReader();
-            List<WorkerDetails> workers = new List<WorkerDetails>();
-            WorkerDetails workersDetails;
+            List<SupportersDetails> supporters = new List<SupportersDetails>();
+            SupportersDetails supportersDetails;
             while (dr.Read())
             {
-                workersDetails = new WorkerDetails();
-                workersDetails.worker.Natoinal_ID = dr["Natoinal_ID"].ToString();
-                workersDetails.worker.Client_Email = dr["Worker_Email"].ToString();
-                workersDetails.worker.First_Name = dr["F_Name"].ToString();
-                workersDetails.worker.Last_Name = dr["L_Name"].ToString();
-                workersDetails.worker.Country = dr["Country"].ToString();
-                workersDetails.worker.City = dr["City"].ToString();
-                workersDetails.worker.Street = dr["Street"].ToString();
-                workersDetails.worker.Phone = dr["Phone"].ToString();
-                workersDetails.worker.Gender = dr["Gender"].ToString()[0];
-                workersDetails.worker.Birth_Date = ((DateTime)dr["Birth_Date"]);
-                workersDetails.worker.Rating = float.Parse(dr["Rating"].ToString());
+                supportersDetails = new SupportersDetails();
+                supportersDetails.supporter.Natoinal_ID = dr["Natoinal_ID"].ToString();
+                supportersDetails.supporter.Supporter_Email = dr["Supporter_Email"].ToString();
+                supportersDetails.supporter.First_Name = dr["F_Name"].ToString();
+                supportersDetails.supporter.Last_Name = dr["L_Name"].ToString();
+                supportersDetails.supporter.Country = dr["Country"].ToString();
+                supportersDetails.supporter.City = dr["City"].ToString();
+                supportersDetails.supporter.Street = dr["Street"].ToString();
+                supportersDetails.supporter.Phone = dr["Phone"].ToString();
+                supportersDetails.supporter.Gender = dr["Gender"].ToString()[0];
+                supportersDetails.supporter.Birth_Date = ((DateTime)dr["Birth_Date"]);
+                supportersDetails.supporter.Admin_ID = dr["Admin_ID"].ToString();
                 if (dr["Admin_b"].ToString() == "True")
-                    workersDetails.isAdmin = true;
+                    supportersDetails.isAdmin = true;
                 else
-                    workersDetails.isAdmin = false;
+                    supportersDetails.isAdmin = false;
 
                 if (dr["S_Blocked"].ToString() == "True")
-                    workersDetails.isBlocked = true;
+                    supportersDetails.isBlocked = true;
                 else
-                    workersDetails.isBlocked = false;
+                    supportersDetails.isBlocked = false;
                 if (string.IsNullOrEmpty(dr["Supporter_b"].ToString()))
                 {
-                    workersDetails.isSupporter = false;
+                    supportersDetails.isSupporter = false;
                 }
                 else if (dr["Supporter_b"].ToString() == "True")
-                    workersDetails.isSupporter = true;
-                else workersDetails.isSupporter = false;
-                workers.Add(workersDetails);
+                    supportersDetails.isSupporter = true;
+                else supportersDetails.isSupporter = false;
+                supporters.Add(supportersDetails);
             }
             dr.Close();
             con.Close();
-            return View("workersControl", workers);
+            return View("SupportersControl", supporters);
         }
 
-        public IActionResult protosupporter(Worker c)
+        public IActionResult protoAdmin(Supporter c)
         {
             con.Open();
             com.Connection = con;
-            com.CommandText = "UPDATE Account SET Supporter_b='" + true + "' WHERE Email='" + c.Client_Email + "';";
+            com.CommandText = "UPDATE Account SET Admin_b='" + true + "' WHERE Email='" + c.Supporter_Email + "';";
             com.ExecuteNonQuery();
-            string email = HttpContext.Session.GetString("Email");
-            com.CommandText = "SELECT Natoinal_ID FROM Administrator WHERE Admin_Email='" + email + "';";
-            dr = com.ExecuteReader();
-            dr.Read();
-            string id = dr["Natoinal_ID"].ToString();
-            dr.Close();
-
-            //com.CommandText = "SELECT Natoinal_ID, Client_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_b, S_Blocked FROM Client, Account WHERE Email = Client_Email;";
-            com.CommandText = "INSERT INTO Supporter (Natoinal_ID, Supporter_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_ID) values ('"
+            com.CommandText = "INSERT INTO Administrator (Natoinal_ID, Admin_Email, F_Name, L_Name, Country, City, Street, Phone, Gender) values ('"
                     + c.Natoinal_ID + "','"
-                    + c.Client_Email + "','"
+                    + c.Supporter_Email + "','"
                     + c.First_Name + "','"
                     + c.Last_Name + "','"
                     + c.Country + "','"
                     + c.City + "','"
                     + c.Street + "','"
                     + c.Phone + "','"
-                    + c.Gender.ToString() + "','"
-                    + c.Birth_Date.ToString("yyyy-MM-dd") + "','"
-                    + id
+                    + c.Gender.ToString()
                     + "');";
             com.ExecuteNonQuery();
-            com.CommandText = "SELECT Natoinal_ID, Worker_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Rating, Admin_b, S_Blocked,Supporter_b FROM Worker, Account WHERE Email = Worker_Email;";
+            com.CommandText = "SELECT Natoinal_ID, Supporter_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_ID, Admin_b, S_Blocked,Supporter_b FROM Supporter, Account WHERE Email = Supporter_Email;";
             dr = com.ExecuteReader();
-            List<WorkerDetails> workers = new List<WorkerDetails>();
-            WorkerDetails workersDetails;
+            List<SupportersDetails> supporters = new List<SupportersDetails>();
+            SupportersDetails supportersDetails;
             while (dr.Read())
             {
-                workersDetails = new WorkerDetails();
-                workersDetails.worker.Natoinal_ID = dr["Natoinal_ID"].ToString();
-                workersDetails.worker.Client_Email = dr["Worker_Email"].ToString();
-                workersDetails.worker.First_Name = dr["F_Name"].ToString();
-                workersDetails.worker.Last_Name = dr["L_Name"].ToString();
-                workersDetails.worker.Country = dr["Country"].ToString();
-                workersDetails.worker.City = dr["City"].ToString();
-                workersDetails.worker.Street = dr["Street"].ToString();
-                workersDetails.worker.Phone = dr["Phone"].ToString();
-                workersDetails.worker.Gender = dr["Gender"].ToString()[0];
-                workersDetails.worker.Birth_Date = ((DateTime)dr["Birth_Date"]);
-                workersDetails.worker.Rating = float.Parse(dr["Rating"].ToString());
+                supportersDetails = new SupportersDetails();
+                supportersDetails.supporter.Natoinal_ID = dr["Natoinal_ID"].ToString();
+                supportersDetails.supporter.Supporter_Email = dr["Supporter_Email"].ToString();
+                supportersDetails.supporter.First_Name = dr["F_Name"].ToString();
+                supportersDetails.supporter.Last_Name = dr["L_Name"].ToString();
+                supportersDetails.supporter.Country = dr["Country"].ToString();
+                supportersDetails.supporter.City = dr["City"].ToString();
+                supportersDetails.supporter.Street = dr["Street"].ToString();
+                supportersDetails.supporter.Phone = dr["Phone"].ToString();
+                supportersDetails.supporter.Gender = dr["Gender"].ToString()[0];
+                supportersDetails.supporter.Birth_Date = ((DateTime)dr["Birth_Date"]);
+                supportersDetails.supporter.Admin_ID = dr["Admin_ID"].ToString();
                 if (dr["Admin_b"].ToString() == "True")
-                    workersDetails.isAdmin = true;
+                    supportersDetails.isAdmin = true;
                 else
-                    workersDetails.isAdmin = false;
+                    supportersDetails.isAdmin = false;
 
                 if (dr["S_Blocked"].ToString() == "True")
-                    workersDetails.isBlocked = true;
+                    supportersDetails.isBlocked = true;
                 else
-                    workersDetails.isBlocked = false;
+                    supportersDetails.isBlocked = false;
                 if (string.IsNullOrEmpty(dr["Supporter_b"].ToString()))
                 {
-                    workersDetails.isSupporter = false;
+                    supportersDetails.isSupporter = false;
                 }
                 else if (dr["Supporter_b"].ToString() == "True")
-                    workersDetails.isSupporter = true;
-                else workersDetails.isSupporter = false;
-                workers.Add(workersDetails);
+                    supportersDetails.isSupporter = true;
+                else supportersDetails.isSupporter = false;
+                supporters.Add(supportersDetails);
             }
             dr.Close();
             con.Close();
-            return View("workersControl", workers);
+            return View("SupportersControl", supporters);
         }
 
-        
+
+        public IActionResult demofromsupporter(Supporter c)
+        {
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "UPDATE Account SET Supporter_b='" + false + "' WHERE Email='" + c.Supporter_Email + "';";
+            com.ExecuteNonQuery();
+            com.CommandText = "DELETE FROM Supporter WHERE Natoinal_ID = '" + c.Natoinal_ID.ToString() + "';";
+            com.ExecuteNonQuery();
+            com.CommandText = "SELECT Natoinal_ID, Supporter_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Admin_ID, Admin_b, S_Blocked,Supporter_b FROM Supporter, Account WHERE Email = Supporter_Email;";
+            dr = com.ExecuteReader();
+            List<SupportersDetails> supporters = new List<SupportersDetails>();
+            SupportersDetails supportersDetails;
+            while (dr.Read())
+            {
+                supportersDetails = new SupportersDetails();
+                supportersDetails.supporter.Natoinal_ID = dr["Natoinal_ID"].ToString();
+                supportersDetails.supporter.Supporter_Email = dr["Supporter_Email"].ToString();
+                supportersDetails.supporter.First_Name = dr["F_Name"].ToString();
+                supportersDetails.supporter.Last_Name = dr["L_Name"].ToString();
+                supportersDetails.supporter.Country = dr["Country"].ToString();
+                supportersDetails.supporter.City = dr["City"].ToString();
+                supportersDetails.supporter.Street = dr["Street"].ToString();
+                supportersDetails.supporter.Phone = dr["Phone"].ToString();
+                supportersDetails.supporter.Gender = dr["Gender"].ToString()[0];
+                supportersDetails.supporter.Birth_Date = ((DateTime)dr["Birth_Date"]);
+                supportersDetails.supporter.Admin_ID = dr["Admin_ID"].ToString();
+                if (dr["Admin_b"].ToString() == "True")
+                    supportersDetails.isAdmin = true;
+                else
+                    supportersDetails.isAdmin = false;
+
+                if (dr["S_Blocked"].ToString() == "True")
+                    supportersDetails.isBlocked = true;
+                else
+                    supportersDetails.isBlocked = false;
+                if (string.IsNullOrEmpty(dr["Supporter_b"].ToString()))
+                {
+                    supportersDetails.isSupporter = false;
+                }
+                else if (dr["Supporter_b"].ToString() == "True")
+                    supportersDetails.isSupporter = true;
+                else supportersDetails.isSupporter = false;
+                supporters.Add(supportersDetails);
+            }
+            dr.Close();
+            con.Close();
+            return View("SupportersControl", supporters);
+        }
+
+
     }
 }
