@@ -609,7 +609,7 @@ tbody tr{
     display: flex;
     align-items: center;
     border-radius: 7px 7px 7px 0;
-    border-right: 5px solid #009879;
+    border-right: 5px solid #2796f3;
 }
 
     .elem label {
@@ -623,20 +623,19 @@ tbody tr{
 }
 #btn {
     display: flex;
-    margin: 20px 20px;
+    margin: 20px 0;
     width: 100px;
     height: 40px;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    background-color: #009879;
+    background-color: orangered;
     color: white;
     border: none;
     outline: none;
-   
 }
     #btn:hover {
-        color: #009879;
+        color: orangered;
         background-color: #dddddd;
     }
 .app {
@@ -675,8 +674,7 @@ tbody tr{
 }
 
     .asel .abtn {
-        display: flex;
-        
+        display: flex;    
         width: 100px;
         height: 40px;
         justify-content: center;

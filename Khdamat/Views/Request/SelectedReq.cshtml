@@ -6,6 +6,7 @@
 }
 
 <h2 class="tit">@Model.Request.Title</h2>
+<hr />
 <div class="elem">
  <label>المدينة : </label>
 <div class="cont">@Model.Request.City</div>
@@ -61,7 +62,7 @@
   <div id="appdes">   @Html.TextAreaFor(model=>model.description,new { @Model.id ,@class="app" })</div>
  <div style="visibility:hidden"> @Html.TextBoxFor(m => m.id, new {@Value = @Model.id, @class = "red" })</div>
  
-                <input type="submit" value="ارسال" class="ersal2" id="btn2"/>
+                <input type="submit" value="ارسال" class="ersal2 defultbutton rightButton" id="btn2"/>
 @*                <a id="btn2" class="ersal2" href=@Url.Action("ApplytoRequest","Request",new{@Model.Request,@Model.id,@Model.description})> hnjkjniknj</a>
 *@
 }
