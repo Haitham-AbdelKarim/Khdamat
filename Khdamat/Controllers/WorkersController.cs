@@ -202,8 +202,11 @@ namespace Khdamat.Controllers
         {
             con.Open();
             com.Connection = con;
-            com.CommandText = "SELECT Natoinal_ID, Worker_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Rating, Admin_b, S_Blocked,Supporter_b FROM Worker, Account WHERE Email = Worker_Email;";
+            com.CommandType = System.Data.CommandType.StoredProcedure;
+            com.CommandText = "WorkerControl";
+            //com.CommandText = "SELECT Natoinal_ID, Worker_Email, F_Name, L_Name, Country, City, Street, Phone, Gender, Birth_Date, Rating, Admin_b, S_Blocked,Supporter_b FROM Worker, Account WHERE Email = Worker_Email;";
             dr = com.ExecuteReader();
+            com.CommandType = System.Data.CommandType.Text;
             List<WorkerDetails> workers = new List<WorkerDetails>();
             WorkerDetails workersDetails;
             while (dr.Read())
