@@ -78,8 +78,12 @@ namespace Khdamat.Controllers
             HttpContext.Session.SetString("c_or_s",t.ToString());
             con.Open();
             com.Connection = con;
-            com.CommandText = "SELECT ID,Title,Worker_ID,Client_ID,Descriptions,Supporter_ID FROM Complain_Suggestion WHERE C_or_S='" + t + "' ;";
+            com.CommandType = System.Data.CommandType.StoredProcedure;
+            com.CommandText = "manageCompSugg";
+            com.Parameters.Add("@t", System.Data.SqlDbType.Char).Value = t;
+            //com.CommandText = "SELECT ID,Title,Worker_ID,Client_ID,Descriptions,Supporter_ID FROM Complain_Suggestion WHERE C_or_S='" + t + "' ;";
             dr = com.ExecuteReader();
+            com.CommandType = System.Data.CommandType.Text;
             List<SuggReqDetails> complainlist = new List<SuggReqDetails>();
             List<string> u_idlist = new List<string>();
             SuggReqDetails complain;
@@ -126,9 +130,13 @@ namespace Khdamat.Controllers
             c.suggreq.ID = c.id;
             con.Open();
             com.Connection = con;
-            com.CommandText = "SELECT Title, Descriptions, C_or_S FROM Complain_Suggestion WHERE ID='" + c.id + "';";
+            com.CommandType = System.Data.CommandType.StoredProcedure;
+            com.CommandText = "manageCompSugg";
+            com.Parameters.Add("@ID", System.Data.SqlDbType.Char).Value = c.id;
+            //com.CommandText = "SELECT Title, Descriptions, C_or_S FROM Complain_Suggestion WHERE ID='" + c.id + "';";
             //com.CommandText = "SELECT Natoinal_ID FROM SUPPORTER WHERE Supporter_Email='"+HttpContext.Session.GetString("Email")+"'";
             dr = com.ExecuteReader();
+            com.CommandType = System.Data.CommandType.Text;
             dr.Read();
             c.suggreq.Title = dr["Title"].ToString();
             c.suggreq.description = dr["Descriptions"].ToString();

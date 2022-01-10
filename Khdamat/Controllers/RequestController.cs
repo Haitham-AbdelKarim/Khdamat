@@ -107,12 +107,19 @@ namespace Khdamat.Controllers
            // int de = HttpContext.Session.GetInt32("reid");
             con.Open();
             com.Connection=con;
-            com.CommandText="select Natoinal_ID from Worker where Worker_Email='"+email+"';";
-            dr=com.ExecuteReader(); dr.Read();
-            com.CommandText="insert into Apply_Req(Req_ID,Worker_ID,Comment) values("+ap.id+",'"+dr["Natoinal_ID"]+"','"+ap.description+"');";
+            //com.CommandText="select Natoinal_ID from Worker where Worker_Email='"+email+"';";
+            com.CommandType = System.Data.CommandType.StoredProcedure;
+            com.CommandText = "GetNatID";
+            com.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = email;
+            dr =com.ExecuteReader(); dr.Read();
+            com.CommandText = "InsertAppReq";
+            com.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = ap.id;
+            com.Parameters.Add("@workerID ", System.Data.SqlDbType.VarChar).Value = dr["Natoinal_ID"];
+            com.Parameters.Add("@comment ", System.Data.SqlDbType.VarChar).Value = ap.description;
+            //com.CommandText="insert into Apply_Req(Req_ID,Worker_ID,Comment) values("+ap.id+",'"+dr["Natoinal_ID"]+"','"+ap.description+"');";
             dr.Close();
             com.ExecuteNonQuery();
-           
+            com.CommandType = System.Data.CommandType.Text;
             con.Close();
             return RedirectToAction(actionName: "Index", controllerName: "Home");
 
