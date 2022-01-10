@@ -131,8 +131,8 @@ namespace Khdamat.Controllers
             con.Open();
             com.Connection = con;
             com.CommandType = System.Data.CommandType.StoredProcedure;
-            com.CommandText = "manageCompSugg";
-            com.Parameters.Add("@ID", System.Data.SqlDbType.Char).Value = c.id;
+            com.CommandText = "viewCompSugg";
+            com.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = c.id;
             //com.CommandText = "SELECT Title, Descriptions, C_or_S FROM Complain_Suggestion WHERE ID='" + c.id + "';";
             //com.CommandText = "SELECT Natoinal_ID FROM SUPPORTER WHERE Supporter_Email='"+HttpContext.Session.GetString("Email")+"'";
             dr = com.ExecuteReader();

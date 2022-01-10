@@ -112,6 +112,7 @@ namespace Khdamat.Controllers
             com.CommandText = "GetNatID";
             com.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = email;
             dr =com.ExecuteReader(); dr.Read();
+            com.Parameters.Clear();
             com.CommandText = "InsertAppReq";
             com.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = ap.id;
             com.Parameters.Add("@workerID ", System.Data.SqlDbType.VarChar).Value = dr["Natoinal_ID"];
